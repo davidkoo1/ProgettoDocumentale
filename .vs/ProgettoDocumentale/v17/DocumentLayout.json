@@ -3,71 +3,71 @@
   "WorkspaceRootPath": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\migrations\\202404291504421_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\migrations\\202404291504421_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\migrations\\202404300736598_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\migrations\\202404300736598_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\migrations\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\migrations\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\context\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\context\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\webui\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\webui\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\context\\configuration\\userroleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\context\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\context\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\context\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\context\\configuration\\userroleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\context\\configuration\\userroleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\context\\configuration\\roleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\context\\configuration\\roleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\context\\configuration\\roleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\context\\configuration\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\context\\configuration\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\context\\configuration\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\entities\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\entities\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\entities\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\dal\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\dal\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{74180E8F-D6D7-4D08-825D-D1918DEB7A83}|src\\DAL\\DAL.csproj|solutionrelative:src\\dal\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\webui\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\webui\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\webui\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\webui\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\webui\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\webui\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\webui\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\webui\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|c:\\users\\crme145\\desktop\\progettodocumentale\\src\\webui\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\webui\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{2CA279A6-192F-4DB2-986F-4B413F3BA015}|src\\WebUI\\WebUI.csproj|solutionrelative:src\\webui\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -83,14 +83,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "202404291504421_InitialCreate.cs",
-              "DocumentMoniker": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\DAL\\Migrations\\202404291504421_InitialCreate.cs",
-              "RelativeDocumentMoniker": "src\\DAL\\Migrations\\202404291504421_InitialCreate.cs",
-              "ToolTip": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\DAL\\Migrations\\202404291504421_InitialCreate.cs",
-              "RelativeToolTip": "src\\DAL\\Migrations\\202404291504421_InitialCreate.cs",
+              "Title": "202404300736598_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\DAL\\Migrations\\202404300736598_InitialCreate.cs",
+              "RelativeDocumentMoniker": "src\\DAL\\Migrations\\202404300736598_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\DAL\\Migrations\\202404300736598_InitialCreate.cs",
+              "RelativeToolTip": "src\\DAL\\Migrations\\202404300736598_InitialCreate.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T15:04:46.785Z",
+              "WhenOpened": "2024-04-30T07:37:04.859Z",
               "EditorCaption": ""
             },
             {
@@ -103,7 +103,7 @@
               "RelativeToolTip": "src\\DAL\\Migrations\\Configuration.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T15:04:27.966Z",
+              "WhenOpened": "2024-04-30T07:36:21.365Z",
               "EditorCaption": ""
             },
             {
@@ -129,12 +129,11 @@
               "RelativeToolTip": "src\\DAL\\Context\\Configuration\\RoleConfiguration.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T14:28:25.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T14:28:25.27Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Web.config",
               "DocumentMoniker": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\WebUI\\Web.config",
               "RelativeDocumentMoniker": "src\\WebUI\\Web.config",
@@ -147,7 +146,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DbInitializer.cs",
               "DocumentMoniker": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\DAL\\Context\\DbInitializer.cs",
               "RelativeDocumentMoniker": "src\\DAL\\Context\\DbInitializer.cs",
@@ -160,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\CRME145\\Desktop\\ProgettoDocumentale\\src\\DAL\\Context\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "src\\DAL\\Context\\ApplicationDbContext.cs",
@@ -168,8 +167,7 @@
               "RelativeToolTip": "src\\DAL\\Context\\ApplicationDbContext.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAowB4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T13:20:47.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T13:20:47.486Z"
             },
             {
               "$type": "Document",
@@ -181,8 +179,7 @@
               "RelativeToolTip": "src\\DAL\\Context\\Configuration\\UserConfiguration.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAAqwCgAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T13:36:20.375Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T13:36:20.375Z"
             },
             {
               "$type": "Document",
@@ -194,8 +191,7 @@
               "RelativeToolTip": "src\\DAL\\Entities\\Role.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T13:16:57.463Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T13:16:57.463Z"
             },
             {
               "$type": "Document",
@@ -207,8 +203,7 @@
               "RelativeToolTip": "src\\DAL\\Entities\\UserRole.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T13:17:22.252Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T13:17:22.252Z"
             },
             {
               "$type": "Document",
@@ -220,8 +215,7 @@
               "RelativeToolTip": "src\\DAL\\Entities\\User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T13:16:52.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T13:16:52.409Z"
             },
             {
               "$type": "Document",
@@ -233,8 +227,7 @@
               "RelativeToolTip": "src\\DAL\\App.config",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-04-29T14:08:11.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T14:08:11.553Z"
             },
             {
               "$type": "Document",
@@ -246,8 +239,7 @@
               "RelativeToolTip": "src\\WebUI\\packages.config",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-04-29T13:59:40.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T13:59:40.625Z"
             },
             {
               "$type": "Document",
@@ -259,8 +251,7 @@
               "RelativeToolTip": "src\\WebUI\\Global.asax.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T13:56:52.542Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T13:56:52.542Z"
             },
             {
               "$type": "Document",
@@ -272,8 +263,7 @@
               "RelativeToolTip": "src\\WebUI\\Views\\Home\\About.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-29T11:10:25.917Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T11:10:25.917Z"
             },
             {
               "$type": "Document",
@@ -285,8 +275,7 @@
               "RelativeToolTip": "src\\WebUI\\Controllers\\HomeController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T11:09:51.903Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T11:09:51.903Z"
             },
             {
               "$type": "Document",
@@ -298,8 +287,7 @@
               "RelativeToolTip": "src\\WebUI\\Views\\Home\\Index.cshtml",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAEAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-29T11:10:06.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T11:10:06.009Z"
             }
           ]
         }
