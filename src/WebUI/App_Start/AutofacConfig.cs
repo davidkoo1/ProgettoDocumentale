@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BLL.Common.Repository;
 using BLL.Common.Interfaces;
+using BLL;
 
 namespace WebUI.App_Start
 {
@@ -16,9 +17,9 @@ namespace WebUI.App_Start
         public static void ConfigureContainer()
         {
             var builder = new ContainerBuilder();
-            
-            // Регистрация зависимостей
-            builder.RegisterType<AccountInterface>().As<IAccountInterface>();
+
+            // Регистрация зависимостей BLL и DAL
+            DependencyInjectionConfig.RegisterDependencies(builder);
 
             // Регистрация всех контроллеров в текущей сборке
             builder.RegisterControllers(Assembly.GetExecutingAssembly());

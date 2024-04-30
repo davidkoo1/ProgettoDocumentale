@@ -1,7 +1,6 @@
 ﻿using DAL.Context.Configuration;
 using DAL.Entities;
 using System.Data.Entity;
-using System.Reflection;
 
 namespace DAL.Context.Persistance
 {
