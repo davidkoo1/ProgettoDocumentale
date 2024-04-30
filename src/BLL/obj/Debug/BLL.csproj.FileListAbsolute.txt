@@ -1,3 +1,5 @@
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\BLL.dll
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\BLL.pdb
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\DAL.dll
@@ -5,8 +7,6 @@ C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\EntityFramework.d
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\DAL.pdb
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\DAL.dll.config
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\EntityFramework.xml
-C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
-C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.Up2Date
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\obj\Debug\BLL.dll
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\obj\Debug\BLL.pdb

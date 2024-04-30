@@ -11,10 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "src\DAL\DAL.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "src\BLL\BLL.csproj", "{23AF0849-0BC4-4FE9-9C13-D37C340790BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B129D575-FB4A-4AC1-94A0-4D3046B32749}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EBA2F24E-9E06-4FA2-A6CA-6B1B99A5CF81}"
 	ProjectSection(SolutionItems) = preProject
-		..\New folder (2)\FinalProject_CruscottoIncidenti\.gitignore = ..\New folder (2)\FinalProject_CruscottoIncidenti\.gitignore
-		..\New folder (2)\FinalProject_CruscottoIncidenti\README.md = ..\New folder (2)\FinalProject_CruscottoIncidenti\README.md
+		.gitignore = .gitignore
+		README.MD = README.MD
 	EndProjectSection
 EndProject
 Global

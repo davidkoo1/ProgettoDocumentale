@@ -51,11 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Context\Persistance\ApplicationDbContext.cs" />
     <Compile Include="Context\Configuration\RoleConfiguration.cs" />
     <Compile Include="Context\Configuration\UserConfiguration.cs" />
     <Compile Include="Context\Configuration\UserRoleConfiguration.cs" />
-    <Compile Include="Context\DbInitializer.cs" />
+    <Compile Include="Context\Persistance\DbInitializer.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />

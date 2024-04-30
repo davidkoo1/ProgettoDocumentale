@@ -3,7 +3,7 @@ using DAL.Entities;
 using System.Data.Entity;
 using System.Reflection;
 
-namespace DAL.Context
+namespace DAL.Context.Persistance
 {
     public class ApplicationDbContext : DbContext
     {

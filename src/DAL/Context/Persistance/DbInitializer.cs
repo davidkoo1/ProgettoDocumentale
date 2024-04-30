@@ -1,9 +1,8 @@
 ﻿using DAL.Entities;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 
-namespace DAL.Context
+namespace DAL.Context.Persistance
 {
     public class DbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
