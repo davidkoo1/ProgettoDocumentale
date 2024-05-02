@@ -4,3 +4,4 @@
 - NugetPackageDelete
 - Bootstrap
 - BootstrapSelect
+- Create,Update,Delete User
