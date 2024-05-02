@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace BLL.DTO
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
+        public RoleDto Role { get; set; }
 
     }
 }

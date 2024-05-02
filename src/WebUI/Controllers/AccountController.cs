@@ -19,6 +19,7 @@ namespace WebUI.Controllers
         {
             _accountInterface = accountInterface;
         }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
@@ -50,15 +51,15 @@ namespace WebUI.Controllers
                 else
                 {
                     ClaimsIdentity claim = new ClaimsIdentity("ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-                    var userClaims = new List<Claim>
-                     {
-                         new Claim(ClaimTypes.NameIdentifier, userVm.Id.ToString()),
-                         new Claim(ClaimTypes.Name, userVm.UserName),
-                         new Claim(ClaimTypes.Email, userVm.Email),
-                         //new Claim(ClaimTypes.Role, userVm.)
+                    claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, userVm.Id.ToString(), ClaimValueTypes.String));
+                    claim.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, userVm.Email, ClaimValueTypes.String));
+                    claim.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
+                        "OWIN Provider", ClaimValueTypes.String));
 
-                     };
-
+                    if (userVm.Role != null)
+                    {
+                        claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userVm.Role.Name, ClaimValueTypes.String));
+                    }
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
@@ -72,11 +73,10 @@ namespace WebUI.Controllers
                 return View(loginVM);
             }
         }
-        public ActionResult SignOut()
+        public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("SignIn", "Account");
-            //return RedirectToAction("SignIn");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

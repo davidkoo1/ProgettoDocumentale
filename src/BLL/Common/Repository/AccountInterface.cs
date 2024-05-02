@@ -33,6 +33,11 @@ namespace BLL.Common.Repository
                     Name = user.Name,
                     Surname = user.Surname,
                     Patronymic = user.Patronymic,
+                    Role = new RoleDto
+                    {
+                        Id = user.UserRole.RoleId,
+                        Name = user.UserRole.Role.Name
+                    },
                 };
             }
             return null;

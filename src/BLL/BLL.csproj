@@ -82,6 +82,7 @@
     <Compile Include="Common\Repository\AccountInterface.cs" />
     <Compile Include="DependencyInjection.cs" />
     <Compile Include="DTO\LoginDto.cs" />
+    <Compile Include="DTO\RoleDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

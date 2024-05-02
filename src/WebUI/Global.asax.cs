@@ -18,7 +18,7 @@ namespace WebUI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            // Конфигурация Autofac
+            // DI
             AutofacConfig.ConfigureContainer();
         }
     }
