@@ -1,0 +1,58 @@
+﻿@model BLL.DTO.UserDto
+
+<hr />
+<div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName)
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @disabled = true })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "First Name")
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = true })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Surname, "Last Name")
+            @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", @disabled = true })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, "Email")
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @disabled = true })
+        </div>
+
+        <div class="form-group mt-3 mb-2">
+            @Html.HiddenFor(model => model.IsEnabled, new { @id = "isActiveField" })
+            <div class="btn-group" role="group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="True"
+                       autocomplete="off" @(Model.IsEnabled ? "checked" : "") disabled>
+                <label class="btn btn-outline-primary" for="btnradio1">Active</label>
+
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="False"
+                       autocomplete="off" @(Model.IsEnabled ? "" : "checked") disabled>
+                <label class="btn btn-outline-primary" for="btnradio2">Inactive</label>
+            </div>
+        </div>
+
+
+        @*<div class="form-group mb-3">
+            @Html.LabelFor(model => model.RoleIds, "Roles")
+            <select class="form-control" id="RoleIds" name="RoleIds" multiple disabled>
+                @foreach (var role in (IEnumerable<SelectListItem>)ViewBag.Roles)
+                {
+
+                    if (Model.RoleIds.Contains(Int32.Parse(role.Value)))
+                    {
+                        <option value="@role.Value" selected>@role.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@role.Value">@role.Text</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.RoleIds)
+        </div>*@
+    </div>
+

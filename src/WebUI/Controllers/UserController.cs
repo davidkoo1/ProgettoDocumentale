@@ -13,10 +13,8 @@ namespace WebUI.Controllers
     public class UserController : BaseController
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+        public UserController(IUserRepository userRepository) => _userRepository = userRepository;
+        
 
         // GET: Users
         public async Task<ActionResult> Index()

@@ -2,7 +2,5 @@
 
 - DI
 - NugetPackageDelete
-
-## Questions
-- Site.js (Basic file for js)
-- Bundle
+- Bootstrap
+- BootstrapSelect

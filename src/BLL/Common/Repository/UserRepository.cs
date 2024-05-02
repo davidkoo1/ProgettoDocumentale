@@ -61,7 +61,12 @@ namespace BLL.Common.Repository
             IsEnabled = u.IsEnabled,
             Name = u.Name,
             Surname = u.Surname,
-            Patronymic = u.Patronymic
+            Patronymic = u.Patronymic,
+            Role = new RoleDto
+            {
+                Id = u.UserRole.RoleId,
+                Name = u.UserRole.Role.Name
+            }
         }).FirstOrDefaultAsync(u => u.Id == id);
 
         public bool Save()

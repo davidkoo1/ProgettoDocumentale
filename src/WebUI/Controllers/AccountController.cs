@@ -14,11 +14,9 @@ namespace WebUI.Controllers
     {
         private readonly IAccountRepository _accountInterface;
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
-            
-        public AccountController(IAccountRepository accountInterface)
-        {
-            _accountInterface = accountInterface;
-        }
+
+        public AccountController(IAccountRepository accountInterface) => _accountInterface = accountInterface;
+
 
         [HttpGet]
         [AllowAnonymous]
