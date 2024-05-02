@@ -1,0 +1,88 @@
+﻿@model IEnumerable<BLL.DTO.UserDto>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Users</h3>
+                    <a type="button" style="width: 150px;" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" onclick="drawPatrialView('/User/GetUpsert/'+'0', 'xlModalBody')">Add</a>
+
+                </div>
+                <div class="card-body">
+                    <table id="UserDatatable" class="table table-bordered table-hover w-100 mb-1">
+                    </table>
+                </div>
+                <div id="actions" style="display:none; padding: 5px;">
+                    <a type="button" style="width: 150px;" class="btn btn-primary" id="editLink" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" onclick="drawPatrialView('/User/GetUpsert/', 'xlModalBody')">Edit</a>
+                    <a type="button" style="width: 150px;" id="detailsLink" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Details/', 'lgModalBody')">Detail</a>
+                    <a type="button" style="width: 150px;" id="deleteLink" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Delete/', 'lgModalBody')">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var userDataTable = initializeUserDataTable();
+            setupRowClickEvents(userDataTable);
+        });
+        //UserData
+        function initializeUserDataTable() {
+            var table = $('#UserDatatable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "scrollX": true,
+                ajax: {
+                    "url": "/User/LoadDatatable",
+                    "type": "POST",
+                    "dataType": "json",
+                    "beforeSend": function () {
+                        $('#actions').hide(); // Скрывать actions перед AJAX запросом
+                    }
+                },
+                "columns": [
+                    { "data": "id", "title": "Id", "name": "id", "visible": false },
+                    { "data": "userName", "title": "userName", "name": "userName" },
+                    { "data": "email", "title": "email", "name": "email" },
+                    { "data": "isEnabled", "title": "isEnabled", "name": "isEnabled" }
+                ]
+            });
+
+            return table;
+        }
+
+        function updateButtonUserLinks(id) {
+            $('#editLink').attr('onclick', `drawPatrialView('/User/GetUpsert/'+${id}, 'xlModalBody')`);
+            $('#detailsLink').attr('onclick', `drawPatrialView('/User/Details/'+${id}, 'lgModalBody')`);
+            $('#deleteLink').attr('onclick', `deleteUser(${id})`);
+        }
+
+        function drawPatrialView(url, divId) {
+            debugger;
+            $.ajax({
+                url: url,
+                cache: false,
+                type: "GET",
+                dataType: "html",
+                statusCode: {
+                    302: function (data) {
+                        window.location.href = '/Account/Logout/';
+                    },
+                },
+                success: function (result, e) {
+                    $('#' + divId).html(result);
+                },
+            });
+        }
+
+
+    </script>
+}

@@ -14,7 +14,8 @@ namespace BLL
             builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerLifetimeScope();
 
             // Регистрация зависимостей BLL
-            builder.RegisterType<AccountInterface>().As<IAccountInterface>();
+            builder.RegisterType<AccountRepository>().As<IAccountRepository>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
         }
     }
 }

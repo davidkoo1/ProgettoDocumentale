@@ -1,5 +1,8 @@
 # TODO List
 
 - DI
-- NugetPackage
-- LogOut
+- NugetPackageDelete
+
+## Questions
+- Site.js (Basic file for js)
+- Bundle

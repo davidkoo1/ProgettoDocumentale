@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Common.Interfaces
 {
-    public interface IAccountInterface
+    public interface IAccountRepository
     {
         Task<UserDto> GetUserForLogin(LoginDto UserToLogin);
     }

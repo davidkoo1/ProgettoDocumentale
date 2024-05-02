@@ -12,10 +12,10 @@ namespace WebUI.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly IAccountInterface _accountInterface;
+        private readonly IAccountRepository _accountInterface;
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
             
-        public AccountController(IAccountInterface accountInterface)
+        public AccountController(IAccountRepository accountInterface)
         {
             _accountInterface = accountInterface;
         }

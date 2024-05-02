@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BLL.Common.Repository
 {
-    public class AccountInterface : IAccountInterface
+    public class AccountRepository : IAccountRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        public AccountInterface(ApplicationDbContext dbContext)
+        public AccountRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
