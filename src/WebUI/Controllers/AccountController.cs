@@ -44,7 +44,7 @@ namespace WebUI.Controllers
                 if (userVm == null || !userVm.IsEnabled)
                 {
                     TempData["ErrorAccount"] = "SomethingError";
-                    return View(loginVM);
+                    return View();
                 }
                 else
                 {

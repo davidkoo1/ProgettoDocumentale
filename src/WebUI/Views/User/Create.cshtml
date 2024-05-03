@@ -1,0 +1,75 @@
+﻿@model BLL.DTO.CreateUserDto
+
+
+@if (TempData["ErrorUser"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Sorry!</strong> - @TempData["ErrorUser"]
+    </div>
+}
+
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { id = "createUserForm" }))
+{
+    <div class="modal-body">
+        @*@Html.AntiForgeryToken()*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName)
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "UserName" })
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "First Name")
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Surname, "Last Name")
+            @Html.TextBoxFor(model => model.Surname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Surname)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Patronymic, "Patronymic")
+            @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Patronymic)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, "Email")
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="form-group mt-3 mb-2">
+            @Html.HiddenFor(model => model.IsEnabled, new { @id = "IsEnabled" })
+
+            <div class="btn-group" role="group">
+                <!-- Unique name and ids for the first group -->
+                <input type="radio" class="btn-check" name="btnradio1" id="btnradio1-1" value="true" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1-1">Active</label>
+
+                <input type="radio" class="btn-check" name="btnradio1" id="btnradio1-2" value="false" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio1-2">Inactive</label>
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.RoleId, "Roles")
+
+            @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control selectpicker", @title = "Choose..." })
+            @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" style="width: 100px;">Save</button>
+        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Cancel</button>
+
+    </div>
+}
+
+

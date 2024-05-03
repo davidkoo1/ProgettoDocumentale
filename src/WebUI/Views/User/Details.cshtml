@@ -28,15 +28,16 @@
             </div>
 
             <div class="form-group mt-3 mb-2">
-                @Html.HiddenFor(model => model.IsEnabled, new { @id = "isActiveField" })
+                @Html.HiddenFor(model => model.IsEnabled, new { @id = "IsEnabledDisabled" })
                 <div class="btn-group" role="group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="True"
+                    <!-- Unique name and ids for the second group, disabled state -->
+                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio2-1" value="True"
                            autocomplete="off" @(Model.IsEnabled ? "checked" : "") disabled>
-                    <label class="btn btn-outline-primary" for="btnradio1">Active</label>
+                    <label class="btn btn-outline-primary" for="btnradio2-1">Active</label>
 
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="False"
+                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio2-2" value="False"
                            autocomplete="off" @(Model.IsEnabled ? "" : "checked") disabled>
-                    <label class="btn btn-outline-primary" for="btnradio2">Inactive</label>
+                    <label class="btn btn-outline-primary" for="btnradio2-2">Inactive</label>
                 </div>
             </div>
 

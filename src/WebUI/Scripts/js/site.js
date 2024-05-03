@@ -49,7 +49,7 @@ function initializeUserDataTable() {
 }
 
 function updateButtonUserLinks(id) {
-    $('#editLink').attr('onclick', `drawPatrialView('/User/GetUpsert/'+${id}, 'xlModalBody')`);
+    $('#editLink').attr('onclick', `drawPatrialView('/User/Edit/'+${id}, 'xlModalBody')`);
     $('#detailsLink').attr('onclick', `drawPatrialView('/User/Details/'+${id}, 'lgModalBody')`);
     $('#deleteLink').attr('onclick', `drawPatrialView('/User/Delete/'+${id}, 'lgModalBody')`);
 }

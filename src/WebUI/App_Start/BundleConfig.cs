@@ -29,7 +29,23 @@ namespace WebUI
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                         "~/Scripts/js/site.js"));
 
-            #region Datatables
+
+            //bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+            //"~/Scripts/dataTables.js",
+            //"~/Scripts/dataTables.min.js"));
+
+            #region Bootstrap Select
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-select").Include(
+                "~/Content/bootstrap-select.css",
+                "~/Content/bootstrap-select.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-select").Include(
+                "~/Scripts/bootstrap-select.js",
+                "~/Scripts/bootstrap-select.min.js"));
+
+            #endregion
+
             bundles.Add(new StyleBundle("~/Content/datatables").Include(
 
                 "~/Content/DataTables/dataTables.bootstrap4.css",
@@ -42,7 +58,7 @@ namespace WebUI
             "~/Scripts/DataTables/dataTables.buttons.js",
             "~/Scripts/DataTables/buttons.bootstrap4.js"));
 
-            #endregion
+
 
         }
     }

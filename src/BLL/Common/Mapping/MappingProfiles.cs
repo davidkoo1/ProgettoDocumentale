@@ -15,6 +15,10 @@ namespace BLL.Common.Mapping
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
+            CreateMap<CreateUserDto, User>();
+
+            CreateMap<Role, RoleDto>();
+            CreateMap<RoleDto, Role>();
         }
     }
 

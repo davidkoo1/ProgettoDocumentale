@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Users</h3>
-                    <a type="button" style="width: 150px;" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" onclick="drawPatrialView('/User/GetUpsert/'+'0', 'xlModalBody')">Add</a>
+                    <a type="button" style="width: 150px;" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" onclick="drawPatrialView('/User/Create/', 'xlModalBody')">Add</a>
 
                 </div>
                 <div class="card-body">
@@ -18,7 +18,7 @@
                     </table>
                 </div>
                 <div id="actions" style="display:none; padding: 5px;">
-                    <a type="button" style="width: 150px;" class="btn btn-primary" id="editLink" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" onclick="drawPatrialView('/User/GetUpsert/', 'xlModalBody')">Edit</a>
+                    <a type="button" style="width: 150px;" class="btn btn-primary" id="editLink" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" onclick="drawPatrialView('/User/Edit/', 'xlModalBody')">Edit</a>
                     <a type="button" style="width: 150px;" id="detailsLink" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Details/', 'lgModalBody')">Detail</a>
                     <a type="button" style="width: 150px;" id="deleteLink" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Delete/', 'lgModalBody')">Delete</a>
                 </div>
