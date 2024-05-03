@@ -1,7 +1,6 @@
 ﻿//UserData
 function setupRowClickEvents(table) {
     $('#UserDatatable tbody').on('click', 'tr', function () {
-        debugger;
         var rowData = table.row(this).data();
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -27,6 +26,9 @@ function initializeUserDataTable() {
         "processing": true,
         "serverSide": true,
         "scrollX": true,
+        "autoWidth": true,
+        //"stateSave": true,
+        //"dom": "p", //f, r, t, l, p
         ajax: {
             "url": "/User/LoadDatatable",
             "type": "POST",
@@ -49,11 +51,24 @@ function initializeUserDataTable() {
 function updateButtonUserLinks(id) {
     $('#editLink').attr('onclick', `drawPatrialView('/User/GetUpsert/'+${id}, 'xlModalBody')`);
     $('#detailsLink').attr('onclick', `drawPatrialView('/User/Details/'+${id}, 'lgModalBody')`);
-    $('#deleteLink').attr('onclick', `deleteUser(${id})`);
+    $('#deleteLink').attr('onclick', `drawPatrialView('/User/Delete/'+${id}, 'lgModalBody')`);
 }
 
+function deleteCurrentUser(userId) {
+    $.ajax({
+        url: '../User/DeleteConfirmed/' + userId,
+        cache: false,
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            if (response.success) {
+                $('#actions').hide();
+                $('#UserDatatable').DataTable().ajax.reload(null, false);
+            } 
+        }
+    });
+}
 function drawPatrialView(url, divId) {
-    debugger;
     $.ajax({
         url: url,
         cache: false,

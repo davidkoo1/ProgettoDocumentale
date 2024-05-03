@@ -16,12 +16,8 @@ namespace WebUI.Controllers
         public UserController(IUserRepository userRepository) => _userRepository = userRepository;
         
 
-        // GET: Users
-        public async Task<ActionResult> Index()
-        {
-
-            return View();
-        }
+        public ActionResult Index() => View();
+        
 
         [HttpPost]
         public async Task<ActionResult> LoadDatatable(DataTablesParameters parameters)
@@ -43,7 +39,7 @@ namespace WebUI.Controllers
                 return View("~/Views/Shared/_NotFound.cshtml");
             }
         }
-        //// GET: User/Details/5
+
         public async Task<ActionResult> Details(int id)
         {
             try
@@ -59,5 +55,47 @@ namespace WebUI.Controllers
             }
 
         }
+
+
+        //GET: User/Delete/5
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+
+                var user = await _userRepository.GetUser(id);
+
+                return PartialView("~/Views/User/Delete.cshtml", user);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                var success = _userRepository.Delete(id);
+                if (success)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+        }
+
     }
 }

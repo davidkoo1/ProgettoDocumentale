@@ -14,9 +14,10 @@ namespace BLL.Common.Interfaces
 
         Task<IEnumerable<UserDto>> GetAllUsers(DataTablesParameters parameters);
         Task<UserDto> GetUser(int id);
-        bool Add(UserDto course);
-        bool Update(UserDto course);
-        bool Delete(UserDto course);
+        Task<bool> UserExists(int userId);
+        bool Add(UserDto userToCreate);
+        bool Update(UserDto userToUpdate);
+        bool Delete(int userId);
         bool Save();
     }
 }

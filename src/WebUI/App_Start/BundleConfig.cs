@@ -9,8 +9,7 @@ namespace WebUI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",  // jQuery
-                    "~/Scripts/DataTables/jquery.dataTables.min.js")); 
+                        "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -21,14 +20,29 @@ namespace WebUI
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                        "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                        "~/Content/bootstrap.css",
+                        "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
-            "~/Scripts/js/site.js"));
+                        "~/Scripts/js/site.js"));
+
+            #region Datatables
+            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+
+                "~/Content/DataTables/dataTables.bootstrap4.css",
+                "~/Content/DataTables/buttons.bootstrap4.css"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+            "~/Scripts/DataTables/jquery.dataTables.js",
+            "~/Scripts/DataTables/dataTables.bootstrap4.js",
+            "~/Scripts/DataTables/dataTables.select.js",
+            "~/Scripts/DataTables/dataTables.buttons.js",
+            "~/Scripts/DataTables/buttons.bootstrap4.js"));
+
+            #endregion
 
         }
     }

@@ -77,3 +77,10 @@ C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\DAL.dll.config
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\EntityFramework.xml
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\EntityFramework.SqlServer.dll
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\EntityFramework.SqlServer.xml
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\AutoMapper.dll
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\System.ValueTuple.dll
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\AutoMapper.pdb
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\AutoMapper.xml
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\System.ValueTuple.xml
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\FluentValidation.dll
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\WebUI\bin\FluentValidation.xml

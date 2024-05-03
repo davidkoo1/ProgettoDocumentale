@@ -30,3 +30,11 @@ C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.Razor.
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.xml
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\AutoMapper.dll
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.ValueTuple.dll
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\AutoMapper.pdb
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\AutoMapper.xml
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.ValueTuple.xml
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.dll
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.ComponentModel.Primitives.dll
+C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.xml

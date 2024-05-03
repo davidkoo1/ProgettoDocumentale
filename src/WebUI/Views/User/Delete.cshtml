@@ -1,0 +1,21 @@
+﻿@model BLL.DTO.UserDto
+
+<div>
+    <div class="modal-body">
+        <div class="col-sm-12">
+            <div class="alert alert-danger alert-dismissible fade show mt-1 px-1 mb-0 text-center" role="alert">
+                <i class="uil uil-exclamation-octagon d-block display-4 mt-2 mb-3 text-danger"></i>
+                <h1 class="text-danger">Delete @Model.UserName</h1>
+                <h3>
+                    Are you sure?
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" id="deleteCurrent" onclick="deleteCurrentUser(@Model.Id)" class="btn btn-danger waves-effect waves-light" data-bs-dismiss="modal">Delete</button>
+
+        <button type="button" class="btn btn-light waves-secondary" data-bs-dismiss="modal">Cancel</button>
+
+    </div>
+</div>
