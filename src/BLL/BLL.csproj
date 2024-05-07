@@ -101,6 +101,7 @@
     <Compile Include="DTO\CreateUserDto.cs" />
     <Compile Include="DTO\LoginDto.cs" />
     <Compile Include="DTO\RoleDto.cs" />
+    <Compile Include="DTO\UpdateUserDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableParameters\DataTablesColumn.cs" />

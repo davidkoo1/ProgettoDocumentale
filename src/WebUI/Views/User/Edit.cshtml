@@ -1,4 +1,4 @@
-﻿@model BLL.DTO.CreateUserDto
+﻿@model BLL.DTO.UpdateUserDto
 
 @if (TempData["ErrorUser"] != null)
 {
@@ -7,7 +7,7 @@
     </div>
 }
 
-@using (Html.BeginForm("Create", "User", FormMethod.Post, new { id = "createUserForm", @class = "needs-validation", novalidate = "novalidate" }))
+@using (Html.BeginForm("Edit", "User", new { userId = Model.Id }, FormMethod.Post, new { id = "updateUserForm", @class = "bg-white needs-validation", novalidate = "novalidate" }))
 {
     <div class="modal-body">
         @Html.AntiForgeryToken()
@@ -16,7 +16,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.UserName, new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username", @disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
             </div>
             <br>

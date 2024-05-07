@@ -57,14 +57,14 @@ namespace WebUI.Controllers
 
         }
 
-        private async Task SetUserRoleList()
+        private async Task SetUserRoleList(UpdateUserDto userDto)
         {
             var rolesVm = await _userRepository.GetRolesAsync();
             var selectListItemRoleVm = rolesVm.Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Name,
-                Selected = false
+                Selected = userDto != null ? userDto.RoleId == x.Id : false
             });
 
             ViewBag.Roles = selectListItemRoleVm;
@@ -78,7 +78,7 @@ namespace WebUI.Controllers
             {
                 //var userVm = await _userRepository.GetUser(id);
 
-                await SetUserRoleList();
+                await SetUserRoleList(null);
                 return PartialView("~/Views/User/Create.cshtml");
             }
             catch (Exception ex)
@@ -106,14 +106,31 @@ namespace WebUI.Controllers
                     else
                     {
                         TempData["ErrorUser"] = "ErrorUser";
-                        await SetUserRoleList();
+                        await SetUserRoleList(null);
                         return PartialView("~/Views/User/Upsert.cshtml", createUser);
                     }
 
                 //}
                 TempData["ErrorUser"] = "ErrorUser";
-                await SetUserRoleList();
+                await SetUserRoleList(null);
                 return PartialView("~/Views/User/Upsert.cshtml", createUser);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+        }
+
+
+        public async Task<ActionResult> Edit(int id)
+        {
+            try
+            {
+
+                var user = await _userRepository.GetUpdateUser(id);
+                await SetUserRoleList(user);
+                return PartialView("~/Views/User/Edit.cshtml", user);
             }
             catch (Exception ex)
             {

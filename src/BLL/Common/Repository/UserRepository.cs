@@ -39,7 +39,6 @@ namespace BLL.Common.Repository
             var userToCreate = _mapper.Map<User>(userToCreateDto);
             string defaultPW = "Cedacri1234567!";
             userToCreate.Password = HashPW(defaultPW);
-            userToCreate.IsEnabled = true;
             userToCreate.UserRole = new UserRole
             {
                 RoleId = userToCreateDto.RoleId
@@ -50,7 +49,7 @@ namespace BLL.Common.Repository
 
         public bool Delete(int userId)
         {
-            var userToDelete = _dbContext.Users.Include(x => x.UserRole).FirstOrDefault();
+            var userToDelete = _dbContext.Users.Include(x => x.UserRole).FirstOrDefault(x => x.Id == userId);
             userToDelete.IsEnabled = false;
             _dbContext.Users.AddOrUpdate(userToDelete);
             return Save();
@@ -64,6 +63,8 @@ namespace BLL.Common.Repository
             .ToListAsync());
 
         public async Task<IEnumerable<RoleDto>> GetRolesAsync() => _mapper.Map<IEnumerable<RoleDto>>(await _dbContext.Roles.ToListAsync());
+
+        public async Task<UpdateUserDto> GetUpdateUser(int id) => _mapper.Map<UpdateUserDto>(await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id));
 
         public async Task<UserDto> GetUser(int id) => await _dbContext.Users.Select(u => new UserDto
         {
@@ -86,7 +87,7 @@ namespace BLL.Common.Repository
         public bool Update(UserDto userToCreateDto)
         {
 
-           
+
             return Save();
         }
 

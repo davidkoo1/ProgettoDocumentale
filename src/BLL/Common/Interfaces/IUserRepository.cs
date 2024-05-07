@@ -15,6 +15,7 @@ namespace BLL.Common.Interfaces
 
         Task<IEnumerable<UserDto>> GetAllUsers(DataTablesParameters parameters);
         Task<UserDto> GetUser(int id);
+        Task<UpdateUserDto> GetUpdateUser(int id);
         Task<bool> UserExists(int userId);
         Task<IEnumerable<RoleDto>> GetRolesAsync();
         bool Add(CreateUserDto userToCreateDto);

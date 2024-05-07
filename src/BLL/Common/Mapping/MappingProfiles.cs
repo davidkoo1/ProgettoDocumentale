@@ -16,6 +16,8 @@ namespace BLL.Common.Mapping
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
             CreateMap<CreateUserDto, User>();
+            CreateMap<User, UpdateUserDto>().ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.UserRole.RoleId));
+            CreateMap<UpdateUserDto, User>();
 
             CreateMap<Role, RoleDto>();
             CreateMap<RoleDto, Role>();

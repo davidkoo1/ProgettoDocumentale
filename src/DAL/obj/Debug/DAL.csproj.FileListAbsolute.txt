@@ -12,3 +12,17 @@ C:\Users\CRME145\Desktop\ProgettoDocumentale\src\DAL\bin\Debug\EntityFramework.S
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.Up2Date
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\DAL\obj\Debug\DAL.dll
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\DAL\obj\Debug\DAL.pdb
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\bin\Debug\DAL.dll.config
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\bin\Debug\DAL.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\bin\Debug\DAL.pdb
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\bin\Debug\EntityFramework.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\bin\Debug\EntityFramework.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Migrations.InitialCreate.resources
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.GenerateResource.cache
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.Up2Date
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.pdb

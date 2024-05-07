@@ -38,3 +38,43 @@ C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.ValueTuple
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.dll
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\System.ComponentModel.Primitives.dll
 C:\Users\CRME145\Desktop\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\BLL.dll.config
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\BLL.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\BLL.pdb
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\Autofac.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\Autofac.Integration.Mvc.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\AutoMapper.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\DAL.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\EntityFramework.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.ComponentModel.Primitives.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.ValueTuple.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.Helpers.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.Mvc.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.Razor.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\DAL.pdb
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\DAL.dll.config
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\Autofac.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\Autofac.Integration.Mvc.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\AutoMapper.pdb
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\AutoMapper.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\EntityFramework.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.ValueTuple.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.Helpers.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.Mvc.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.Razor.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.Up2Date
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.pdb
