@@ -20,10 +20,10 @@ namespace WebUI
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
-                        "~/Scripts/bootstrap.js"));
+                        "~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                        "~/Content/bootstrap.css",
+                        "~/lib/bootstrap/dist/css/bootstrap.min.css",
                         "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
@@ -36,27 +36,18 @@ namespace WebUI
 
             #region Bootstrap Select
 
-            bundles.Add(new StyleBundle("~/Content/bootstrap-select").Include(
-                "~/Content/bootstrap-select.css",
-                "~/Content/bootstrap-select.min.css"));
+            bundles.Add(new StyleBundle("~/lib/bootstrap-select").Include(
+                "~/lib/bootstrap-select/dist/css/bootstrap-select.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-select").Include(
-                "~/Scripts/bootstrap-select.js",
-                "~/Scripts/bootstrap-select.min.js"));
+                "~/lib/bootstrap-select/dist/js/bootstrap-select.js"));
 
             #endregion
 
-            bundles.Add(new StyleBundle("~/Content/datatables").Include(
-
-                "~/Content/DataTables/dataTables.bootstrap4.css",
-                "~/Content/DataTables/buttons.bootstrap4.css"
-                ));
+            bundles.Add(new StyleBundle("~/lib/jquery-datatables").Include(
+                "~/lib/jquery-datatables/css/jquery.dataTables.css"));
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-            "~/Scripts/DataTables/jquery.dataTables.js",
-            "~/Scripts/DataTables/dataTables.bootstrap4.js",
-            "~/Scripts/DataTables/dataTables.select.js",
-            "~/Scripts/DataTables/dataTables.buttons.js",
-            "~/Scripts/DataTables/buttons.bootstrap4.js"));
+            "~/lib/jquery-datatables/js/jquery.dataTables.js"));
 
 
 
