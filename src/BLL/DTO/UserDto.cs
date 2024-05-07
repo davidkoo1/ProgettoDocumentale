@@ -16,7 +16,7 @@ namespace BLL.DTO
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
-        public RoleDto Role { get; set; }
+        public string UserRole { get; set; }
 
     }
 }

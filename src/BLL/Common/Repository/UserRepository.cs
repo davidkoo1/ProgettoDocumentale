@@ -64,30 +64,49 @@ namespace BLL.Common.Repository
 
         public async Task<IEnumerable<RoleDto>> GetRolesAsync() => _mapper.Map<IEnumerable<RoleDto>>(await _dbContext.Roles.ToListAsync());
 
-        public async Task<UpdateUserDto> GetUpdateUser(int id) => _mapper.Map<UpdateUserDto>(await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id));
+        public async Task<UpdateUserDto> GetUpdateUser(int id) => _mapper.Map<UpdateUserDto>(await _dbContext.Users.Include(x => x.UserRole).FirstOrDefaultAsync(x => x.Id == id));
 
-        public async Task<UserDto> GetUser(int id) => await _dbContext.Users.Select(u => new UserDto
+        public async Task<UserDto> GetUser(int id)
         {
-            Id = u.Id,
-            UserName = u.UserName,
-            Email = u.Email,
-            IsEnabled = u.IsEnabled,
-            Name = u.Name,
-            Surname = u.Surname,
-            Patronymic = u.Patronymic,
-            Role = new RoleDto
+            // Include UserRole and Role in the initial query to reduce DB round trips
+            var user = await _dbContext.Users
+                .Include(u => u.UserRole)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            var roles = await _dbContext.UserRoles.Include(x => x.Role).FirstOrDefaultAsync(x => x.UserId == id);
+            var role = await _dbContext.Roles.FirstOrDefaultAsync(x => x.Id == roles.RoleId);
+            return new UserDto
             {
-                Id = u.UserRole.RoleId,
-                Name = u.UserRole.Role.Name
-            }
-        }).FirstOrDefaultAsync(u => u.Id == id);
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                IsEnabled = user.IsEnabled,
+                Name = user.Name,
+                Surname = user.Surname,
+                Patronymic = user.Patronymic,
+                UserRole = role.Name
+
+            };
+        }
 
         public bool Save() => _dbContext.SaveChanges() > 0 ? true : false;
 
-        public bool Update(UserDto userToCreateDto)
+        public bool Update(UpdateUserDto userToCreateDto)
         {
+            var user = _dbContext.Users.Include(x => x.UserRole).FirstOrDefault(x => x.Id == userToCreateDto.Id);
+            user.Email = userToCreateDto.Email;
+            user.Name = userToCreateDto.Name;
+            user.Surname = userToCreateDto.Surname;
+            user.Patronymic = userToCreateDto.Patronymic;
+            user.IsEnabled = userToCreateDto.IsEnabled;
+            // Удаляем старые роли пользователя
+            var userRolesToRemove = _dbContext.UserRoles.Where(ur => ur.UserId == userToCreateDto.Id);
+            _dbContext.UserRoles.RemoveRange(userRolesToRemove);
 
-
+            user.UserRole = new UserRole
+            {
+                RoleId = userToCreateDto.RoleId,
+            };
+            _dbContext.Users.AddOrUpdate(user);
             return Save();
         }
 

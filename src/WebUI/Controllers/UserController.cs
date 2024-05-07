@@ -57,7 +57,7 @@ namespace WebUI.Controllers
 
         }
 
-        private async Task SetUserRoleList(UpdateUserDto userDto)
+        private async Task PrepareUserRoles(UpdateUserDto userDto)
         {
             var rolesVm = await _userRepository.GetRolesAsync();
             var selectListItemRoleVm = rolesVm.Select(x => new SelectListItem
@@ -78,7 +78,7 @@ namespace WebUI.Controllers
             {
                 //var userVm = await _userRepository.GetUser(id);
 
-                await SetUserRoleList(null);
+                await PrepareUserRoles(null);
                 return PartialView("~/Views/User/Create.cshtml");
             }
             catch (Exception ex)
@@ -106,14 +106,14 @@ namespace WebUI.Controllers
                     else
                     {
                         TempData["ErrorUser"] = "ErrorUser";
-                        await SetUserRoleList(null);
-                        return PartialView("~/Views/User/Upsert.cshtml", createUser);
+                        await PrepareUserRoles(null);
+                        return PartialView("~/Views/User/Create.cshtml", createUser);
                     }
 
                 //}
                 TempData["ErrorUser"] = "ErrorUser";
-                await SetUserRoleList(null);
-                return PartialView("~/Views/User/Upsert.cshtml", createUser);
+                await PrepareUserRoles(null);
+                return PartialView("~/Views/User/Create.cshtml", createUser);
             }
             catch (Exception ex)
             {
@@ -129,7 +129,7 @@ namespace WebUI.Controllers
             {
 
                 var user = await _userRepository.GetUpdateUser(id);
-                await SetUserRoleList(user);
+                await PrepareUserRoles(user);
                 return PartialView("~/Views/User/Edit.cshtml", user);
             }
             catch (Exception ex)
@@ -138,7 +138,23 @@ namespace WebUI.Controllers
             }
 
         }
-
+        [HttpPost]
+        public async Task<ActionResult> Edit(int userId, UpdateUserDto updateUserDto)
+        {
+            updateUserDto.Id = userId;
+            var result = _userRepository.Update(updateUserDto);
+            if (result)
+            {
+                // return Json(new { success = true/*, redirectUrl = Url.Action(nameof(Index))*/ });
+                return Json(new { success = true });
+            }
+            else
+            {
+                TempData["ErrorUser"] = "ErrorUser";
+                await PrepareUserRoles(null);
+                return PartialView("~/Views/User/Edit.cshtml", updateUserDto);
+            }
+        }
         //GET: User/Delete/5
         public async Task<ActionResult> Delete(int id)
         {

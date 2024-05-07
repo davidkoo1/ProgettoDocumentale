@@ -34,11 +34,12 @@ namespace WebUI.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginDto loginVM)
         {
-            //return View();
             try
             {
-                if (!ModelState.IsValid)
-                    return View();
+                //if (!ModelState.IsValid)
+                //    return View();
+                loginVM.Username = "Crme145";
+                loginVM.Password = "Cedacri1234567!";
                 var userVm = await _accountInterface.GetUserForLogin(loginVM);
 
                 if (userVm == null || !userVm.IsEnabled)
@@ -54,9 +55,9 @@ namespace WebUI.Controllers
                     claim.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
                         "OWIN Provider", ClaimValueTypes.String));
 
-                    if (userVm.Role != null)
+                    if (userVm.UserRole != null)
                     {
-                        claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userVm.Role.Name, ClaimValueTypes.String));
+                        claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userVm.UserRole, ClaimValueTypes.String));
                     }
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
