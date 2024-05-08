@@ -19,7 +19,7 @@ namespace BLL.Validator
                 .MinimumLength(5)
                 .Must(a => a != null && a.StartsWith("Cr") == true);
 
-            RuleFor(x => x.UserName)
+            RuleFor(x => x.Name)
                 .NotNull()
                 .NotEmpty()
                 .MaximumLength(100);

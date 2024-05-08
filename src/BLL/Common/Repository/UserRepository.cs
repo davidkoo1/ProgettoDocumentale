@@ -86,7 +86,7 @@ namespace BLL.Common.Repository
             userToUpdate.UserRoles = new List<UserRole>();
             userToUpdate.UserRoles.AddRange(userToUpdateDto.RolesId.Select(id => new UserRole { RoleId = id }));
 
-            _dbContext.Users.AddOrUpdate(user);
+            _dbContext.Users.AddOrUpdate(userToUpdate);
             return await Save();
         }
 

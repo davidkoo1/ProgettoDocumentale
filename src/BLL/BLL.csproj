@@ -115,7 +115,9 @@
     <Compile Include="TableParameters\DataTablesOrder.cs" />
     <Compile Include="TableParameters\DataTablesParameters.cs" />
     <Compile Include="TableParameters\DataTablesSearch.cs" />
+    <Compile Include="Validator\CreateUserDtoValidator.cs" />
     <Compile Include="Validator\LoginDtoValidator.cs" />
+    <Compile Include="Validator\UpdateUserDtoValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

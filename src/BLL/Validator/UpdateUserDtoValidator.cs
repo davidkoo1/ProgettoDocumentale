@@ -13,7 +13,7 @@ namespace BLL.Validator
         public UpdateUserDtoValidator()
         {
 
-            RuleFor(x => x.UserName)
+            RuleFor(x => x.Name)
                 .NotNull()
                 .NotEmpty()
                 .MaximumLength(100);

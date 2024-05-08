@@ -1,6 +1,8 @@
 ﻿using BLL.Common.Interfaces;
 using BLL.DTO;
 using BLL.TableParameters;
+using BLL.Validator;
+using FluentValidation;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -8,13 +10,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
     public class UserController : BaseController
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository) => _userRepository = userRepository;
+        private readonly IValidator<CreateUserDto> _CreateUserDtoValidator;
+        private readonly IValidator<UpdateUserDto> _UpdateUserDtoValidator;
+        public UserController(IUserRepository userRepository, 
+            IValidator<CreateUserDto> CreateUserDtoValidator, 
+            IValidator<UpdateUserDto> updateUserDtoValidator)
+        {
+            _userRepository = userRepository;
+            _CreateUserDtoValidator = CreateUserDtoValidator;
+            _UpdateUserDtoValidator = updateUserDtoValidator;
+        }
 
 
         public ActionResult Index() => View();
@@ -90,30 +102,36 @@ namespace WebUI.Controllers
         }
         // POST: User/Create
         [HttpPost]
-
         public async Task<ActionResult> Create(CreateUserDto createUser)
         {
             try
             {
-                //if (ModelState.IsValid)
-                //{
-                    var result = await _userRepository.Add(createUser);
-                    if (result)
+                var validationResult = _CreateUserDtoValidator.Validate(createUser);
+                if (!validationResult.IsValid)
+                {
+                    foreach (var failure in validationResult.Errors)
                     {
-                        // return Json(new { success = true/*, redirectUrl = Url.Action(nameof(Index))*/ });
-                        return Json(new { success = true });
-                    }
-                    else
-                    {
-                        TempData["ErrorUser"] = "ErrorUser";
-                        await PrepareUserRoles(null);
-                        return PartialView("~/Views/User/Create.cshtml", createUser);
+                        ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
                     }
 
-                //}
-                TempData["ErrorUser"] = "ErrorUser";
-                await PrepareUserRoles(null);
-                return PartialView("~/Views/User/Create.cshtml", createUser);
+                    TempData["ErrorUser"] = "ErrorUser";
+                    await PrepareUserRoles(null);
+                    return PartialView("~/Views/User/Create.cshtml", createUser);
+                }
+
+                var result = await _userRepository.Add(createUser);
+                if (result)
+                {
+                    // return Json(new { success = true/*, redirectUrl = Url.Action(nameof(Index))*/ });
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    TempData["ErrorUser"] = "ErrorUser";
+                    await PrepareUserRoles(null);
+                    return PartialView("~/Views/User/Create.cshtml", createUser);
+                }
+
             }
             catch (Exception ex)
             {
@@ -141,6 +159,18 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(int userId, UpdateUserDto updateUserDto)
         {
+            var validationResult = _UpdateUserDtoValidator.Validate(updateUserDto);
+            if (!validationResult.IsValid)
+            {
+                foreach (var failure in validationResult.Errors)
+                {
+                    ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+                }
+
+                TempData["ErrorUser"] = "ErrorUser";
+                await PrepareUserRoles(null);
+                return PartialView("~/Views/User/Edit.cshtml", updateUserDto);
+            }
             updateUserDto.Id = userId;
             var result = await _userRepository.Update(updateUserDto);
             if (result)

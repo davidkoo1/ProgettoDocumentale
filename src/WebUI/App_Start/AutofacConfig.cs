@@ -28,6 +28,8 @@ namespace WebUI.App_Start
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<LoginDtoValidator>().As<IValidator<LoginDto>>();
+            builder.RegisterType<CreateUserDtoValidator>().As<IValidator<CreateUserDto>>();
+            builder.RegisterType<UpdateUserDtoValidator>().As<IValidator<UpdateUserDto>>();
             var container = builder.Build();
 
             // Установка резолвера зависимостей для MVC

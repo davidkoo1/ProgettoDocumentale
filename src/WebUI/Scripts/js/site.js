@@ -69,6 +69,32 @@ function deleteCurrentUser(userId) {
         }
     });
 }
+
+function handleSubmitButton(formId) {
+    var $form = $(formId);
+    if ($form.length === 0) return; // Проверяем, существует ли форма
+
+    $.ajax({
+        type: $form.attr('method'),
+        url: $form.attr('action'),
+        data: $form.serialize(),
+        success: function (response) {
+            if (response.success) {
+                $('#lgModal').modal('hide');
+                $('#UserDatatable').DataTable().ajax.reload(null, false);
+                $('#actions').hide();
+            } else {
+                $('.modal-body').html(response);
+                $('.selectpicker').selectpicker('refresh');
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("Произошла ошибка: " + error);
+        }
+    });
+}
+
+
 function drawPatrialView(url, divId) {
     $.ajax({
         url: url,
