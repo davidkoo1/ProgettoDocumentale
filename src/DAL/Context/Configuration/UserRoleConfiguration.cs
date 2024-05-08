@@ -12,14 +12,19 @@ namespace DAL.Context.Configuration
     {
         public UserRoleConfiguration()
         {
-            HasKey(ur => ur.UserId);  // Using UserId as the primary key, RoleId becomes unique automatically
+            HasKey(x => new { x.UserId, x.RoleId }); // Композитный ключ
 
+            // Конфигурация внешнего ключа для User
             HasRequired(ur => ur.User)
-                .WithRequiredDependent(u => u.UserRole);
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.UserId);
 
+            // Конфигурация внешнего ключа для Role
             HasRequired(ur => ur.Role)
-                .WithRequiredDependent(r => r.UserRole);
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.RoleId);
         }
     }
+
 
 }

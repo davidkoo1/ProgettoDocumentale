@@ -64,7 +64,7 @@ namespace WebUI.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.Name,
-                Selected = userDto != null ? userDto.RoleId == x.Id : false
+                Selected = userDto != null ? userDto.RolesId.Contains(x.Id) : false
             });
 
             ViewBag.Roles = selectListItemRoleVm;
@@ -97,7 +97,7 @@ namespace WebUI.Controllers
             {
                 //if (ModelState.IsValid)
                 //{
-                    var result = _userRepository.Add(createUser);
+                    var result = await _userRepository.Add(createUser);
                     if (result)
                     {
                         // return Json(new { success = true/*, redirectUrl = Url.Action(nameof(Index))*/ });
@@ -142,7 +142,7 @@ namespace WebUI.Controllers
         public async Task<ActionResult> Edit(int userId, UpdateUserDto updateUserDto)
         {
             updateUserDto.Id = userId;
-            var result = _userRepository.Update(updateUserDto);
+            var result = await _userRepository.Update(updateUserDto);
             if (result)
             {
                 // return Json(new { success = true/*, redirectUrl = Url.Action(nameof(Index))*/ });
@@ -174,11 +174,11 @@ namespace WebUI.Controllers
 
 
         [HttpPost]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             try
             {
-                var success = _userRepository.Delete(id);
+                var success = await _userRepository.Delete(id);
                 if (success)
                 {
                     return Json(new { success = true });

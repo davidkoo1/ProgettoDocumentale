@@ -28,9 +28,9 @@ namespace BLL.Common.Repository
             _mapper = mapper;
         }
 
-        public bool Add(CreateUserDto userToCreateDto)
+        public async Task<bool> Add(CreateUserDto userToCreateDto)
         {
-            var existing = _dbContext.Users.Any(x => (x.UserName == userToCreateDto.UserName || x.Email == userToCreateDto.Email));
+            var existing = await _dbContext.Users.AnyAsync(x => (x.UserName == userToCreateDto.UserName || x.Email == userToCreateDto.Email));
 
             if (userToCreateDto == null || existing == true)
             {
@@ -39,20 +39,17 @@ namespace BLL.Common.Repository
             var userToCreate = _mapper.Map<User>(userToCreateDto);
             string defaultPW = "Cedacri1234567!";
             userToCreate.Password = HashPW(defaultPW);
-            userToCreate.UserRole = new UserRole
-            {
-                RoleId = userToCreateDto.RoleId
-            };
-            _dbContext.Users.AddOrUpdate(userToCreate);
-            return Save();
+            userToCreate.UserRoles = userToCreateDto.RolesId.Select(id => new UserRole { RoleId = id }).ToList();
+            _dbContext.Users.Add(userToCreate);
+            return await Save();
         }
 
-        public bool Delete(int userId)
+        public async Task<bool> Delete(int userId)
         {
-            var userToDelete = _dbContext.Users.Include(x => x.UserRole).FirstOrDefault(x => x.Id == userId);
+            var userToDelete = _dbContext.Users.FirstOrDefault(x => x.Id == userId);
             userToDelete.IsEnabled = false;
             _dbContext.Users.AddOrUpdate(userToDelete);
-            return Save();
+            return await Save();
         }
 
         public async Task<IEnumerable<UserDto>> GetAllUsers(DataTablesParameters parameters) => _mapper.Map<IEnumerable<UserDto>>
@@ -64,50 +61,33 @@ namespace BLL.Common.Repository
 
         public async Task<IEnumerable<RoleDto>> GetRolesAsync() => _mapper.Map<IEnumerable<RoleDto>>(await _dbContext.Roles.ToListAsync());
 
-        public async Task<UpdateUserDto> GetUpdateUser(int id) => _mapper.Map<UpdateUserDto>(await _dbContext.Users.Include(x => x.UserRole).FirstOrDefaultAsync(x => x.Id == id));
+        public async Task<UpdateUserDto> GetUpdateUser(int id) => _mapper.Map<UpdateUserDto>(await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id));
 
         public async Task<UserDto> GetUser(int id)
         {
-            // Include UserRole and Role in the initial query to reduce DB round trips
-            var user = await _dbContext.Users
-                .Include(u => u.UserRole)
-                .FirstOrDefaultAsync(x => x.Id == id);
-            var roles = await _dbContext.UserRoles.Include(x => x.Role).FirstOrDefaultAsync(x => x.UserId == id);
-            var role = await _dbContext.Roles.FirstOrDefaultAsync(x => x.Id == roles.RoleId);
-            return new UserDto
-            {
-                Id = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-                IsEnabled = user.IsEnabled,
-                Name = user.Name,
-                Surname = user.Surname,
-                Patronymic = user.Patronymic,
-                UserRole = role.Name
+            var user = await _dbContext.Users.Include(u => u.UserRoles.Select(ur => ur.Role)).FirstOrDefaultAsync(u => u.Id == id);
 
-            };
+            return _mapper.Map<UserDto>(user);
         }
 
-        public bool Save() => _dbContext.SaveChanges() > 0 ? true : false;
+        public async Task<bool> Save() => await _dbContext.SaveChangesAsync() > 0 ? true : false;
 
-        public bool Update(UpdateUserDto userToCreateDto)
+        public async Task<bool> Update(UpdateUserDto userToUpdateDto)
         {
-            var user = _dbContext.Users.Include(x => x.UserRole).FirstOrDefault(x => x.Id == userToCreateDto.Id);
-            user.Email = userToCreateDto.Email;
-            user.Name = userToCreateDto.Name;
-            user.Surname = userToCreateDto.Surname;
-            user.Patronymic = userToCreateDto.Patronymic;
-            user.IsEnabled = userToCreateDto.IsEnabled;
+            var user = _dbContext.Users.AsNoTracking().FirstOrDefault(x => x.Id == userToUpdateDto.Id);
+            var userToUpdate = _mapper.Map<User>(userToUpdateDto);
+            userToUpdate.UserName = user.UserName;
+            userToUpdate.Password = user.Password;
+
             // Удаляем старые роли пользователя
-            var userRolesToRemove = _dbContext.UserRoles.Where(ur => ur.UserId == userToCreateDto.Id);
+            var userRolesToRemove = _dbContext.UserRoles.Where(ur => ur.UserId == userToUpdateDto.Id);
             _dbContext.UserRoles.RemoveRange(userRolesToRemove);
 
-            user.UserRole = new UserRole
-            {
-                RoleId = userToCreateDto.RoleId,
-            };
+            userToUpdate.UserRoles = new List<UserRole>();
+            userToUpdate.UserRoles.AddRange(userToUpdateDto.RolesId.Select(id => new UserRole { RoleId = id }));
+
             _dbContext.Users.AddOrUpdate(user);
-            return Save();
+            return await Save();
         }
 
         public async Task<bool> UserExists(int userId) => await _dbContext.Users.AnyAsync(x => x.Id == userId && !x.IsEnabled);

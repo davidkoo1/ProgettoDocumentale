@@ -54,11 +54,14 @@ namespace WebUI.Controllers
                     claim.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, userVm.Email, ClaimValueTypes.String));
                     claim.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
                         "OWIN Provider", ClaimValueTypes.String));
-
-                    if (userVm.UserRole != null)
-                    {
-                        claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userVm.UserRole, ClaimValueTypes.String));
-                    }
+                    if (userVm.UserRoles != null)
+                        foreach(var userRole in userVm.UserRoles)
+                        claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userRole, ClaimValueTypes.String));
+                            
+                    //if (userVm.UserRole != null)
+                    //{
+                    //    claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userVm.UserRole, ClaimValueTypes.String));
+                    //}
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {

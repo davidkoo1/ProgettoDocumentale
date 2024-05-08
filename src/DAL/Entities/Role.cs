@@ -7,6 +7,6 @@ namespace DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual UserRole UserRole { get; set; }
+        public virtual List<UserRole> UserRoles { get; set; }
     }
 }

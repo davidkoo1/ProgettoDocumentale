@@ -70,10 +70,10 @@
 
 
         <div class="mb-3 row">
-            @Html.LabelFor(model => model.RoleId, "Roles", new { @class = "col-sm-3 form-label" })
+            @Html.LabelFor(model => model.RolesId, "Roles", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true", @title = "Choose..." })
-                @Html.ValidationMessageFor(model => model.RoleId, null, new { @class = "text-danger" })
+                @Html.ListBoxFor(model => model.RolesId, new MultiSelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true", @title = "Choose..." })
+                @Html.ValidationMessageFor(model => model.RolesId, null, new { @class = "text-danger" })
             </div>
         </div>
 

@@ -43,8 +43,13 @@
 
 
             <div class="form-group mb-3">
-                @Html.LabelFor(model => model.UserRole, "Role")
-                @Html.TextBoxFor(model => model.UserRole, new { @class = "form-control", @disabled = true })
+                @Html.LabelFor(model => model.UserRoles, "Role")
+                @foreach (var role in Model.UserRoles)
+                {
+                    <input type="text" readonly disabled class="form-control" value="@role">
+                    <br />
+                }
+
             </div>
         </div>
 

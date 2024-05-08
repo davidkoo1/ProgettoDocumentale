@@ -1,4 +1,5 @@
-﻿using BLL.Common.Interfaces;
+﻿using AutoMapper;
+using BLL.Common.Interfaces;
 using BLL.DTO;
 using DAL.Context.Persistance;
 using System.Data.Entity;
@@ -12,34 +13,20 @@ namespace BLL.Common.Repository
     public class AccountRepository : IAccountRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        public AccountRepository(ApplicationDbContext dbContext)
+        private readonly IMapper _mapper;
+        public AccountRepository(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<UserDto> GetUserForLogin(LoginDto UserToLogin)
         {
-            var user = await _dbContext.Users.Include(x => x.UserRole).FirstOrDefaultAsync(u => u.UserName == UserToLogin.Username);
-
+            var user = await _dbContext.Users.Include(u => u.UserRoles.Select(ur => ur.Role)).FirstOrDefaultAsync(u => u.UserName == UserToLogin.Username);
             var encrypted = HashPW(UserToLogin.Password);
             if (user != null && user.Password == encrypted)
             {
-                return new UserDto
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    IsEnabled = user.IsEnabled,
-                    Name = user.Name,
-                    Surname = user.Surname,
-                    Patronymic = user.Patronymic,
-                    UserRole = user.UserRole.Role.Name
-                    //Role = new RoleDto
-                    //{
-                    //    Id = user.UserRole.RoleId,
-                    //    Name = user.UserRole.Role.Name
-                    //},
-                };
+                return _mapper.Map<UserDto>(user);
             }
             return null;
         }

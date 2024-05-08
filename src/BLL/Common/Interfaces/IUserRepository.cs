@@ -18,9 +18,9 @@ namespace BLL.Common.Interfaces
         Task<UpdateUserDto> GetUpdateUser(int id);
         Task<bool> UserExists(int userId);
         Task<IEnumerable<RoleDto>> GetRolesAsync();
-        bool Add(CreateUserDto userToCreateDto);
-        bool Update(UpdateUserDto userToUpdate);
-        bool Delete(int userId);
-        bool Save();
+        Task<bool> Add(CreateUserDto userToCreateDto);
+        Task<bool> Update(UpdateUserDto userToUpdateDto);
+        Task<bool> Delete(int userId);
+        Task<bool> Save();
     }
 }

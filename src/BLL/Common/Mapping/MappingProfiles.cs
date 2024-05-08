@@ -13,10 +13,10 @@ namespace BLL.Common.Mapping
     {
         public MappingProfiles()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>().ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role.Name)));
             CreateMap<UserDto, User>();
             CreateMap<CreateUserDto, User>();
-            CreateMap<User, UpdateUserDto>().ForMember(dest => dest.RoleId, opt => opt.MapFrom(src => src.UserRole.RoleId));
+            CreateMap<User, UpdateUserDto>().ForMember(dest => dest.RolesId, opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role.Id)));
             CreateMap<UpdateUserDto, User>();
 
             CreateMap<Role, RoleDto>();
