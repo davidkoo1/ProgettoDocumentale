@@ -78,3 +78,6 @@ C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BL
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.csproj.Up2Date
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.dll
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\obj\Debug\BLL.pdb
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.Mvc.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.ValidatorAttribute.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\BLL\bin\Debug\FluentValidation.Mvc.xml

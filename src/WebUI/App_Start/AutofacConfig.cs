@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using BLL.Common.Repository;
 using BLL.Common.Interfaces;
 using BLL;
+using FluentValidation;
+using BLL.DTO;
+using BLL.Validator;
 
 namespace WebUI.App_Start
 {
@@ -19,11 +22,12 @@ namespace WebUI.App_Start
             var builder = new ContainerBuilder();
 
             // Регистрация зависимостей BLL и DAL
-            DependencyInjectionConfig.RegisterDependencies(builder);
+            DependencyInjection.RegisterDependencies(builder);
 
             // Регистрация всех контроллеров в текущей сборке
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
+            builder.RegisterType<LoginDtoValidator>().As<IValidator<LoginDto>>();
             var container = builder.Build();
 
             // Установка резолвера зависимостей для MVC

@@ -1,5 +1,4 @@
-﻿@using WebUI.Models
-@model LoginVM
+﻿@model BLL.DTO.LoginDto
 
 @{
     ViewBag.Title = "LogIn";
@@ -86,15 +85,13 @@
         <div class="form-group">
             <label asp-for="Username"><b>Username</b></label>
             @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Username)
-            <span asp-validation-for="Username" class="text-danger"></span>
+            @Html.ValidationMessageFor(m => m.Username, null, new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             <label asp-for="Password"><b>Password</b></label>
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Password)
-            <span asp-validation-for="Password" class="text-danger"></span>
+            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
         </div>
 
         <button type="submit">Login</button>

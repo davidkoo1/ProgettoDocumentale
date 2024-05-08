@@ -1,39 +1,37 @@
 ﻿using Autofac;
+using Autofac.Core;
 using AutoMapper;
 using BLL.Common.Interfaces;
 using BLL.Common.Mapping;
 using BLL.Common.Repository;
+using BLL.DTO;
+using BLL.Validator;
 using DAL.Context.Persistance;
 using FluentValidation;
 using System;
 using System.Linq;
-
+using FluentValidation.Mvc;
 namespace BLL
 {
-    public class DependencyInjectionConfig
+    public class DependencyInjection
     {
         public static void RegisterDependencies(ContainerBuilder builder)
         {
-            // Регистрация DbContext
+            // Registration of DbContext
             builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerLifetimeScope();
 
-            // Регистрация зависимостей BLL
+            // BLL Dependencies Registration
             builder.RegisterType<AccountRepository>().As<IAccountRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
 
-            // Создание и регистрация AutoMapper
+            // AutoMapper Configuration and Registration
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfiles());
             });
             builder.RegisterInstance(mapperConfiguration.CreateMapper()).As<IMapper>().SingleInstance();
 
-            // Регистрация FluentValidation
-            builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
-                   .Where(t => t.IsClosedTypeOf(typeof(IValidator<>)))
-                   .AsImplementedInterfaces()
-                   .InstancePerLifetimeScope();
-
+            
         }
     }
 }

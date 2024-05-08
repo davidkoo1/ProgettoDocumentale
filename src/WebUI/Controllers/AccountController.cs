@@ -1,21 +1,31 @@
 ﻿using BLL.Common.Interfaces;
 using BLL.DTO;
+using FluentValidation;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
     public class AccountController : BaseController
     {
         private readonly IAccountRepository _accountInterface;
+        private readonly IValidator<LoginDto> _LoginDtoValidator;
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
-        public AccountController(IAccountRepository accountInterface) => _accountInterface = accountInterface;
+        public AccountController(IAccountRepository accountInterface, IValidator<LoginDto> LoginDtoValidator)
+        {
+            _accountInterface = accountInterface;
+            _LoginDtoValidator = LoginDtoValidator;
+        }
+
+
 
 
         [HttpGet]
@@ -36,10 +46,20 @@ namespace WebUI.Controllers
         {
             try
             {
-                //if (!ModelState.IsValid)
-                //    return View();
+                var validationResult = _LoginDtoValidator.Validate(loginVM);
+                if (!validationResult.IsValid)
+                {
+                    foreach (var failure in validationResult.Errors)
+                    {
+                        ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+                    }
+
+                    return View(loginVM);
+                }
+
                 loginVM.Username = "Crme145";
                 loginVM.Password = "Cedacri1234567!";
+                //return View();
                 var userVm = await _accountInterface.GetUserForLogin(loginVM);
 
                 if (userVm == null || !userVm.IsEnabled)
@@ -55,9 +75,9 @@ namespace WebUI.Controllers
                     claim.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
                         "OWIN Provider", ClaimValueTypes.String));
                     if (userVm.UserRoles != null)
-                        foreach(var userRole in userVm.UserRoles)
-                        claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userRole, ClaimValueTypes.String));
-                            
+                        foreach (var userRole in userVm.UserRoles)
+                            claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userRole, ClaimValueTypes.String));
+
                     //if (userVm.UserRole != null)
                     //{
                     //    claim.AddClaim(new Claim(ClaimsIdentity.DefaultRoleClaimType, userVm.UserRole, ClaimValueTypes.String));

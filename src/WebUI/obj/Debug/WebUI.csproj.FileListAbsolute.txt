@@ -170,3 +170,7 @@ C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\obj\Debug\
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\obj\Debug\WebUI.csproj.Up2Date
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\obj\Debug\WebUI.dll
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\obj\Debug\WebUI.pdb
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\bin\FluentValidation.Mvc.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\bin\FluentValidation.ValidatorAttribute.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\bin\System.ComponentModel.Primitives.dll
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\WebUI\bin\FluentValidation.Mvc.xml
