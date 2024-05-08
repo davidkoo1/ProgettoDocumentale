@@ -23,10 +23,10 @@ function checkTableDataAndToggleActions(table) {
 }
 function initializeUserDataTable() {
     var table = $('#UserDatatable').DataTable({
-        "processing": true,
+        //"processing": true,
         "serverSide": true,
-        "scrollX": true,
-        "autoWidth": true,
+        //"scrollX": true,
+        //"autoWidth": true,
         //"stateSave": true,
         //"dom": "p", //f, r, t, l, p
         ajax: {
@@ -39,10 +39,13 @@ function initializeUserDataTable() {
         },
         "columns": [
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
-            { "data": "UserName", "title": "UserName", "name": "UserName" },
-            { "data": "Email", "title": "Email", "name": "Email" },
-            { "data": "IsEnabled", "title": "IsEnabled", "name": "IsEnabled" }
-        ]
+            { "data": "UserName", "title": "UserName", "name": "UserName", "autoWidth": true },
+            { "data": "Email", "title": "Email", "name": "Email", "autoWidth": true },
+            { "data": "IsEnabled", "title": "IsEnabled", "name": "IsEnabled", "autoWidth": true }
+        ],
+        columnDefs: [
+            { className: 'text-center', targets: [3] },
+        ],
     });
 
     return table;

@@ -75,12 +75,14 @@ namespace BLL.Common.Repository
         public async Task<bool> Update(UpdateUserDto userToUpdateDto)
         {
             var user = _dbContext.Users.AsNoTracking().FirstOrDefault(x => x.Id == userToUpdateDto.Id);
+
             var userToUpdate = _mapper.Map<User>(userToUpdateDto);
+
             userToUpdate.UserName = user.UserName;
             userToUpdate.Password = user.Password;
 
             // Удаляем старые роли пользователя
-            var userRolesToRemove = _dbContext.UserRoles.Where(ur => ur.UserId == userToUpdateDto.Id);
+            var userRolesToRemove = _dbContext.UserRoles.Where(ur => ur.UserId == user.Id);
             _dbContext.UserRoles.RemoveRange(userRolesToRemove);
 
             userToUpdate.UserRoles = new List<UserRole>();

@@ -3,13 +3,10 @@ using BLL.DTO;
 using FluentValidation;
 using Microsoft.Owin.Security;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebUI.Models;
 
 namespace WebUI.Controllers
 {
