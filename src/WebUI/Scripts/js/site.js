@@ -1,26 +1,5 @@
 ﻿//UserData
-function setupRowClickEvents(table) {
-    $('#UserDatatable tbody').on('click', 'tr', function () {
-        var rowData = table.row(this).data();
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            $('#actions').hide();
-        } else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            updateButtonUserLinks(rowData.Id);
-            checkTableDataAndToggleActions(table);
-        }
-    });
-    
-}
-function checkTableDataAndToggleActions(table) {
-    if (table.rows().count() === 0) {
-        $('#actions').hide();
-    } else {
-        $('#actions').show();
-    }
-}
+
 function initializeUserDataTable() {
     var table = $('#UserDatatable').DataTable({
         //"processing": true,
@@ -33,9 +12,6 @@ function initializeUserDataTable() {
             "url": "/User/LoadDatatable",
             "type": "POST",
             "dataType": "json",
-            "beforeSend": function () {
-                $('#actions').hide();
-            }
         },
         "columns": [
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
@@ -53,35 +29,31 @@ function initializeUserDataTable() {
         trigger: 'right',
         callback: function (key, options) {
             let row = table.row(options.$trigger);
-            //switch (key) {
-            //    case 'edit':
-            //        loadEditUserForm(row.data()["id"]);
-            //        break;
-            //    case 'changePassword':
-            //        loadChangeUserPasswordForm(row.data()["id"]);
-            //        break;
-            //    case 'details':
-            //        loadUserDetails(row.data()["id"]);
-            //        break;
-            //    default:
-            //        break
-            //}
+            switch (key) {
+                case 'Edit':
+                    $('#lgModal').modal('show');
+                    drawPatrialView('../User/Edit/' + row.data()["Id"] , 'lgModalBody');
+                    break;
+                case 'Details':
+                    $('#lgModal').modal('show');
+                    drawPatrialView('../User/Details/' + row.data()["Id"], 'lgModalBody');
+                    break;
+                case 'Delete':
+                    $('#lgModal').modal('show');
+                    drawPatrialView('../User/Delete/' + row.data()["Id"], 'lgModalBody');
+                    break;
+                default:
+                    break
+            }
         },
         items: {
-            "changePassword": { name: "Change Password" },
-            "edit": { name: "Edit" },
-            "details": { name: "Details" }
+            "Edit": { name: "Edit" },
+            "Details": { name: "Details" },
+            "Delete": { name: "Delete" }
         }
     });
 
     return table;
-}
-
-function updateButtonUserLinks(id) {
-
-    $('#editLink').attr('onclick', `drawPatrialView('/User/Edit/'+${id}, 'lgModalBody')`);
-    $('#detailsLink').attr('onclick', `drawPatrialView('/User/Details/'+${id}, 'lgModalBody')`);
-    $('#deleteLink').attr('onclick', `drawPatrialView('/User/Delete/'+${id}, 'lgModalBody')`);
 }
 
 function deleteCurrentUser(userId) {
@@ -92,7 +64,6 @@ function deleteCurrentUser(userId) {
         contentType: "application/json; charset=utf-8",
         success: function (response) {
             if (response.success) {
-                $('#actions').hide();
                 $('#UserDatatable').DataTable().ajax.reload(null, false);
             } 
         }
@@ -111,7 +82,6 @@ function handleSubmitButton(formId) {
             if (response.success) {
                 $('#lgModal').modal('hide');
                 $('#UserDatatable').DataTable().ajax.reload(null, false);
-                $('#actions').hide();
             } else {
                 $('.modal-body').html(response);
                 $('.selectpicker').selectpicker('refresh');

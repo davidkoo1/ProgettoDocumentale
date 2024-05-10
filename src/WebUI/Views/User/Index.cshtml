@@ -55,11 +55,7 @@
                         </div>
 
                     </div>
-                    <div id="actions" style="display:none; padding: 5px;">
-                        <a type="button" style="width: 150px;" id="editLink" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Edit/', 'lgModalBody')">Edit</a>
-                        <a type="button" style="width: 150px;" id="detailsLink" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Details/', 'lgModalBody')">Detail</a>
-                        <a type="button" style="width: 150px;" id="deleteLink" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Delete/', 'lgModalBody')">Delete</a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -69,8 +65,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            var userDataTable = initializeUserDataTable();
-            setupRowClickEvents(userDataTable);
+            initializeUserDataTable();
         });
 
     </script>
