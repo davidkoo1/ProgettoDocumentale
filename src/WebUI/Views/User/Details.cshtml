@@ -21,7 +21,10 @@
                 @Html.LabelFor(model => model.Surname, "Last Name")
                 @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", @disabled = true })
             </div>
-
+            <div class="form-group">
+                @Html.LabelFor(model => model.Patronymic, "Patronymic")
+                @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control", @disabled = true })
+            </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, "Email")
                 @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @disabled = true })

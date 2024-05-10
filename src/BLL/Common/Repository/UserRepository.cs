@@ -74,19 +74,21 @@ namespace BLL.Common.Repository
 
         public async Task<bool> Update(UpdateUserDto userToUpdateDto)
         {
-            var user = _dbContext.Users.AsNoTracking().FirstOrDefault(x => x.Id == userToUpdateDto.Id);
-
+            var user = _dbContext.Users.FirstOrDefault(x => x.Id == userToUpdateDto.Id);
+            if (user == null)
+                return false;
             var userToUpdate = _mapper.Map<User>(userToUpdateDto);
 
             userToUpdate.UserName = user.UserName;
             userToUpdate.Password = user.Password;
 
-            // Удаляем старые роли пользователя
-            var userRolesToRemove = _dbContext.UserRoles.Where(ur => ur.UserId == user.Id);
-            _dbContext.UserRoles.RemoveRange(userRolesToRemove);
+            // Обновляем роли пользователя
+            var existingRoles = _dbContext.UserRoles.Where(ur => ur.UserId == user.Id).ToList();
+            _dbContext.UserRoles.RemoveRange(existingRoles); // Удаление старых ролей
 
-            userToUpdate.UserRoles = new List<UserRole>();
-            userToUpdate.UserRoles.AddRange(userToUpdateDto.RolesId.Select(id => new UserRole { RoleId = id }));
+            // Добавляем новые роли
+            var newRoles = userToUpdateDto.RolesId.Select(id => new UserRole { UserId = user.Id, RoleId = id }).ToList();
+            _dbContext.UserRoles.AddRange(newRoles);
 
             _dbContext.Users.AddOrUpdate(userToUpdate);
             return await Save();

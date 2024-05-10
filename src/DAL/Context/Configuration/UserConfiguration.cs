@@ -1,5 +1,6 @@
 ﻿using DAL.Entities;
 using System.Data.Entity.ModelConfiguration;
+using System.Reflection;
 
 namespace DAL.Context.Configuration
 {
@@ -13,9 +14,6 @@ namespace DAL.Context.Configuration
                 .HasMaxLength(32) 
                 .IsRequired();
 
-            HasIndex(user => user.UserName)
-                .IsUnique();
-
             Property(user => user.Name)
                 .HasMaxLength(100)
                 .IsRequired();
@@ -25,7 +23,8 @@ namespace DAL.Context.Configuration
                 .IsRequired();
 
             Property(user => user.Patronymic)
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .IsOptional();
 
             Property(user => user.Password) 
                 .HasMaxLength(256) 
@@ -35,19 +34,20 @@ namespace DAL.Context.Configuration
                 .HasMaxLength(150)
                 .IsRequired();
 
-            HasIndex(user => user.Email)
-                .IsUnique();
-
             Property(user => user.IsEnabled) 
                 .IsRequired();
+            Property(user => user.IdInstitution).IsOptional();
+            // Указание ForeignKey и связанной коллекции
+            HasOptional(user => user.Institution)
+                .WithMany(institution => institution.Users) // Ссылка на коллекцию пользователей в Institution
+                .HasForeignKey(user => user.IdInstitution);  // Явное указание внешнего ключа
 
-            //Property(user => user.Type) 
-            //    .HasMaxLength(50)
-            //    .IsRequired();
 
-            //Property(user => user.Institution) 
-            //    .HasMaxLength(100) 
-            //    .IsOptional(); 
+            // Indexes
+            HasIndex(user => user.UserName)
+                .IsUnique();
+            HasIndex(user => user.Email)
+                .IsUnique();
         }
     }
 

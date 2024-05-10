@@ -24,8 +24,6 @@ namespace BLL.Validator
                 .MaximumLength(100);
 
             RuleFor(x => x.Patronymic)
-                .NotNull()
-                .NotEmpty()
                 .MaximumLength(100);
 
             RuleFor(x => x.Email)

@@ -51,11 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\Configuration\InstitutionConfiguration.cs" />
     <Compile Include="Context\Persistance\ApplicationDbContext.cs" />
     <Compile Include="Context\Configuration\RoleConfiguration.cs" />
     <Compile Include="Context\Configuration\UserConfiguration.cs" />
     <Compile Include="Context\Configuration\UserRoleConfiguration.cs" />
     <Compile Include="Context\Persistance\DbInitializer.cs" />
+    <Compile Include="Entities\Institution.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
@@ -66,6 +68,18 @@
     <Compile Include="Migrations\202405080647159_Change.cs" />
     <Compile Include="Migrations\202405080647159_Change.Designer.cs">
       <DependentUpon>202405080647159_Change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405100816479_OptionalPatranimicUser.cs" />
+    <Compile Include="Migrations\202405100816479_OptionalPatranimicUser.Designer.cs">
+      <DependentUpon>202405100816479_OptionalPatranimicUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405100851046_IstitutionModel.cs" />
+    <Compile Include="Migrations\202405100851046_IstitutionModel.Designer.cs">
+      <DependentUpon>202405100851046_IstitutionModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405100858588_IstitutionModelUpdate.cs" />
+    <Compile Include="Migrations\202405100858588_IstitutionModelUpdate.Designer.cs">
+      <DependentUpon>202405100858588_IstitutionModelUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +94,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405080647159_Change.resx">
       <DependentUpon>202405080647159_Change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405100816479_OptionalPatranimicUser.resx">
+      <DependentUpon>202405100816479_OptionalPatranimicUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405100851046_IstitutionModel.resx">
+      <DependentUpon>202405100851046_IstitutionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405100858588_IstitutionModelUpdate.resx">
+      <DependentUpon>202405100858588_IstitutionModelUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
