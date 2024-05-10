@@ -45,9 +45,12 @@ namespace WebUI
             #endregion
 
             bundles.Add(new StyleBundle("~/lib/jquery-datatables").Include(
-                "~/lib/jquery-datatables/css/jquery.dataTables.css"));
+                "~/lib/jquery-datatables/css/jquery.dataTables.css",
+            "~/lib/jquery-contextmenu/dist/jquery.contextMenu.min.css"));
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
-            "~/lib/jquery-datatables/js/jquery.dataTables.js"));
+            "~/lib/jquery-datatables/js/jquery.dataTables.js",
+            "~/lib/jquery-contextmenu/dist/jquery.contextMenu.min.js",
+            "~/lib/jquery-contextmenu/dist/jquery.ui.position.min.js"));
 
 
 

@@ -36,11 +36,12 @@ namespace DAL.Context.Configuration
 
             Property(user => user.IsEnabled) 
                 .IsRequired();
+
             Property(user => user.IdInstitution).IsOptional();
-            // Указание ForeignKey и связанной коллекции
+
             HasOptional(user => user.Institution)
-                .WithMany(institution => institution.Users) // Ссылка на коллекцию пользователей в Institution
-                .HasForeignKey(user => user.IdInstitution);  // Явное указание внешнего ключа
+                .WithMany(institution => institution.Users) 
+                .HasForeignKey(user => user.IdInstitution); 
 
 
             // Indexes

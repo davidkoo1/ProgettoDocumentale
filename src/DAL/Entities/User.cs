@@ -13,7 +13,7 @@ namespace DAL.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
-        public int IdInstitution { get; set; }
+        public Nullable<int> IdInstitution { get; set; }
         public virtual Institution Institution { get; set; }
         public virtual List<UserRole> UserRoles { get; set; }
     }

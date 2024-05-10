@@ -1,63 +1,67 @@
 ﻿@model BLL.DTO.UserDto
+<style>
+    hr.dashed {
+        border-top: 2px dashed #000; /* Задаём черту как пунктирную, толщиной 2px и черного цвета */
+        margin-top: 10px; /* Отступ сверху */
+        margin-bottom: 10px; /* Отступ снизу */
+    }
+</style>
+
+
 
 <h1>Detail</h1>
 
-<div>
-    <div class="modal-body">
+<div class="modal-body">
+    <div class="mb-3 row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.UserName)
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = true })
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Surname)
+            @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Patronymic)
+            @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control", @disabled = true })
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @disabled = true })
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.IsEnabled)
+            <div role="group">
+                <input type="radio" class="btn-check" name="btnradio2" id="btnradio2-1" value="True" autocomplete="off" @(Model.IsEnabled ? "checked" : "") disabled>
+                <label class="btn btn-outline-primary" for="btnradio2-1">Active</label>
 
-        <hr />
-        <div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserName)
-                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @disabled = true })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, "First Name")
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = true })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Surname, "Last Name")
-                @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", @disabled = true })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Patronymic, "Patronymic")
-                @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control", @disabled = true })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, "Email")
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @disabled = true })
-            </div>
-
-            <div class="form-group mt-3 mb-2">
-                @Html.HiddenFor(model => model.IsEnabled, new { @id = "IsEnabledDisabled" })
-                <div class="btn-group" role="group">
-                    <!-- Unique name and ids for the second group, disabled state -->
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio2-1" value="True"
-                           autocomplete="off" @(Model.IsEnabled ? "checked" : "") disabled>
-                    <label class="btn btn-outline-primary" for="btnradio2-1">Active</label>
-
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio2-2" value="False"
-                           autocomplete="off" @(Model.IsEnabled ? "" : "checked") disabled>
-                    <label class="btn btn-outline-primary" for="btnradio2-2">Inactive</label>
-                </div>
-            </div>
-
-
-            <div class="form-group mb-3">
-                @Html.LabelFor(model => model.UserRoles, "Role")
-                @foreach (var role in Model.UserRoles)
-                {
-                    <input type="text" readonly disabled class="form-control" value="@role">
-                    <br />
-                }
-
+                <input type="radio" class="btn-check" name="btnradio2" id="btnradio2-2" value="False" autocomplete="off" @(Model.IsEnabled ? "" : "checked") disabled>
+                <label class="btn btn-outline-primary" for="btnradio2-2">Inactive</label>
             </div>
         </div>
+    </div>
+
+    <hr class="dashed">
+
+    <div class="mb-3 row">
+        @foreach (var role in Model.UserRoles)
+        {
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => role, new { @class = "form-control", @disabled = true })
+            </div>
+        }
 
     </div>
 </div>
+
 <div class="modal-footer">
     <button type="button" class="btn btn-light waves-secondary" data-bs-dismiss="modal">Cancel</button>
 </div>

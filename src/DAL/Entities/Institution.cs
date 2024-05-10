@@ -13,8 +13,7 @@ namespace DAL.Entities
         public string Name { get; set; }
         public string AdditionalInfo { get; set; }
 
-        // Коллекция пользователей, связанных с учреждением
-        public virtual List<User> Users { get; set; } // Используйте virtual для ленивой загрузки
+        public virtual List<User> Users { get; set; }
 
     }
 }

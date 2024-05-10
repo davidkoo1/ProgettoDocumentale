@@ -48,6 +48,32 @@ function initializeUserDataTable() {
         ],
     });
 
+    var contextmenu = $('#UserDatatable').contextMenu({
+        selector: 'tr',
+        trigger: 'right',
+        callback: function (key, options) {
+            let row = table.row(options.$trigger);
+            //switch (key) {
+            //    case 'edit':
+            //        loadEditUserForm(row.data()["id"]);
+            //        break;
+            //    case 'changePassword':
+            //        loadChangeUserPasswordForm(row.data()["id"]);
+            //        break;
+            //    case 'details':
+            //        loadUserDetails(row.data()["id"]);
+            //        break;
+            //    default:
+            //        break
+            //}
+        },
+        items: {
+            "changePassword": { name: "Change Password" },
+            "edit": { name: "Edit" },
+            "details": { name: "Details" }
+        }
+    });
+
     return table;
 }
 
