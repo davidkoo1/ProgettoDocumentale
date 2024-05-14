@@ -12,6 +12,7 @@ using BLL;
 using FluentValidation;
 using BLL.DTO;
 using BLL.Validator;
+using BLL.UserDTOs;
 
 namespace WebUI.App_Start
 {

@@ -100,16 +100,20 @@
   <ItemGroup>
     <Compile Include="Common\Extensions\DataTableExtensions.cs" />
     <Compile Include="Common\Interfaces\IAccountRepository.cs" />
+    <Compile Include="Common\Interfaces\IInstitutionRepository.cs" />
     <Compile Include="Common\Interfaces\IUserRepository.cs" />
     <Compile Include="Common\Mapping\MappingProfiles.cs" />
     <Compile Include="Common\Repository\AccountRepository.cs" />
+    <Compile Include="Common\Repository\InstitutionRepository.cs" />
     <Compile Include="Common\Repository\UserRepository.cs" />
     <Compile Include="DependencyInjection.cs" />
-    <Compile Include="DTO\CreateUserDto.cs" />
+    <Compile Include="DTO\InstitutionDTOs\CreateInstitutionDto.cs" />
+    <Compile Include="DTO\InstitutionDTOs\InstitutionDto.cs" />
+    <Compile Include="DTO\UserDTOs\CreateUserDto.cs" />
     <Compile Include="DTO\LoginDto.cs" />
-    <Compile Include="DTO\RoleDto.cs" />
-    <Compile Include="DTO\UpdateUserDto.cs" />
-    <Compile Include="DTO\UserDto.cs" />
+    <Compile Include="DTO\UserDTOs\RoleDto.cs" />
+    <Compile Include="DTO\UserDTOs\UpdateUserDto.cs" />
+    <Compile Include="DTO\UserDTOs\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableParameters\DataTablesColumn.cs" />
     <Compile Include="TableParameters\DataTablesOrder.cs" />
@@ -129,6 +133,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

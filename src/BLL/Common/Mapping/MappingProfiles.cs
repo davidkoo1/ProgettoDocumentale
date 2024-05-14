@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using BLL.DTO;
+using BLL.DTO.InstitutionDTOs;
+using BLL.UserDTOs;
 using DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,10 @@ namespace BLL.Common.Mapping
 
             CreateMap<Role, RoleDto>();
             CreateMap<RoleDto, Role>();
+
+
+            CreateMap<Institution, InstitutionDto>();
+            CreateMap<InstitutionDto, Institution>();
         }
     }
 

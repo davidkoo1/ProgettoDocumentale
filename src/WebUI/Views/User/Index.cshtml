@@ -1,7 +1,5 @@
-﻿@model IEnumerable<BLL.DTO.UserDto>
-
-@{
-    ViewBag.Title = "Users";
+﻿@{
+    ViewBag.Title = "Admin";
 }
 <style>
     tr.selected {
@@ -12,50 +10,41 @@
 <div class="" id="adminContent">
     <h3>Administration</h3>
 
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Users</h3>
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <div class="d-flex justify-content-between">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-institutions-tab" data-bs-toggle="tab" data-bs-target="#nav-institutions" type="button" role="tab" aria-controls="nav-institutions" aria-selected="true">
+                                        <h5>Institutions</h5>
+                                    </button>
+                                    <button class="nav-link" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">
+                                        <h5>Users</h5>
+                                    </button>
+                                </div>
+                            </nav>
 
-                                <button class="nav-link active" id="nav-institutions-tab" data-bs-toggle="tab" data-bs-target="#nav-institutions" type="button" role="tab" aria-controls="nav-institutions" aria-selected="true">
-                                    <h5>Institutions</h5>
-                                </button>
+                            <a id="addButton" type="button" class="btn btn-success d-flex justify-content-center align-items-center" style="width: 150px; height: 40px;" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/Institution/GetCreate/', 'lgModalBody')">Add</a>
 
-                                <button class="nav-link" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">
-                                    <h5>Users</h5>
-                                </button>
-
-                            </div>
-                        </nav>
-                        <a type="button" style="width: 150px;" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/User/Create/', 'lgModalBody')">Add</a>
-
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="nav-tabContent">
-
                             <div class="tab-pane fade show active" id="nav-institutions" role="tabpanel" aria-labelledby="nav-institutions-tab" tabindex="0">
                                 <div style="width:100%; margin:0 auto;">
-                                    <table id="institutionsDatatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0"></table>
-
+                                    <table id="InstitutionDatatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0"></table>
                                 </div>
                             </div>
-
                             <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
                                 <div style="width:100%; margin:0 auto;">
                                     <table id="UserDatatable" class="table table-bordered table-hover w-100 mb-1"></table>
-
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -66,7 +55,15 @@
     <script>
         $(document).ready(function () {
             initializeUserDataTable();
-        });
+            initializeInstitutionDataTable();
 
+            $('#nav-institutions-tab').on('shown.bs.tab', function () {
+                $('#addButton').attr('onclick', "drawPatrialView('/Institution/GetCreate/', 'lgModalBody')");
+            });
+
+            $('#nav-users-tab').on('shown.bs.tab', function () {
+                $('#addButton').attr('onclick', "drawPatrialView('/User/GetCreate/', 'lgModalBody')");
+            });
+        });
     </script>
 }

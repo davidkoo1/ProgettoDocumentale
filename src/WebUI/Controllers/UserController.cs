@@ -1,5 +1,5 @@
 ﻿using BLL.Common.Interfaces;
-using BLL.DTO;
+using BLL.UserDTOs;
 using BLL.TableParameters;
 using BLL.Validator;
 using FluentValidation;
@@ -14,6 +14,7 @@ using WebUI.Models;
 
 namespace WebUI.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class UserController : BaseController
     {
         private readonly IUserRepository _userRepository;
@@ -33,7 +34,7 @@ namespace WebUI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> LoadDatatable(DataTablesParameters parameters)
+        public async Task<ActionResult> LoadUserDatatable(DataTablesParameters parameters)
         {
             try
             {
@@ -53,7 +54,8 @@ namespace WebUI.Controllers
             }
         }
 
-        public async Task<ActionResult> Details(int id)
+        [HttpGet]
+        public async Task<ActionResult> GetDetails(int id)
         {
             try
             {
@@ -84,7 +86,8 @@ namespace WebUI.Controllers
 
         }
 
-        public async Task<ActionResult> Create()
+        [HttpGet]
+        public async Task<ActionResult> GetCreate()
         {
             try
             {
@@ -140,8 +143,8 @@ namespace WebUI.Controllers
 
         }
 
-
-        public async Task<ActionResult> Edit(int id)
+        [HttpGet]
+        public async Task<ActionResult> GetEdit(int id)
         {
             try
             {
@@ -168,8 +171,8 @@ namespace WebUI.Controllers
                 }
 
                 TempData["ErrorUser"] = "ErrorUser";
-                await PrepareUserRoles(null);
-                return PartialView("~/Views/User/Edit.cshtml", updateUserDto);
+                await PrepareUserRoles(updateUserDto);
+                return PartialView("~/Views/User/Edit.cshtml", await _userRepository.GetUpdateUser(userId));
             }
             updateUserDto.Id = userId;
             var result = await _userRepository.Update(updateUserDto);
@@ -181,12 +184,13 @@ namespace WebUI.Controllers
             else
             {
                 TempData["ErrorUser"] = "ErrorUser";
-                await PrepareUserRoles(null);
-                return PartialView("~/Views/User/Edit.cshtml", updateUserDto);
+                await PrepareUserRoles(updateUserDto);
+                return PartialView("~/Views/User/Edit.cshtml", await _userRepository.GetUpdateUser(userId));
             }
         }
-        //GET: User/Delete/5
-        public async Task<ActionResult> Delete(int id)
+
+        [HttpGet]
+        public async Task<ActionResult> GetDelete(int id)
         {
             try
             {

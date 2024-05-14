@@ -23,6 +23,7 @@ namespace BLL
             // BLL Dependencies Registration
             builder.RegisterType<AccountRepository>().As<IAccountRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
+            builder.RegisterType<InstitutionRepository>().As<IInstitutionRepository>();
 
             // AutoMapper Configuration and Registration
             var mapperConfiguration = new MapperConfiguration(cfg =>

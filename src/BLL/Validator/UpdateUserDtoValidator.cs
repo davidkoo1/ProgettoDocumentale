@@ -1,4 +1,5 @@
 ﻿using BLL.DTO;
+using BLL.UserDTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

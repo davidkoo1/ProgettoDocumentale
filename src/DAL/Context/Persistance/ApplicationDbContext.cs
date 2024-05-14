@@ -9,6 +9,7 @@ namespace DAL.Context.Persistance
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Institution> Institutions { get; set; }
 
         public ApplicationDbContext() : base("name=DefaultConnection")
         {

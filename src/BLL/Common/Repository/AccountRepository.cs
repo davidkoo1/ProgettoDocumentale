@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.Common.Interfaces;
 using BLL.DTO;
+using BLL.UserDTOs;
 using DAL.Context.Persistance;
 using System.Data.Entity;
 using System.Linq;

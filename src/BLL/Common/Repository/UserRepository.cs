@@ -3,6 +3,7 @@ using BLL.Common.Extensions;
 using BLL.Common.Interfaces;
 using BLL.DTO;
 using BLL.TableParameters;
+using BLL.UserDTOs;
 using DAL.Context.Persistance;
 using DAL.Entities;
 using System;
@@ -52,8 +53,8 @@ namespace BLL.Common.Repository
             return await Save();
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsers(DataTablesParameters parameters) => _mapper.Map<IEnumerable<UserDto>>
-            (await _dbContext.Users
+        public async Task<IEnumerable<UserDto>> GetAllUsers(DataTablesParameters parameters) => _mapper.Map<IEnumerable<UserDto>>(
+            await _dbContext.Users
             .Search(parameters)
             .OrderBy(parameters)
             .Page(parameters)

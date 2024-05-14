@@ -1,4 +1,60 @@
-﻿//UserData
+﻿function initializeInstitutionDataTable() {
+    var table = $('#InstitutionDatatable').DataTable({
+        //"processing": true,
+        "serverSide": true,
+        "scrollX": true,
+        "autoWidth": true,
+        //"stateSave": true,
+        //"dom": "p", //f, r, t, l, p
+        ajax: {
+            "url": "/Institution/LoadInstitutionDatatable",
+            "type": "POST",
+            "dataType": "json",
+        },
+        "columns": [
+            { "data": "Id", "title": "Id", "name": "Id", "visible": false },
+            { "data": "InstCode", "title": "InstCode", "name": "InstCode", "autoWidth": true },
+            { "data": "Name", "title": "Name", "name": "Name", "autoWidth": true },
+            { "data": "AdditionalInfo", "title": "AdditionalInfo", "name": "AdditionalInfo", "autoWidth": true }
+        ],
+        columnDefs: [
+            { className: 'text-center', targets: [3] },
+        ],
+    });
+
+    //var contextmenu = $('#InstitutionDatatable').contextMenu({
+    //    selector: 'tr',
+    //    trigger: 'right',
+    //    callback: function (key, options) {
+    //        let row = table.row(options.$trigger);
+    //        switch (key) {
+    //            case 'Edit':
+    //                $('#lgModal').modal('show');
+    //                drawPatrialView('../User/GetEdit/' + row.data()["Id"], 'lgModalBody');
+    //                break;
+    //            case 'Details':
+    //                $('#lgModal').modal('show');
+    //                drawPatrialView('../User/GetDetails/' + row.data()["Id"], 'lgModalBody');
+    //                break;
+    //            case 'Delete':
+    //                $('#lgModal').modal('show');
+    //                drawPatrialView('../User/GetDelete/' + row.data()["Id"], 'lgModalBody');
+    //                break;
+    //            default:
+    //                break
+    //        }
+    //    },
+    //    items: {
+    //        "Edit": { name: "Edit" },
+    //        "Details": { name: "Details" },
+    //        "Delete": { name: "Delete" }
+    //    }
+    //});
+
+    return table;
+}
+
+//UserData
 
 function initializeUserDataTable() {
     var table = $('#UserDatatable').DataTable({
@@ -9,7 +65,7 @@ function initializeUserDataTable() {
         //"stateSave": true,
         //"dom": "p", //f, r, t, l, p
         ajax: {
-            "url": "/User/LoadDatatable",
+            "url": "/User/LoadUserDatatable",
             "type": "POST",
             "dataType": "json",
         },
@@ -32,15 +88,15 @@ function initializeUserDataTable() {
             switch (key) {
                 case 'Edit':
                     $('#lgModal').modal('show');
-                    drawPatrialView('../User/Edit/' + row.data()["Id"] , 'lgModalBody');
+                    drawPatrialView('../User/GetEdit/' + row.data()["Id"] , 'lgModalBody');
                     break;
                 case 'Details':
                     $('#lgModal').modal('show');
-                    drawPatrialView('../User/Details/' + row.data()["Id"], 'lgModalBody');
+                    drawPatrialView('../User/GetDetails/' + row.data()["Id"], 'lgModalBody');
                     break;
                 case 'Delete':
                     $('#lgModal').modal('show');
-                    drawPatrialView('../User/Delete/' + row.data()["Id"], 'lgModalBody');
+                    drawPatrialView('../User/GetDelete/' + row.data()["Id"], 'lgModalBody');
                     break;
                 default:
                     break
