@@ -66,7 +66,7 @@ namespace BLL.Common.Repository
 
         public async Task<UserDto> GetUser(int id)
         {
-            var user = await _dbContext.Users.Include(u => u.UserRoles.Select(ur => ur.Role)).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _dbContext.Users.Include(u => u.UserRoles.Select(ur => ur.Role)).Include(u => u.Institution).FirstOrDefaultAsync(u => u.Id == id);
 
             return _mapper.Map<UserDto>(user);
         }

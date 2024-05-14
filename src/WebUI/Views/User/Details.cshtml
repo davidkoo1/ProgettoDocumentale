@@ -60,6 +60,16 @@
         }
 
     </div>
+    @if (Model.InstitutionName != null)
+    {
+        <hr class="dashed">
+        <div class="mb-3 row">
+            <div class="col-12">
+                @Html.LabelFor(model => model.InstitutionName, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.InstitutionName, new { @class = "form-control", @disabled = true })
+            </div>
+        </div>
+    }
 </div>
 
 <div class="modal-footer">

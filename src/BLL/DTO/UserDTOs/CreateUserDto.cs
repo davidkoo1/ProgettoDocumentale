@@ -15,6 +15,7 @@ namespace BLL.UserDTOs
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public List<int> RolesId { get; set; }
+        public Nullable<int> IdInstitution { get; set; }
 
     }
 }

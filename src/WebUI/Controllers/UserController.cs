@@ -18,13 +18,15 @@ namespace WebUI.Controllers
     public class UserController : BaseController
     {
         private readonly IUserRepository _userRepository;
+        private readonly IInstitutionRepository _institutionRepository;
         private readonly IValidator<CreateUserDto> _CreateUserDtoValidator;
         private readonly IValidator<UpdateUserDto> _UpdateUserDtoValidator;
-        public UserController(IUserRepository userRepository, 
-            IValidator<CreateUserDto> CreateUserDtoValidator, 
+        public UserController(IUserRepository userRepository, IInstitutionRepository institutionRepository,
+            IValidator<CreateUserDto> CreateUserDtoValidator,
             IValidator<UpdateUserDto> updateUserDtoValidator)
         {
             _userRepository = userRepository;
+            _institutionRepository = institutionRepository;
             _CreateUserDtoValidator = CreateUserDtoValidator;
             _UpdateUserDtoValidator = updateUserDtoValidator;
         }
@@ -83,9 +85,34 @@ namespace WebUI.Controllers
 
             ViewBag.Roles = selectListItemRoleVm;
 
-
+            if(userDto != null)
+            {
+                await PrepareUserInstitution(userDto.Id);
+            }
+            
+            //if (userDto.RolesId.Contains(3) && userDto != null && userDto.IdInstitution != 0 && userDto.IdInstitution != null)
+            //{
+            //    await PrepareUserInstitution(userDto.Id);
+            //}
         }
 
+        [HttpPost]
+        public async Task<JsonResult> PrepareUserInstitution(int userid)
+        {
+
+            var userVM = await _userRepository.GetUser(userid);
+            var userInstitutionId = userVM.InstitutionId;
+            var institutions = await _institutionRepository.GetInstitutions();
+            var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = userVM != null && userVM.InstitutionId != 0 && userVM.InstitutionId != null ? x.Id == userInstitutionId : false
+            });
+            ViewBag.Institutions = selectListInstitutionsVm;
+
+            return Json(selectListInstitutionsVm);
+        }
         [HttpGet]
         public async Task<ActionResult> GetCreate()
         {

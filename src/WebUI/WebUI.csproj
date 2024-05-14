@@ -821,6 +821,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Institution\Details.cshtml" />
     <Content Include="Views\Institution\Create.cshtml" />
+    <Content Include="Views\Institution\Delete.cshtml" />
+    <Content Include="Views\Institution\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

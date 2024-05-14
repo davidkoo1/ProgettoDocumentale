@@ -1,4 +1,4 @@
-﻿@model BLL.DTO.InstitutionDTOs.CreateInstitutionDto
+﻿@model BLL.DTO.InstitutionDTOs.UpdateInstitutionDto
 
 @if (TempData["ErrorInstitution"] != null)
 {
@@ -7,7 +7,7 @@
     </div>
 }
 
-@using (Html.BeginForm("Create", "Institution", FormMethod.Post, new { id = "createInstitutionForm", @class = "needs-validation", novalidate = "novalidate" }))
+@using (Html.BeginForm("Edit", "Institution", new { institutionId = Model.Id }, FormMethod.Post, new { id = "updateInstitutionForm", @class = "needs-validation", novalidate = "novalidate" }))
 {
     <div class="modal-body">
         @Html.AntiForgeryToken()
@@ -15,7 +15,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.InstCode, "*Code", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.InstCode, new { @class = "form-control", placeholder = "ACXXX", maxlength = "5" })
+                @Html.TextBoxFor(model => model.InstCode, new { @class = "form-control", placeholder = "ACXXX", maxlength = "5", @disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.InstCode, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#createInstitutionForm')">Save</button>
+        <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#updateInstitutionForm')">Save</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
     </div>
 }

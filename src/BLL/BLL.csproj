@@ -109,6 +109,7 @@
     <Compile Include="DependencyInjection.cs" />
     <Compile Include="DTO\InstitutionDTOs\CreateInstitutionDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\InstitutionDto.cs" />
+    <Compile Include="DTO\InstitutionDTOs\UpdateInstitutionDto.cs" />
     <Compile Include="DTO\UserDTOs\CreateUserDto.cs" />
     <Compile Include="DTO\LoginDto.cs" />
     <Compile Include="DTO\UserDTOs\RoleDto.cs" />
@@ -119,8 +120,10 @@
     <Compile Include="TableParameters\DataTablesOrder.cs" />
     <Compile Include="TableParameters\DataTablesParameters.cs" />
     <Compile Include="TableParameters\DataTablesSearch.cs" />
+    <Compile Include="Validator\CreateInstitutionDtoValidator.cs" />
     <Compile Include="Validator\CreateUserDtoValidator.cs" />
     <Compile Include="Validator\LoginDtoValidator.cs" />
+    <Compile Include="Validator\UpdateInstitutionDtoValidator.cs" />
     <Compile Include="Validator\UpdateUserDtoValidator.cs" />
   </ItemGroup>
   <ItemGroup>

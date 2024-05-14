@@ -14,27 +14,27 @@
 
 
         <div class="mb-3 row">
-            @Html.LabelFor(model => model.UserName, new { @class = "col-sm-3 form-label" })
+            @Html.LabelFor(model => model.UserName, "*User Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username", minlength = "5", maxlength = "7" })
                 @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
             </div>
             <br>
         </div>
 
         <div class="mb-3 row">
-            @Html.LabelFor(model => model.Name, "First Name", new { @class = "col-sm-3 form-label" })
+            @Html.LabelFor(model => model.Name, "*First Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter first name" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter first name", maxlength = "100" })
                 @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
             </div>
             <br>
         </div>
 
         <div class="mb-3 row">
-            @Html.LabelFor(model => model.Surname, "Last Name", new { @class = "col-sm-3 form-label" })
+            @Html.LabelFor(model => model.Surname, "*Last Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Enter last name" })
+                @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Enter last name", maxlength = "100" })
                 @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "text-danger" })
             </div>
             <br>
@@ -44,16 +44,16 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.Patronymic, "Patronymic", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control", placeholder = "Enter patronymic" })
+                @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control", placeholder = "Enter patronymic", maxlength = "100" })
                 @Html.ValidationMessageFor(model => model.Patronymic, null, new { @class = "text-danger" })
             </div>
             <br>
         </div>
 
         <div class="mb-3 row">
-            @Html.LabelFor(model => model.Email, "Email", new { @class = "col-sm-3 form-label" })
+            @Html.LabelFor(model => model.Email, "*Email", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter email address", type = "email" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter email address", type = "email", maxlength = "100" })
                 @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -70,12 +70,20 @@
 
 
         <div class="mb-3 row">
-            @Html.LabelFor(model => model.RolesId, "Roles", new { @class = "col-sm-3 form-label" })
+            @Html.LabelFor(model => model.RolesId, "*Roles", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.ListBoxFor(model => model.RolesId, new MultiSelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true", @title = "Choose..." })
+                @Html.ListBoxFor(model => model.RolesId, new MultiSelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true", @title = "Choose...", @id = "rolesSelect" })
                 @Html.ValidationMessageFor(model => model.RolesId, null, new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="mb-3 row" id="additionalSelectRow" style="display: none;">
+            @Html.LabelFor(model => model.IdInstitution, "Institutions", new { @class = "col-sm-3 form-label" })
+            <div class="col-sm-9">
+                @Html.DropDownListFor(model => model.IdInstitution, Enumerable.Empty<SelectListItem>(), new { @class = "form-control selectpicker", data_live_search = "true", @id = "AdditionalSelect", @title = "Choose..." })
+            </div>
+        </div>
+
 
     </div>
 
@@ -88,5 +96,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.selectpicker').selectpicker();
+
+        $('#rolesSelect').change(SetInstitution);
     });
 </script>

@@ -17,6 +17,8 @@ namespace BLL.UserDTOs
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public ICollection<string> UserRoles { get; set; } = new HashSet<string>();
+        public string InstitutionName { get; set; }
+        public int InstitutionId { get; set; }
 
     }
 }

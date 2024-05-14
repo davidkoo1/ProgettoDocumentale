@@ -15,7 +15,9 @@ namespace BLL.Common.Mapping
     {
         public MappingProfiles()
         {
-            CreateMap<User, UserDto>().ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role.Name)));
+            CreateMap<User, UserDto>().ForMember(dest => dest.UserRoles, opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role.Name)))
+                                        .ForMember(d => d.InstitutionName, o => o.MapFrom(s => s.Institution.Name))
+                                        .ForMember(d => d.InstitutionId, o => o.MapFrom(s => s.Institution.Id));
             CreateMap<UserDto, User>();
             CreateMap<CreateUserDto, User>();
             CreateMap<User, UpdateUserDto>().ForMember(dest => dest.RolesId, opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role.Id)));
@@ -27,6 +29,10 @@ namespace BLL.Common.Mapping
 
             CreateMap<Institution, InstitutionDto>();
             CreateMap<InstitutionDto, Institution>();
+
+            CreateMap<CreateInstitutionDto, Institution>();
+            CreateMap<Institution, UpdateInstitutionDto>();//GetForUpdate
+            CreateMap<UpdateInstitutionDto, Institution>();//DtoToUpdate
         }
     }
 
