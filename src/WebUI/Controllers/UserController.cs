@@ -15,7 +15,7 @@ using WebUI.Models;
 namespace WebUI.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class UserController : BaseController
+    public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
         private readonly IInstitutionRepository _institutionRepository;

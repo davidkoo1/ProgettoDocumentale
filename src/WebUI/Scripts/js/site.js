@@ -60,8 +60,8 @@ function initializeInstitutionDataTable() {
     var table = $('#InstitutionDatatable').DataTable({
         //"processing": true,
         "serverSide": true,
-        "scrollX": true,
-        "autoWidth": true,
+        //"scrollX": true,
+        //"autoWidth": true,
         //"stateSave": true,
         //"dom": "p", //f, r, t, l, p
         ajax: {

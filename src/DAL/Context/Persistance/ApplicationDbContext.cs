@@ -13,7 +13,8 @@ namespace DAL.Context.Persistance
 
         public ApplicationDbContext() : base("name=DefaultConnection")
         {
-            Database.SetInitializer<ApplicationDbContext>(new DbInitializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, DbInitializer>());
+            //Database.SetInitializer<ApplicationDbContext>(new DbInitializer());
             //Database.SetInitializer(new DbInitializer());
         }
 

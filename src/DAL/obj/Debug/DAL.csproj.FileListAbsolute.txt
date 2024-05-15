@@ -24,9 +24,5 @@ C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DA
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.Up2Date
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.dll
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.pdb
-C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Migrations.Init.resources
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Context.Persistance.InitWithSeed.resources
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.GenerateResource.cache
-C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Migrations.Change.resources
-C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Migrations.OptionalPatranimicUser.resources
-C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Migrations.IstitutionModel.resources
-C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Migrations.IstitutionModelUpdate.resources

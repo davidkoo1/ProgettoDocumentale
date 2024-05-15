@@ -174,7 +174,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Enum\ExecutionResult.cs" />
     <Compile Include="Models\FileName.cs" />
+    <Compile Include="Models\JsonResponseModels\BaseJsonResponse.cs" />
+    <Compile Include="Models\JsonResponseModels\CollectionJsonResponse.cs" />
+    <Compile Include="Models\JsonResponseModels\ExceptionJsonResponse.cs" />
+    <Compile Include="Models\JsonResponseModels\SingleJsonResponse.cs" />
+    <Compile Include="Models\JsonResponseModels\ValidationJsonResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
