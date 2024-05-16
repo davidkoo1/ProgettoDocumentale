@@ -27,7 +27,8 @@ namespace WebUI
                         "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
-                        "~/Scripts/js/site.js"));
+                        "~/Scripts/js/site.js",
+                        "~/Scripts/js/Admin.js"));
 
 
             //bundles.Add(new ScriptBundle("~/bundles/datatables").Include(

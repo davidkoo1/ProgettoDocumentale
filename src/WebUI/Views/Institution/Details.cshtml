@@ -1,27 +1,23 @@
 ﻿@model BLL.DTO.InstitutionDTOs.InstitutionDto
-<style>
-    input, select, textarea {
-        max-width: 100% !important;
-        width: 100%; /* Обеспечивает, что элементы занимают всю доступную ширину */
-    }
-</style>
+
 <div class="modal-body">
     <div class="col-sm-12">
         <h2>Details</h2>
         <div class="mb-3 row">
             <div class="col-md-6">
                 @Html.LabelFor(model => model.InstCode)
-                @Html.TextBoxFor(model => model.InstCode, new { @class = "form-control", @disabled = true })
+                @Html.TextBoxFor(model => model.InstCode, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
             </div>
             <div class="col-md-6">
                 @Html.LabelFor(model => model.Name)
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = true })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
+
             </div>
         </div>
         <div class="mb-3 row">
             <div class="col-md-12">
                 <label for="AdditionalInfo" class="col-md-4 col-form-label">Additional Info</label>
-                <textarea id="AdditionalInfo" rows="3" class="form-control" style="resize: none;" disabled>@Model.AdditionalInfo</textarea>
+                <textarea id="AdditionalInfo" rows="3" class="form-control" style="resize: none; max-width: 100% !important; width: 100%;" disabled>@Model.AdditionalInfo</textarea>
             </div>
         </div>
     </div>

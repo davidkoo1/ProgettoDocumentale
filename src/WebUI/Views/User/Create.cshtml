@@ -16,7 +16,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.UserName, "*User Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username", minlength = "5", maxlength = "7" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username", minlength = "5", maxlength = "7", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
             </div>
             <br>
@@ -25,7 +25,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.Name, "*First Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter first name", maxlength = "100" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter first name", maxlength = "100", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
             </div>
             <br>
@@ -34,7 +34,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.Surname, "*Last Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Enter last name", maxlength = "100" })
+                @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Enter last name", maxlength = "100", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.Surname, null, new { @class = "text-danger" })
             </div>
             <br>
@@ -44,7 +44,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.Patronymic, "Patronymic", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control", placeholder = "Enter patronymic", maxlength = "100" })
+                @Html.TextBoxFor(model => model.Patronymic, new { @class = "form-control", placeholder = "Enter patronymic", maxlength = "100", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.Patronymic, null, new { @class = "text-danger" })
             </div>
             <br>
@@ -53,7 +53,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.Email, "*Email", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter email address", type = "email", maxlength = "100" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter email address", type = "email", maxlength = "100", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
             </div>
         </div>

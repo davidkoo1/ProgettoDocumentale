@@ -15,7 +15,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.InstCode, "*Code", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.InstCode, new { @class = "form-control", placeholder = "ACXXX", maxlength = "5" })
+                @Html.TextBoxFor(model => model.InstCode, new { @class = "form-control", placeholder = "ACXXX", maxlength = "5", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.InstCode, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.Name, "*Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Banca of code ACXXX", maxlength = "255" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Banca of code ACXXX", maxlength = "255", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
             </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="mb-3 row">
             <label class="col-sm-3 form-label" for="AdditionalInfo">Additional Info</label>
             <div class="col-sm-9">
-                <textarea id="AdditionalInfo" rows="5" name="AdditionalInfo" maxlength="1000" class="form-control" placeholder="Big Message"></textarea>
+                <textarea id="AdditionalInfo" rows="5" name="AdditionalInfo" maxlength="1000" style="max-width: 100% !important; width: 100%;" class="form-control" placeholder="Big Message"></textarea>
             </div>
         </div>
     </div>
