@@ -84,6 +84,17 @@ namespace WebUI.Controllers
                     {
                         IsPersistent = true
                     }, claim);
+
+                    if(userVm.UserRoles.Contains("Administrator"))
+                    {
+                        return RedirectToAction("Index", "User");
+                    }
+
+                    if (userVm.UserRoles.Contains("Operator Cedacri"))
+                    {
+                        return RedirectToAction("Index", "Document");
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
             }

@@ -100,10 +100,12 @@
   <ItemGroup>
     <Compile Include="Common\Extensions\DataTableExtensions.cs" />
     <Compile Include="Common\Interfaces\IAccountRepository.cs" />
+    <Compile Include="Common\Interfaces\IDocumentRepository.cs" />
     <Compile Include="Common\Interfaces\IInstitutionRepository.cs" />
     <Compile Include="Common\Interfaces\IUserRepository.cs" />
     <Compile Include="Common\Mapping\MappingProfiles.cs" />
     <Compile Include="Common\Repository\AccountRepository.cs" />
+    <Compile Include="Common\Repository\DocumentRepository.cs" />
     <Compile Include="Common\Repository\InstitutionRepository.cs" />
     <Compile Include="Common\Repository\UserRepository.cs" />
     <Compile Include="DependencyInjection.cs" />
