@@ -16,5 +16,6 @@ namespace DAL.Entities
         public Nullable<int> IdInstitution { get; set; }
         public virtual Institution Institution { get; set; }
         public virtual List<UserRole> UserRoles { get; set; }
+        public virtual List<Document> Documents { get; set; } //Optional
     }
 }

@@ -27,6 +27,10 @@ namespace DAL.Context.Persistance
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
 
+            modelBuilder.Configurations.Add(new DocumentConfiguration());
+            modelBuilder.Configurations.Add(new DocumentTypeConfiguration());
+            modelBuilder.Configurations.Add(new DocumentTypeHierarchyConfiguration());
+
         }
 
     }

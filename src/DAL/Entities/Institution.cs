@@ -14,6 +14,7 @@ namespace DAL.Entities
         public string AdditionalInfo { get; set; }
 
         public virtual List<User> Users { get; set; }
+        public List<Document> Documents { get; set; } //Optional
 
     }
 }

@@ -160,7 +160,18 @@ function initializeUserDataTable() {
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
             { "data": "UserName", "title": "UserName", "name": "UserName", "autoWidth": true },
             { "data": "Email", "title": "Email", "name": "Email", "autoWidth": true },
-            { "data": "IsEnabled", "title": "IsEnabled", "name": "IsEnabled", "autoWidth": true }
+            {
+                "data": "IsEnabled",
+                "title": "IsEnabled",
+                "name": "IsEnabled",
+                "autoWidth": true,
+                "render": function (data, type, row) {
+                    if (type === 'display') {
+                        return '<input type="checkbox" ' + (data ? 'checked' : '') + ' disabled />';
+                    }
+                    return data;
+                }
+            }
         ],
         columnDefs: [
             { className: 'text-center', targets: [3] },
