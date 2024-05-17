@@ -54,7 +54,6 @@ namespace WebUI.Controllers
                     return View(loginVM);
                 }
 
-                loginVM.Username = "Cr00001";
                 loginVM.Password = "Cedacri1234567!";
                 //return View();
                 var userVm = await _accountInterface.GetUserForLogin(loginVM);

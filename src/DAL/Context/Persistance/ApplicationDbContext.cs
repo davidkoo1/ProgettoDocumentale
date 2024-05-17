@@ -10,6 +10,9 @@ namespace DAL.Context.Persistance
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Institution> Institutions { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<DocumentType> DocumentTypes { get; set; }
+        public DbSet<DocumentTypeHierarchy> DocumentTypeHierarchies { get; set; }
 
         public ApplicationDbContext() : base("name=DefaultConnection")
         {

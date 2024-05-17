@@ -24,6 +24,7 @@ namespace BLL
             builder.RegisterType<AccountRepository>().As<IAccountRepository>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<InstitutionRepository>().As<IInstitutionRepository>();
+            builder.RegisterType<DocumentRepository>().As<IDocumentRepository>();
 
             // AutoMapper Configuration and Registration
             var mapperConfiguration = new MapperConfiguration(cfg =>

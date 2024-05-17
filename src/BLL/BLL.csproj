@@ -109,6 +109,7 @@
     <Compile Include="Common\Repository\InstitutionRepository.cs" />
     <Compile Include="Common\Repository\UserRepository.cs" />
     <Compile Include="DependencyInjection.cs" />
+    <Compile Include="DTO\DocumentDTOs\DocumentViewModel.cs" />
     <Compile Include="DTO\InstitutionDTOs\CreateInstitutionDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\InstitutionDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\UpdateInstitutionDto.cs" />
