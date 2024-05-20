@@ -1,4 +1,5 @@
-﻿using DAL.Entities;
+﻿using BLL.DTO.DocumentDTOs;
+using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace BLL.DTO.InstitutionDTOs
         public string AdditionalInfo { get; set; }
 
         //public virtual List<User> Users { get; set; }
+        public List<DocumentDto> Documents { get; set; } //Optional
     }
 }

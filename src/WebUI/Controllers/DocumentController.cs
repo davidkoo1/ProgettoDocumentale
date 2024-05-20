@@ -18,11 +18,18 @@ namespace WebUI.Controllers
         {
             _documentRepository = documentRepository;
         }
-        // GET: Document
+
         public async Task<ActionResult> Index()
         {
             var tmp = await _documentRepository.GetAllThree();
             return View(tmp);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> GetAllDocumentsThree()
+        {
+            var result = await _documentRepository.GetAllThree();
+            return Json(result);
         }
 
         [HttpPost]

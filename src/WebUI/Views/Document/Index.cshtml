@@ -1,5 +1,4 @@
-﻿@model IEnumerable<BLL.DTO.DocumentDTOs.DocumentViewModel>
-
+﻿
 @{
     ViewBag.Title = "Documents";
 }
@@ -45,72 +44,51 @@
         margin-top: 20px;
     }
 </style>
-<div class="" id="adminContent">
-    <h3>Administration</h3>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="nav-institutions-tab" data-bs-toggle="tab" data-bs-target="#nav-institutions" type="button" role="tab" aria-controls="nav-institutions" aria-selected="true">
-                                        <h5>Documents</h5>
-                                    </button>
-                                    <button class="nav-link" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">
-                                        <h5>Projects</h5>
-                                    </button>
-                                </div>
-                            </nav>
+@*<h3>Administration</h3>*@
 
-                            <a id="addButton" type="button" class="btn btn-success d-flex justify-content-center align-items-center" style="width: 150px; height: 40px;" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/Institution/GetCreate/', 'lgModalBody')">Add</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-institutions-tab" data-bs-toggle="tab" data-bs-target="#nav-institutions" type="button" role="tab" aria-controls="nav-institutions" aria-selected="true">
+                                    <h5>Documents</h5>
+                                </button>
+                                <button class="nav-link" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">
+                                    <h5>Projects</h5>
+                                </button>
+                            </div>
+                        </nav>
 
-                        </div>
+                        <a id="addButton" type="button" class="btn btn-success d-flex justify-content-center align-items-center" style="width: 150px; height: 40px;" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" onclick="drawPatrialView('/Institution/GetCreate/', 'lgModalBody')">Add</a>
+
                     </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-institutions" role="tabpanel" aria-labelledby="nav-institutions-tab" tabindex="0">
-                                <div style="width:100%; margin:0 auto;">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <ul id="myUL">
-                                                    @foreach (var institute in Model)
-                                                    {
-                                                        <li>
-                                                            <span class="caret"></span>@institute.Institution
-                                                            <ul class="nested">
-                                                                @foreach (var yearGroup in institute.Documents.GroupBy(d => d.Date.Year))
-                                                                {
-                                                                    <li>
-                                                                        <span class="caret"></span>@yearGroup.Key
-                                                                        <ul class="nested">
-                                                                            @foreach (var document in yearGroup)
-                                                                            {
-                                                                                <li>@document.Name</li>
-                                                                            }
-                                                                        </ul>
-                                                                    </li>
-                                                                }
-                                                            </ul>
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 table-container">
-                                                <table id="DocumentDatatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0"></table>
-                                            </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-institutions" role="tabpanel" aria-labelledby="nav-institutions-tab" tabindex="0">
+                            <div style="width:100%; margin:0 auto;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <ul id="myUL">
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-9 table-container">
+                                            <table id="DocumentDatatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0"></table>
                                         </div>
                                     </div>
+                                </div>
 
-                                </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
-                                <div style="width:100%; margin:0 auto;">
-                                    <table id="ProjectDatatable" class="table table-bordered table-hover w-100 mb-1"></table>
-                                </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
+                            <div style="width:100%; margin:0 auto;">
+                                <table id="ProjectDatatable" class="table table-bordered table-hover w-100 mb-1"></table>
                             </div>
                         </div>
                     </div>
@@ -120,30 +98,107 @@
     </div>
 </div>
 
+
 @section scripts {
     <script>
         $(document).ready(function () {
+            initializeData();
             initializeDocumentDataTable();
-            //initializeInstitutionDataTable();
-
-            //$('#nav-institutions-tab').on('shown.bs.tab', function () {
-            //    $('#addButton').attr('onclick', "drawPatrialView('/Institution/GetCreate/', 'lgModalBody')");
-            //});
-
-            //$('#nav-users-tab').on('shown.bs.tab', function () {
-            //    $('#addButton').attr('onclick', "drawPatrialView('/User/GetCreate/', 'lgModalBody')");
-            //});
         });
 
-        var toggler = document.getElementsByClassName("caret");
-        var i;
 
-        for (i = 0; i < toggler.length; i++) {
-            toggler[i].addEventListener("click", function () {
-                this.parentElement.querySelector(".nested").classList.toggle("active");
-                this.classList.toggle("caret-down");
+        function initializeData() {
+            $.ajax({
+                url: '../Document/GetAllDocumentsThree',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    buildList(data);
+                    attachCaretEventListeners();
+                }
             });
         }
-    </script>
 
+
+        function buildList(institutes) {
+            var ul = $('#myUL');
+            ul.empty();
+
+            institutes.forEach(function (institute) {
+                var caretSpan = $('<span>').addClass('caret');
+                var textSpan = $('<span>').text(institute.Institution);
+
+                var instituteLi = $('<li>').append(caretSpan, textSpan);
+                var yearGroupUl = $('<ul>').addClass('nested');
+
+                institute.YearGroups.forEach(function (yearGroup) {
+                    var yearCaretSpan = $('<span>').addClass('caret');
+                    var yearTextSpan = $('<span>').text(yearGroup.Year);
+
+                    var yearLi = $('<li>').append(yearCaretSpan, yearTextSpan);
+                    var typeUl = $('<ul>').addClass('nested');
+
+                    yearGroup.Types.forEach(function (type) {
+                        var typeLi = $('<li>').text(type);
+                        typeUl.append(typeLi);
+                    });
+
+                    yearLi.append(typeUl);
+                    yearGroupUl.append(yearLi);
+                });
+
+                instituteLi.append(yearGroupUl);
+                ul.append(instituteLi);
+            });
+        }
+
+
+
+        function attachCaretEventListeners() {
+            var toggler = document.getElementsByClassName("caret");
+            for (var i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function () {
+                    this.parentElement.querySelector(".nested").classList.toggle("active");
+                    this.classList.toggle("caret-down");
+                });
+            }
+        }
+        /*
+        
+        function buildList(institutes) {
+            var ul = $('#myUL');
+            ul.empty();
+
+            institutes.forEach(function (institute) {
+                var instituteLi = $('<li>').append($('<span>').addClass('caret').text(institute.Institution));
+                var yearGroupUl = $('<ul>').addClass('nested');
+
+                institute.YearGroups.forEach(function (yearGroup) {
+                    var yearLi = $('<li>').append($('<span>').addClass('caret').text(yearGroup.Year));
+                    var documentsUl = $('<ul>').addClass('nested');
+
+                    yearGroup.Documents.forEach(function (document) {
+                        documentsUl.append($('<li>').text(document.Name + ' (' + document.Type + ')'));
+                    });
+
+                    yearLi.append(documentsUl);
+                    yearGroupUl.append(yearLi);
+                });
+
+                instituteLi.append(yearGroupUl);
+                ul.append(instituteLi);
+            });
+        }
+
+        function attachCaretEventListeners() {
+            var toggler = document.getElementsByClassName("caret");
+            for (var i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function () {
+                    this.parentElement.querySelector(".nested").classList.toggle("active");
+                    this.classList.toggle("caret-down");
+                });
+            }
+        }
+        */
+    </script>
 }

@@ -15,7 +15,7 @@ function initializeDocumentDataTable() {
         "columns": [
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
             { "data": "Name", "title": "Name", "name": "Name", "autoWidth": true },
-            { "data": "Type", "title": "Type", "name": "Type", "autoWidth": true },
+            { "data": "DocumentType", "title": "DocumentType", "name": "DocumentType", "autoWidth": true },
             { "data": "Institution", "title": "Institution", "name": "Institution", "autoWidth": true }
         ],
         columnDefs: [
