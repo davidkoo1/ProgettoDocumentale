@@ -69,7 +69,7 @@ namespace DAL.Context.Persistance
         #region DocumentTypes
         private static readonly DocumentType DocumentType1 = new DocumentType { Id = 1, Code = "RPSRV", Name = "Report di Servizio", TypeDscr = "Report SLA per periodo", IsMacro = true, IsDateGrouped = true  };
         private static readonly DocumentType DocumentType2 = new DocumentType { Id = 2, Code = "RPSLA", Name = "Report SLA", TypeDscr = "Report SLA per periodo", IsMacro = true, IsDateGrouped = true  };
-        private static readonly DocumentType DocumentType3 = new DocumentType { Id = 3, Code = "RPPRG", Name = "Report di Servizio", TypeDscr = "Documentazione per progetti", IsMacro = true, IsDateGrouped = false };
+        private static readonly DocumentType DocumentType3 = new DocumentType { Id = 3, Code = "RPPRG", Name = "Report di Projectto", TypeDscr = "Documentazione per progetti", IsMacro = true, IsDateGrouped = false };
         private static readonly DocumentType DocumentType4 = new DocumentType { Id = 4, Code = "NETWK", Name = "Network", TypeDscr = "Network", IsMacro = false, IsDateGrouped = false };
         private static readonly DocumentType DocumentType5 = new DocumentType { Id = 5, Code = "SICRZ", Name = "Sicurezza", TypeDscr = "Sicurezza", IsMacro = false, IsDateGrouped = false };
         private static readonly DocumentType DocumentType6 = new DocumentType { Id = 6, Code = "CHNGE", Name = "Change", TypeDscr = "Change", IsMacro = false, IsDateGrouped = false };
@@ -106,6 +106,7 @@ namespace DAL.Context.Persistance
         private static readonly DocumentTypeHierarchy DocumentTypeHierarchy7 = new DocumentTypeHierarchy { IdMacro = 3, IdMicro = 10 };
         private static readonly DocumentTypeHierarchy DocumentTypeHierarchy8 = new DocumentTypeHierarchy { IdMacro = 3, IdMicro = 11 };
         private static readonly DocumentTypeHierarchy DocumentTypeHierarchy9 = new DocumentTypeHierarchy { IdMacro = 3, IdMicro = 12 };
+        private static readonly DocumentTypeHierarchy DocumentTypeHierarchy10 = new DocumentTypeHierarchy { IdMacro = 2, IdMicro = 2 };
        
         private void SetDocumentTypeHierarchies(ApplicationDbContext context)
         {
@@ -118,6 +119,7 @@ namespace DAL.Context.Persistance
             context.DocumentTypeHierarchies.Add(DocumentTypeHierarchy7);
             context.DocumentTypeHierarchies.Add(DocumentTypeHierarchy8);
             context.DocumentTypeHierarchies.Add(DocumentTypeHierarchy9);
+            context.DocumentTypeHierarchies.Add(DocumentTypeHierarchy10);
         }
         #endregion
 

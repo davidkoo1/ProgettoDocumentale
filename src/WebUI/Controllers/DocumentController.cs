@@ -6,6 +6,8 @@ using FluentValidation;
 using System.Threading.Tasks;
 using System;
 using System.Web.Mvc;
+using BLL.DTO.DocumentDTOs;
+using System.Collections.Generic;
 
 namespace WebUI.Controllers
 {
@@ -32,7 +34,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> LoadDocumentDatatable(DataTablesParameters parameters)
+        public async Task<ActionResult> LoadDocumentDatatable(DataTablesParameters parameters, string resource1, string resource2, string resource3)
         {
             try
             {
@@ -44,7 +46,6 @@ namespace WebUI.Controllers
                     recordsTotal = parameters.TotalCount,
                     data = result
                 });
-
             }
             catch (Exception ex)
             {

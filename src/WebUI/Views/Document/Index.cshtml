@@ -126,20 +126,26 @@
 
             institutions.forEach(function (institution) {
                 var caretSpan = $('<span>').addClass('caret');
-                var textSpan = $('<span>').text(institution.InstitutionName);
+                var textSpan = $('<span>').text(institution.InstitutionName).css('cursor', 'pointer').on('click', function () {
+                    DrawDocumentDataTable(institution.InstitutionName, null, null);
+                });
 
                 var instituteLi = $('<li>').append(caretSpan, textSpan);
                 var yearGroupUl = $('<ul>').addClass('nested');
 
                 institution.YearGroups.forEach(function (yearGroup) {
                     var yearCaretSpan = $('<span>').addClass('caret');
-                    var yearTextSpan = $('<span>').text(yearGroup.Year);
+                    var yearTextSpan = $('<span>').text(yearGroup.Year).css('cursor', 'pointer').on('click', function () {
+                        DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, null);
+                    });
 
                     var yearLi = $('<li>').append(yearCaretSpan, yearTextSpan);
                     var typeUl = $('<ul>').addClass('nested');
 
                     yearGroup.SubTypeNames.forEach(function (typeName) {
-                        var typeLi = $('<li>').text(typeName);
+                        var typeLi = $('<li>').text(typeName).css('cursor', 'pointer').on('click', function () {
+                            DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, typeName);
+                        });
                         typeUl.append(typeLi);
                     });
 
@@ -155,41 +161,6 @@
 
 
 
-        function attachCaretEventListeners() {
-            var toggler = document.getElementsByClassName("caret");
-            for (var i = 0; i < toggler.length; i++) {
-                toggler[i].addEventListener("click", function () {
-                    this.parentElement.querySelector(".nested").classList.toggle("active");
-                    this.classList.toggle("caret-down");
-                });
-            }
-        }
-        /*
-        
-        function buildList(institutes) {
-            var ul = $('#myUL');
-            ul.empty();
-
-            institutes.forEach(function (institute) {
-                var instituteLi = $('<li>').append($('<span>').addClass('caret').text(institute.Institution));
-                var yearGroupUl = $('<ul>').addClass('nested');
-
-                institute.YearGroups.forEach(function (yearGroup) {
-                    var yearLi = $('<li>').append($('<span>').addClass('caret').text(yearGroup.Year));
-                    var documentsUl = $('<ul>').addClass('nested');
-
-                    yearGroup.Documents.forEach(function (document) {
-                        documentsUl.append($('<li>').text(document.Name + ' (' + document.Type + ')'));
-                    });
-
-                    yearLi.append(documentsUl);
-                    yearGroupUl.append(yearLi);
-                });
-
-                instituteLi.append(yearGroupUl);
-                ul.append(instituteLi);
-            });
-        }
 
         function attachCaretEventListeners() {
             var toggler = document.getElementsByClassName("caret");
@@ -200,6 +171,6 @@
                 });
             }
         }
-        */
+
     </script>
 }

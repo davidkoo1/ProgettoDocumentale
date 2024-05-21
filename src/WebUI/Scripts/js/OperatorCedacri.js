@@ -1,4 +1,4 @@
-//InstitutionData
+﻿//DocumentData
 function initializeDocumentDataTable() {
     var table = $('#DocumentDatatable').DataTable({
         //"processing": true,
@@ -31,15 +31,15 @@ function initializeDocumentDataTable() {
             switch (key) {
                 case 'Edit':
                     $('#lgModal').modal('show');
-                    drawPatrialView('../Institution/GetEdit/' + row.data()["Id"], 'lgModalBody');
+                    drawPatrialView('../Document/GetEdit/' + row.data()["Id"], 'lgModalBody');
                     break;
                 case 'Details':
                     $('#lgModal').modal('show');
-                    drawPatrialView('../Institution/GetDetails/' + row.data()["Id"], 'lgModalBody');
+                    drawPatrialView('../Document/GetDetails/' + row.data()["Id"], 'lgModalBody');
                     break;
                 case 'Delete':
                     $('#lgModal').modal('show');
-                    drawPatrialView('../Institution/GetDelete/' + row.data()["Id"], 'lgModalBody');
+                    drawPatrialView('../Document/GetDelete/' + row.data()["Id"], 'lgModalBody');
                     break;
                 default:
                     break
@@ -53,4 +53,12 @@ function initializeDocumentDataTable() {
     });
 
     return table;
+}
+
+
+function DrawDocumentDataTable(resource1, resource2, resource3) {
+    var table = $('#DocumentDatatable').DataTable();
+    // Непосредственно обновляем данные AJAX-запроса перед отправкой
+    var newUrl = '/Document/LoadDocumentDatatable' + '?resource1=' + (resource1 || '') + '&resource2=' + (resource2 || '') + '&resource3=' + (resource3 || '');
+    table.ajax.url(newUrl).load();
 }
