@@ -1,4 +1,5 @@
-﻿using BLL.DTO.DocumentDTOs;
+﻿using BLL.Common.Repository;
+using BLL.DTO.DocumentDTOs;
 using BLL.TableParameters;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace BLL.Common.Interfaces
     {
         //dynamic TestMethod();
         Task<IEnumerable<DocumentDto>> GetAllDocuments(DataTablesParameters parameters);
-        Task<IEnumerable<DocumentViewModel>> GetAllThree();
+        Task<IEnumerable<InstitutionDocumentTypeGroup>> GetAllThree();
         ////Task<IEnumerable<InstitutionDto>> GetInstitutions();
         ////Task<InstitutionDto> GetInstitution(int id);
         ////Task<UpdateInstitutionDto> GetInstitutionForUpdate(int id);

@@ -120,26 +120,26 @@
         }
 
 
-        function buildList(institutes) {
+        function buildList(institutions) {
             var ul = $('#myUL');
             ul.empty();
 
-            institutes.forEach(function (institute) {
+            institutions.forEach(function (institution) {
                 var caretSpan = $('<span>').addClass('caret');
-                var textSpan = $('<span>').text(institute.Institution);
+                var textSpan = $('<span>').text(institution.InstitutionName);
 
                 var instituteLi = $('<li>').append(caretSpan, textSpan);
                 var yearGroupUl = $('<ul>').addClass('nested');
 
-                institute.YearGroups.forEach(function (yearGroup) {
+                institution.YearGroups.forEach(function (yearGroup) {
                     var yearCaretSpan = $('<span>').addClass('caret');
                     var yearTextSpan = $('<span>').text(yearGroup.Year);
 
                     var yearLi = $('<li>').append(yearCaretSpan, yearTextSpan);
                     var typeUl = $('<ul>').addClass('nested');
 
-                    yearGroup.Types.forEach(function (type) {
-                        var typeLi = $('<li>').text(type);
+                    yearGroup.SubTypeNames.forEach(function (typeName) {
+                        var typeLi = $('<li>').text(typeName);
                         typeUl.append(typeLi);
                     });
 
@@ -151,6 +151,7 @@
                 ul.append(instituteLi);
             });
         }
+
 
 
 
