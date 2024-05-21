@@ -1,6 +1,4 @@
-﻿using BLL.DTO.InstitutionDTOs;
-using DAL.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +15,7 @@ namespace BLL.DTO.DocumentDTOs
         public string AdditionalInfo { get; set; } //Optional
         public DateTime GroupingDate { get; set; }
 
-        public string Institution { get; set; }
-        public string DocumentType { get; set; }
+        public string InstitutionId { get; set; }
+        public string TypeId { get; set; }
     }
 }

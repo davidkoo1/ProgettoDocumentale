@@ -21,8 +21,7 @@ namespace WebUI.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var tmp = await _documentRepository.GetAllThree();
-            return View(tmp);
+            return View();
         }
 
         [HttpPost]

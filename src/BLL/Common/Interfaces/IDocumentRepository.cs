@@ -10,7 +10,7 @@ namespace BLL.Common.Interfaces
     {
         //dynamic TestMethod();
         Task<IEnumerable<DocumentDto>> GetAllDocuments(DataTablesParameters parameters);
-        Task<IEnumerable<InstitutionDocumentTypeGroup>> GetAllThree();
+        Task<IEnumerable<BuilderDocumentThree>> GetAllThree();
         ////Task<IEnumerable<InstitutionDto>> GetInstitutions();
         ////Task<InstitutionDto> GetInstitution(int id);
         ////Task<UpdateInstitutionDto> GetInstitutionForUpdate(int id);

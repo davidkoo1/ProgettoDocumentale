@@ -15,8 +15,8 @@ function initializeDocumentDataTable() {
         "columns": [
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
             { "data": "Name", "title": "Name", "name": "Name", "autoWidth": true },
-            { "data": "DocumentType", "title": "DocumentType", "name": "DocumentType", "autoWidth": true },
-            { "data": "Institution", "title": "Institution", "name": "Institution", "autoWidth": true }
+            { "data": "TypeId", "title": "TypeId", "name": "TypeId", "autoWidth": true },
+            { "data": "InstitutionId", "title": "InstitutionId", "name": "InstitutionId", "autoWidth": true }
         ],
         columnDefs: [
             { className: 'text-center', targets: [3] },

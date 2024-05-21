@@ -12,17 +12,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Common.Repository
 {
-    public class InstitutionDocumentTypeGroup
-    {
-        public string InstitutionName { get; set; }
-        public List<YearDocumentTypeGroup> YearGroups { get; set; }
-    }
-
-    public class YearDocumentTypeGroup
-    {
-        public int Year { get; set; }
-        public List<string> SubTypeNames { get; set; }
-    }
+   
 
     public class DocumentRepository : IDocumentRepository
     {
@@ -50,12 +40,12 @@ namespace BLL.Common.Repository
                 UploadDate = x.UploadDate,
                 AdditionalInfo = x.AdditionalInfo,
                 GroupingDate = x.GroupingDate,
-                Institution = x.Institution.Name,
-                DocumentType = x.DocumentType.Name,
+                InstitutionId = x.Institution.Name,
+                TypeId = x.DocumentType.Name,
             });
         }
 
-        public async Task<IEnumerable<InstitutionDocumentTypeGroup>> GetAllThree()
+        public async Task<IEnumerable<BuilderDocumentThree>> GetAllThree()
         {
             var documents = await _dbContext.Documents
                    .Include(doc => doc.Institution)
@@ -66,7 +56,7 @@ namespace BLL.Common.Repository
             var typeHierarchy = _dbContext.DocumentTypeHierarchies.ToList();
 
             var grouped = documents.GroupBy(doc => doc.Institution)
-                            .Select(instGroup => new InstitutionDocumentTypeGroup
+                            .Select(instGroup => new BuilderDocumentThree
                             {
                                 InstitutionName = instGroup.Key.Name,
                                 YearGroups = instGroup.GroupBy(doc => doc.GroupingDate.Year)
