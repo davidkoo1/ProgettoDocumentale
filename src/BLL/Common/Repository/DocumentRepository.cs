@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Common.Repository
 {
-   
+
 
     public class DocumentRepository : IDocumentRepository
     {
@@ -24,13 +24,37 @@ namespace BLL.Common.Repository
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DocumentDto>> GetAllDocuments(DataTablesParameters parameters)
+        public async Task<IEnumerable<DocumentDto>> GetAllDocuments(DataTablesParameters parameters, string resource1, string resource2, string resource3)
         {
-            var documents = await _dbContext.Documents
-                .Include(x => x.Institution)
-                .Include(x => x.DocumentType)
-                .Search(parameters).OrderBy(parameters).Page(parameters)
-                .ToListAsync();
+            List<Document> documents;
+            documents = await _dbContext.Documents
+               .Include(x => x.Institution)
+               .Include(x => x.DocumentType)
+               .Search(parameters).OrderBy(parameters).Page(parameters)
+               .ToListAsync();
+            if (!string.IsNullOrEmpty(resource1))
+            {
+                documents = documents.Where(x => x.Institution.Name == resource1).ToList();
+            }
+            if (!string.IsNullOrEmpty(resource2))
+            {
+                documents = documents.Where(x => x.Institution.Name == resource1 && x.GroupingDate.Year == int.Parse(resource2)).ToList();
+            }
+            if (!string.IsNullOrEmpty(resource3))
+            {
+                var idDocument = await _dbContext.DocumentTypes.FirstOrDefaultAsync(x => x.Name == resource3);
+                var idDocument2 = await _dbContext.DocumentTypeHierarchies
+    .Where(x => x.IdMacro == idDocument.Id)
+    .Select(x => x.IdMicro) // Извлекаем только IdMicro
+    .ToListAsync();
+
+                documents = documents.Where(x =>
+     x.Institution.Name == resource1 &&
+     x.GroupingDate.Year == int.Parse(resource2) &&
+     idDocument2.Contains(x.TypeId)) // Проверяем, содержится ли TypeId в списке
+     .ToList();
+
+            }
 
             return documents.Select(x => new DocumentDto
             {

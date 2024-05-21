@@ -38,7 +38,7 @@ namespace WebUI.Controllers
         {
             try
             {
-                var result = await _documentRepository.GetAllDocuments(parameters);
+                var result = await _documentRepository.GetAllDocuments(parameters, resource1, resource2, resource3);
                 return Json(new
                 {
                     draw = parameters.Draw,
