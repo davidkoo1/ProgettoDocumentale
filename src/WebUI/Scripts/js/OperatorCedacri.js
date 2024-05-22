@@ -72,7 +72,7 @@ function DrawDocumentDataTable(resource1, resource2, resource3) {
     table.ajax.url(newUrl).load();
 }
 
-function initializeData() {
+function initializeDocumentThree() {
     $.ajax({
         url: '../Document/GetAllDocumentsThree',
         type: 'POST',
@@ -124,15 +124,56 @@ function buildList(institutions) {
 }
 
 
+function initializeProjectThree() {
+    $.ajax({
+        url: '../Project/GetAllProjectsThree',
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            buildProjectList(data);
+            //attachCaretEventListeners();
+        }
+    });
+}
+
+function buildProjectList(institutions) {
+    var ul = $('#ThreeProject');
+    ul.empty();
+
+    institutions.forEach(function (institution) {
+        var caretSpan = $('<span>').addClass('caret');
+        var textSpan = $('<span>').text(institution.InstitutionName).css('cursor', 'pointer').on('click', function () {
+            DrawProjectDataTable(institution.InstitutionName, null);
+        });
+
+        var instituteLi = $('<li>').append(caretSpan, textSpan);
+        var yearGroupUl = $('<ul>').addClass('nested');
+
+        institution.YearGroups.forEach(function (yearGroup) {
+            var yearTextSpan = $('<span>').text(yearGroup).css('cursor', 'pointer').on('click', function () {
+                DrawProjectDataTable(institution.InstitutionName, yearGroup.Year);
+            });;
+            var yearLi = $('<li>').append(yearTextSpan);
+            yearGroupUl.append(yearLi);
+        });
+
+        instituteLi.append(yearGroupUl);
+        ul.append(instituteLi);
+    });
+
+}
+
 
 
 
 function attachCaretEventListeners() {
     var toggler = document.getElementsByClassName("caret");
     for (var i = 0; i < toggler.length; i++) {
-        toggler[i].addEventListener("click", function () {
+        toggler[i].addEventListener("click", function (event) {
+            event.stopPropagation(); // Добавлено, чтобы остановить всплытие события
             this.parentElement.querySelector(".nested").classList.toggle("active");
             this.classList.toggle("caret-down");
         });
     }
 }
+

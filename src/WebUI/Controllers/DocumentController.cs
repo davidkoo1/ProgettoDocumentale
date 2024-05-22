@@ -21,10 +21,7 @@ namespace WebUI.Controllers
             _documentRepository = documentRepository;
         }
 
-        public async Task<ActionResult> Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
         [HttpPost]
         public async Task<ActionResult> GetAllDocumentsThree()

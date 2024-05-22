@@ -116,6 +116,7 @@
     <Compile Include="DTO\InstitutionDTOs\CreateInstitutionDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\InstitutionDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\UpdateInstitutionDto.cs" />
+    <Compile Include="DTO\ProjectDTOs\BuilderProjectThree.cs" />
     <Compile Include="DTO\UserDTOs\CreateUserDto.cs" />
     <Compile Include="DTO\LoginDto.cs" />
     <Compile Include="DTO\UserDTOs\RoleDto.cs" />

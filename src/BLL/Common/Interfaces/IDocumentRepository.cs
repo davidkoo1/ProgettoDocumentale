@@ -8,7 +8,6 @@ namespace BLL.Common.Interfaces
 {
     public interface IDocumentRepository
     {
-        //dynamic TestMethod();
         Task<IEnumerable<DocumentDto>> GetAllDocuments(DataTablesParameters parameters, string resource1, string resource2, string resource3);
         Task<IEnumerable<BuilderDocumentThree>> GetAllThree();
         ////Task<IEnumerable<InstitutionDto>> GetInstitutions();

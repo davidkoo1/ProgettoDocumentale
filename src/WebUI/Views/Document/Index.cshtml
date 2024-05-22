@@ -4,11 +4,11 @@
 }
 
 <style>
-    ul, #ThreeDocument {
+    ul, #ThreeDocument, #ThreeProject {
         list-style-type: none;
     }
 
-    #ThreeDocument {
+    #ThreeDocument, #ThreeProject {
         margin: 0;
         padding: 0;
     }
@@ -88,8 +88,19 @@
                         </div>
                         <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
                             <div style="width:100%; margin:0 auto;">
-                                <table id="ProjectDatatable" class="table table-bordered table-hover w-100 mb-1"></table>
-                            </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <ul id="ThreeProject">
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-9 table-container">
+                                            <table id="ProjectDatatable" class="table table-bordered table-hover w-100 mb-1"></table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>                          
                         </div>
                     </div>
                 </div>
@@ -104,7 +115,8 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            initializeData();
+            initializeDocumentThree();
+            initializeProjectThree();
             initializeDocumentDataTable();
         });
     </script>
