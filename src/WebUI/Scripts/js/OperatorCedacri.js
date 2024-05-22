@@ -3,8 +3,8 @@ function initializeDocumentDataTable() {
     var table = $('#DocumentDatatable').DataTable({
         //"processing": true,
         "serverSide": true,
-        //"scrollX": true,
-        //"autoWidth": true,
+        "scrollX": true,
+        "autoWidth": true,
         //"stateSave": true,
         //"dom": "p", //f, r, t, l, p
         ajax: {
@@ -15,8 +15,17 @@ function initializeDocumentDataTable() {
         "columns": [
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
             { "data": "Name", "title": "Name", "name": "Name", "autoWidth": true },
-            { "data": "TypeId", "title": "TypeId", "name": "TypeId", "autoWidth": true },
-            { "data": "InstitutionId", "title": "InstitutionId", "name": "InstitutionId", "autoWidth": true }
+            { "data": "TypeId", "title": "Type", "name": "TypeId", "autoWidth": true },
+            {
+                "data": "GroupingDate",
+                "title": "Data",
+                "name": "GroupingDate",
+                "autoWidth": true,
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY'); // Формат даты
+                }
+            },
+            { "data": "InstitutionId", "title": "Institution", "name": "InstitutionId", "autoWidth": true }
         ],
         columnDefs: [
             { className: 'text-center', targets: [3] },
@@ -61,4 +70,69 @@ function DrawDocumentDataTable(resource1, resource2, resource3) {
     // Непосредственно обновляем данные AJAX-запроса перед отправкой
     var newUrl = '/Document/LoadDocumentDatatable' + '?resource1=' + (resource1 || '') + '&resource2=' + (resource2 || '') + '&resource3=' + (resource3 || '');
     table.ajax.url(newUrl).load();
+}
+
+function initializeData() {
+    $.ajax({
+        url: '../Document/GetAllDocumentsThree',
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            buildList(data);
+            attachCaretEventListeners();
+        }
+    });
+}
+
+
+function buildList(institutions) {
+    var ul = $('#ThreeDocument');
+    ul.empty();
+
+    institutions.forEach(function (institution) {
+        var caretSpan = $('<span>').addClass('caret');
+        var textSpan = $('<span>').text(institution.InstitutionName).css('cursor', 'pointer').on('click', function () {
+            DrawDocumentDataTable(institution.InstitutionName, null, null);
+        });
+
+        var instituteLi = $('<li>').append(caretSpan, textSpan);
+        var yearGroupUl = $('<ul>').addClass('nested');
+
+        institution.YearGroups.forEach(function (yearGroup) {
+            var yearCaretSpan = $('<span>').addClass('caret');
+            var yearTextSpan = $('<span>').text(yearGroup.Year).css('cursor', 'pointer').on('click', function () {
+                DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, null);
+            });
+
+            var yearLi = $('<li>').append(yearCaretSpan, yearTextSpan);
+            var typeUl = $('<ul>').addClass('nested');
+
+            yearGroup.SubTypeNames.forEach(function (typeName) {
+                var typeLi = $('<li>').text(typeName).css('cursor', 'pointer').on('click', function () {
+                    DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, typeName);
+                });
+                typeUl.append(typeLi);
+            });
+
+            yearLi.append(typeUl);
+            yearGroupUl.append(yearLi);
+        });
+
+        instituteLi.append(yearGroupUl);
+        ul.append(instituteLi);
+    });
+}
+
+
+
+
+
+function attachCaretEventListeners() {
+    var toggler = document.getElementsByClassName("caret");
+    for (var i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
 }

@@ -9,10 +9,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BLL.Common.Repository
 {
-
 
     public class DocumentRepository : IDocumentRepository
     {
@@ -26,81 +26,111 @@ namespace BLL.Common.Repository
 
         public async Task<IEnumerable<DocumentDto>> GetAllDocuments(DataTablesParameters parameters, string resource1, string resource2, string resource3)
         {
-            List<Document> documents;
-            documents = await _dbContext.Documents
-               .Include(x => x.Institution)
-               .Include(x => x.DocumentType)
-               .Search(parameters).OrderBy(parameters).Page(parameters)
-               .ToListAsync();
+            IQueryable<Document> query = _dbContext.Documents
+                .Include(x => x.Institution)
+                .Include(x => x.DocumentType)
+                .Search(parameters).OrderBy(parameters).Page(parameters);
+
             if (!string.IsNullOrEmpty(resource1))
             {
-                documents = documents.Where(x => x.Institution.Name == resource1).ToList();
+                query = query.Where(x => x.Institution.Name == resource1);
             }
-            if (!string.IsNullOrEmpty(resource2))
+
+            if (!string.IsNullOrEmpty(resource2) && int.TryParse(resource2, out int year))
             {
-                documents = documents.Where(x => x.Institution.Name == resource1 && x.GroupingDate.Year == int.Parse(resource2)).ToList();
+                query = query.Where(x => x.GroupingDate.Year == year);
             }
+
             if (!string.IsNullOrEmpty(resource3))
             {
-                var idDocument = await _dbContext.DocumentTypes.FirstOrDefaultAsync(x => x.Name == resource3);
-                var idDocument2 = await _dbContext.DocumentTypeHierarchies
-    .Where(x => x.IdMacro == idDocument.Id)
-    .Select(x => x.IdMicro) // Извлекаем только IdMicro
-    .ToListAsync();
+                var documentTypeId = await _dbContext.DocumentTypes
+                    .Where(x => x.Name == resource3)
+                    .Select(x => x.Id)
+                    .FirstOrDefaultAsync();
 
-                documents = documents.Where(x =>
-     x.Institution.Name == resource1 &&
-     x.GroupingDate.Year == int.Parse(resource2) &&
-     idDocument2.Contains(x.TypeId)) // Проверяем, содержится ли TypeId в списке
-     .ToList();
+                if (documentTypeId != 0)
+                {
+                    var documentTypeIds = await _dbContext.DocumentTypeHierarchies
+                        .Where(x => x.IdMacro == documentTypeId)
+                        .Select(x => x.IdMicro)
+                        .ToListAsync();
 
+                    query = query.Where(x => documentTypeIds.Contains(x.DocumentType.Id));
+                }
             }
 
-            return documents.Select(x => new DocumentDto
+            // Materialize query result
+            var documents = await query.ToListAsync();
+
+            // Process each document to create DocumentDto
+            var documentDtos = new List<DocumentDto>();
+            foreach (var x in documents)
             {
-                Id = x.Id,
-                Name = x.Name,
-                SavedPath = x.SavedPath,
-                UploadDate = x.UploadDate,
-                AdditionalInfo = x.AdditionalInfo,
-                GroupingDate = x.GroupingDate,
-                InstitutionId = x.Institution.Name,
-                TypeId = x.DocumentType.Name,
-            });
+                var typeName = await GetFullDocumentTypeName(x.DocumentType);
+                documentDtos.Add(new DocumentDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    SavedPath = x.SavedPath,
+                    UploadDate = x.UploadDate,
+                    AdditionalInfo = x.AdditionalInfo,
+                    GroupingDate = x.GroupingDate,
+                    InstitutionId = x.Institution.Name,
+                    TypeId = typeName
+                });
+            }
+
+            return documentDtos;
+        }
+
+        private async Task<string> GetFullDocumentTypeName(DocumentType documentType)
+        {
+            var hierarchy = await _dbContext.DocumentTypeHierarchies
+                                            .FirstOrDefaultAsync(x => x.IdMicro == documentType.Id);
+
+            var hierarchyName = hierarchy != null ?
+                await _dbContext.DocumentTypes.FirstOrDefaultAsync(x => x.Id == hierarchy.IdMacro) : null;
+
+            return hierarchyName != null ? $"{documentType.Name}/{hierarchyName.Name}" : documentType.Name;
         }
 
         public async Task<IEnumerable<BuilderDocumentThree>> GetAllThree()
         {
             var documents = await _dbContext.Documents
-                   .Include(doc => doc.Institution)
-                   .Include(doc => doc.DocumentType)
-                   .ToListAsync();
+                 .Include(doc => doc.Institution)
+                 .Include(doc => doc.DocumentType)
+                 .ToListAsync();
 
-            var documentTypes = _dbContext.DocumentTypes.ToList();
-            var typeHierarchy = _dbContext.DocumentTypeHierarchies.ToList();
-
-            var grouped = documents.GroupBy(doc => doc.Institution)
-                            .Select(instGroup => new BuilderDocumentThree
-                            {
-                                InstitutionName = instGroup.Key.Name,
-                                YearGroups = instGroup.GroupBy(doc => doc.GroupingDate.Year)
-                                .Select(yearGroup => new YearDocumentTypeGroup
-                                {
-                                    Year = yearGroup.Key,
-                                    // Сбор имен макро-типов для документов в каждом году
-                                    SubTypeNames = yearGroup
-                                        .SelectMany(doc => typeHierarchy.Where(x => x.IdMicro == doc.TypeId).Select(x => x.IdMacro)) // Извлекаем IdMacro
-                                        .Distinct()
-                                        .Join(documentTypes, idMacro => idMacro, dt => dt.Id, (idMacro, dt) => dt.Name) // Присоединяем DocumentTypes для получения имени
-                                        .OrderBy(name => name)
-                                        .ToList(),
-                                }).OrderBy(y => y.Year).ToList()
-                            }).ToList();
+            var typeHierarchy = await _dbContext.DocumentTypeHierarchies.ToListAsync();
+            var documentTypes = await _dbContext.DocumentTypes.ToListAsync();
 
 
+            var grouped = (from doc in documents
+                           group doc by doc.Institution into instGroup
+                           select new BuilderDocumentThree
+                           {
+                               InstitutionId = instGroup.Key.Id,
+                               InstitutionName = instGroup.Key.Name,
+                               YearGroups = (from doc in instGroup
+                                             group doc by doc.GroupingDate.Year into yearGroup
+                                             let macroIds = (from doc in yearGroup
+                                                             from th in typeHierarchy
+                                                             where th.IdMicro == doc.TypeId
+                                                             select th.IdMacro).Distinct().OrderBy(id => id)
+                                             let macroNames = (from idMacro in macroIds
+                                                               join dt in documentTypes on idMacro equals dt.Id
+                                                               select dt.Name).OrderBy(name => name)
+                                             select new YearDocumentTypeGroup
+                                             {
+                                                 Year = yearGroup.Key,
+                                                 SubTypeIds = macroIds.ToList(),
+                                                 SubTypeNames = macroNames.ToList()
+                                             }).OrderBy(y => y.Year).ToList()
+                           }).ToList();
 
             return grouped;
         }
+
 
     }
 }

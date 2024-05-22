@@ -17,6 +17,11 @@
     {
       "library": "jquery-contextmenu@2.9.2",
       "destination": "lib/jquery-contextmenu/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "moment.js@2.30.1",
+      "destination": "Scripts/moment.js/"
     }
   ]
 }
