@@ -27,3 +27,4 @@ C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DA
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Context.Persistance.InitWithSeed.resources
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.csproj.GenerateResource.cache
 C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Context.Persistance.DocumentsTables.resources
+C:\Users\CRME145\Desktop\New folder (2)\ProgettoDocumentale\src\DAL\obj\Debug\DAL.Context.Persistance.InitialProjectConfig.resources

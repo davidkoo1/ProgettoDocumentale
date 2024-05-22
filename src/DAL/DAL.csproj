@@ -55,6 +55,7 @@
     <Compile Include="Context\Configuration\DocumentTypeConfiguration.cs" />
     <Compile Include="Context\Configuration\DocumentTypeHierarchyConfiguration.cs" />
     <Compile Include="Context\Configuration\InstitutionConfiguration.cs" />
+    <Compile Include="Context\Configuration\ProjectConfiguration.cs" />
     <Compile Include="Context\Persistance\ApplicationDbContext.cs" />
     <Compile Include="Context\Configuration\RoleConfiguration.cs" />
     <Compile Include="Context\Configuration\UserConfiguration.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Entities\DocumentTypeHierarchy.cs" />
     <Compile Include="Entities\DocumentType.cs" />
     <Compile Include="Entities\Institution.cs" />
+    <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
@@ -74,6 +76,10 @@
     <Compile Include="Migrations\202405160809535_DocumentsTables.cs" />
     <Compile Include="Migrations\202405160809535_DocumentsTables.Designer.cs">
       <DependentUpon>202405160809535_DocumentsTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405220901228_InitialProjectConfig.cs" />
+    <Compile Include="Migrations\202405220901228_InitialProjectConfig.Designer.cs">
+      <DependentUpon>202405220901228_InitialProjectConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405160809535_DocumentsTables.resx">
       <DependentUpon>202405160809535_DocumentsTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405220901228_InitialProjectConfig.resx">
+      <DependentUpon>202405220901228_InitialProjectConfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

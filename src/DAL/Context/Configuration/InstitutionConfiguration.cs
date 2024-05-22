@@ -27,6 +27,8 @@ namespace DAL.Context.Configuration
             Property(a => a.AdditionalInfo)
                 .HasMaxLength(1000).IsOptional();
 
+
+
         }
     }
 }

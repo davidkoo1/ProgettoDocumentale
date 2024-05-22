@@ -3,40 +3,33 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.Context.Configuration
 {
-    public class DocumentConfiguration : EntityTypeConfiguration<Document>
+    public class ProjectConfiguration : EntityTypeConfiguration<Project>
     {
-        public DocumentConfiguration()
+        public ProjectConfiguration()
         {
-            HasKey(document => document.Id);
+            HasKey(p => p.Id);
 
-            Property(d => d.Name)
+            Property(i => i.Name)
                 .HasMaxLength(255)
                 .IsRequired();
 
             Property(a => a.AdditionalInfo)
                 .HasMaxLength(1000).IsOptional();
 
-            HasOptional(i => i.Project)
-               .WithMany(d => d.Documents)
-               .HasForeignKey(i => i.ProjectId);
-
             HasOptional(i => i.Institution)
-               .WithMany(d => d.Documents)
+               .WithMany(d => d.Projects)
                .HasForeignKey(i => i.InstitutionId);
 
-            HasRequired(i => i.DocumentType)
-                .WithMany(d => d.Documents)
-                .HasForeignKey(i => i.TypeId);
 
             HasRequired(user => user.User)
-               .WithMany(d => d.Documents)
+               .WithMany(d => d.Projects)
                .HasForeignKey(user => user.UserId);
+
         }
     }
 }

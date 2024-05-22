@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class Document
+    public class Project
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string SavedPath { get; set; }
-        public DateTime UploadDate { get; set; }
-        public string AdditionalInfo { get; set; } //Optional
-        public DateTime GroupingDate { get; set; }
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTill { get; set; }
+        public string AdditionalInfo { get; set; } //IsOptional
+        public bool IsActive { get; set; }
 
         public int? InstitutionId { get; set; }
         public virtual Institution Institution { get; set; }
@@ -21,10 +21,6 @@ namespace DAL.Entities
         public int UserId { get; set; }
         public virtual User User { get; set; }
 
-        public int TypeId { get; set; }
-        public virtual DocumentType DocumentType { get; set; }
-
-        public int? ProjectId { get; set; }
-        public virtual Project Project { get; set; }
+        public virtual List<Document> Documents { get; set; }
     }
 }

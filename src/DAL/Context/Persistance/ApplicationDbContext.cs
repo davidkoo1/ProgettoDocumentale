@@ -13,6 +13,7 @@ namespace DAL.Context.Persistance
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<DocumentTypeHierarchy> DocumentTypeHierarchies { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         public ApplicationDbContext() : base("name=DefaultConnection")
         {
@@ -33,6 +34,8 @@ namespace DAL.Context.Persistance
             modelBuilder.Configurations.Add(new DocumentConfiguration());
             modelBuilder.Configurations.Add(new DocumentTypeConfiguration());
             modelBuilder.Configurations.Add(new DocumentTypeHierarchyConfiguration());
+
+            modelBuilder.Configurations.Add(new ProjectConfiguration());
 
         }
 

@@ -17,5 +17,6 @@ namespace DAL.Entities
         public virtual Institution Institution { get; set; }
         public virtual List<UserRole> UserRoles { get; set; }
         public virtual List<Document> Documents { get; set; } //Optional
+        public virtual List<Project> Projects { get; set; } //Optional
     }
 }
