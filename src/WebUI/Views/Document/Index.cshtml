@@ -86,6 +86,7 @@
 
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
                             <div style="width:100%; margin:0 auto;">
                                 <div class="container">
@@ -100,7 +101,7 @@
                                     </div>
                                 </div>
 
-                            </div>                          
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,9 +116,24 @@
 @section scripts {
     <script>
         $(document).ready(function () {
+            
             initializeDocumentThree();
-            initializeProjectThree();
             initializeDocumentDataTable();
+            initializeProjectThree();
+            // This boolean variable will ensure the projects data table is initialized only once
+            let projectInitialized = false;
+
+            // Add event listener to the Projects tab
+            $('#nav-users-tab').on('click', function () {
+                if (!projectInitialized) {
+                    // Initialize projects-related elements only the first time the tab is clicked
+                    initializeProjectDataTable();
+                   
+                    projectInitialized = true;  // Set the flag so initialization only happens once
+                }
+            });
+            
         });
+
     </script>
 }

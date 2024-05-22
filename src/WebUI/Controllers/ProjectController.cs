@@ -1,4 +1,6 @@
 ﻿using BLL.Common.Interfaces;
+using BLL.Common.Repository;
+using BLL.TableParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,27 @@ namespace WebUI.Controllers
         {
             var result = await _projectRepository.GetAllThree();
             return Json(result);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> LoadProjectDatatable(DataTablesParameters parameters, string resource1, string resource2)
+        {
+            try
+            {
+                var result = await _projectRepository.GetAllProjects(parameters, resource1, resource2);
+                return Json(new
+                {
+                    draw = parameters.Draw,
+                    recordsFiltered = parameters.TotalCount,
+                    recordsTotal = parameters.TotalCount,
+                    data = result
+                });
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
         }
 
     }

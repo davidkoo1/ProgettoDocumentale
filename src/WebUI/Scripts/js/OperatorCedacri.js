@@ -4,7 +4,7 @@ function initializeDocumentDataTable() {
         //"processing": true,
         "serverSide": true,
         "scrollX": true,
-        "autoWidth": true,
+        //"autoWidth": true,
         //"stateSave": true,
         //"dom": "p", //f, r, t, l, p
         ajax: {
@@ -78,14 +78,14 @@ function initializeDocumentThree() {
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-            buildList(data);
+            buildDocumentList(data);
             attachCaretEventListeners();
         }
     });
 }
 
 
-function buildList(institutions) {
+function buildDocumentList(institutions) {
     var ul = $('#ThreeDocument');
     ul.empty();
 
@@ -120,9 +120,107 @@ function buildList(institutions) {
 
         instituteLi.append(yearGroupUl);
         ul.append(instituteLi);
+
+
     });
 }
 
+
+
+function initializeProjectDataTable() {
+    var table = $('#ProjectDatatable').DataTable({
+        //"processing": true,
+        "serverSide": true,
+        "scrollX": true,
+        //"autoWidth": true,
+        //"stateSave": true,
+        //"dom": "p", //f, r, t, l, p
+        ajax: {
+            "url": "/Project/LoadProjectDatatable",
+            "type": "POST",
+            "dataType": "json",
+        },
+        "columns": [
+            { "data": "Id", "title": "Id", "name": "Id", "visible": false },
+            { "data": "Name", "title": "Name", "name": "Name", "autoWidth": true },
+            {
+                "data": "DateFrom",
+                "title": "DateFrom",
+                "name": "DateFrom",
+                "autoWidth": true,
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY'); // Формат даты
+                }
+            },
+            {
+                "data": "DateTill",
+                "title": "DateTill",
+                "name": "DateTill",
+                "autoWidth": true,
+                "render": function (data, type, row) {
+                    return moment(data).format('DD/MM/YYYY'); // Формат даты
+                }
+            },
+            { "data": "InstitutionId", "title": "Institution", "name": "InstitutionId", "autoWidth": true },
+            { "data": "UserId", "title": "User", "name": "UserId", "autoWidth": true },
+            {
+                "data": "IsActive",
+                "title": "IsActive",
+                "name": "IsActive",
+                "autoWidth": true,
+                "render": function (data, type, row) {
+                    if (type === 'display') {
+                        return '<input type="checkbox" ' + (data ? 'checked' : '') + ' disabled />';
+                    }
+                    return data;
+                }
+            }
+        ],
+        columnDefs: [
+            { className: 'text-center', targets: [2] },
+            { className: 'text-center', targets: [3] },
+            { className: 'text-center', targets: [6] },
+        ],
+    });
+
+    var contextmenu = $('#ProjectDatatable').contextMenu({
+        selector: 'tr',
+        trigger: 'right',
+        callback: function (key, options) {
+            let row = table.row(options.$trigger);
+            switch (key) {
+                case 'Edit':
+                    $('#lgModal').modal('show');
+                    drawPatrialView('../Project/GetEdit/' + row.data()["Id"], 'lgModalBody');
+                    break;
+                case 'Details':
+                    $('#lgModal').modal('show');
+                    drawPatrialView('../Project/GetDetails/' + row.data()["Id"], 'lgModalBody');
+                    break;
+                case 'Delete':
+                    $('#lgModal').modal('show');
+                    drawPatrialView('../Project/GetDelete/' + row.data()["Id"], 'lgModalBody');
+                    break;
+                default:
+                    break
+            }
+        },
+        items: {
+            "Edit": { name: "Edit" },
+            "Details": { name: "Details" },
+            "Delete": { name: "Delete" }
+        }
+    });
+
+    return table;
+}
+
+function DrawProjectDataTable(resource1, resource2) {
+    var table = $('#ProjectDatatable').DataTable();
+    // Непосредственно обновляем данные AJAX-запроса перед отправкой
+    var newUrl = '/Project/LoadProjectDatatable' + '?resource1=' + (resource1 || '') + '&resource2=' + (resource2 || '');
+    table.ajax.url(newUrl).load();
+}
 
 function initializeProjectThree() {
     $.ajax({
@@ -130,8 +228,7 @@ function initializeProjectThree() {
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-            buildProjectList(data);
-            //attachCaretEventListeners();
+            buildProjectList(data);    
         }
     });
 }
@@ -151,7 +248,7 @@ function buildProjectList(institutions) {
 
         institution.YearGroups.forEach(function (yearGroup) {
             var yearTextSpan = $('<span>').text(yearGroup).css('cursor', 'pointer').on('click', function () {
-                DrawProjectDataTable(institution.InstitutionName, yearGroup.Year);
+                DrawProjectDataTable(institution.InstitutionName, yearGroup);
             });;
             var yearLi = $('<li>').append(yearTextSpan);
             yearGroupUl.append(yearLi);
@@ -159,6 +256,8 @@ function buildProjectList(institutions) {
 
         instituteLi.append(yearGroupUl);
         ul.append(instituteLi);
+
+
     });
 
 }
@@ -170,7 +269,7 @@ function attachCaretEventListeners() {
     var toggler = document.getElementsByClassName("caret");
     for (var i = 0; i < toggler.length; i++) {
         toggler[i].addEventListener("click", function (event) {
-            event.stopPropagation(); // Добавлено, чтобы остановить всплытие события
+            event.stopPropagation(); 
             this.parentElement.querySelector(".nested").classList.toggle("active");
             this.classList.toggle("caret-down");
         });

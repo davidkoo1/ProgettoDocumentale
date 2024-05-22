@@ -1,5 +1,6 @@
 ﻿using BLL.DTO.DocumentDTOs;
 using BLL.DTO.ProjectDTOs;
+using BLL.TableParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace BLL.Common.Interfaces
     public interface IProjectRepository
     {
         Task<IEnumerable<BuilderProjectThree>> GetAllThree();
+        Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string resource1, string resource2);
     }
 }
