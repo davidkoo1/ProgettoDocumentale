@@ -12,6 +12,7 @@ namespace BLL.Common.Interfaces
     public interface IProjectRepository
     {
         Task<IEnumerable<BuilderProjectThree>> GetAllThree();
-        Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string resource1, string resource2);
+        Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string InstitutionId, string YearGroup);
+        Task<ProjectDetailDto> GetProject(int ProjectId);
     }
 }

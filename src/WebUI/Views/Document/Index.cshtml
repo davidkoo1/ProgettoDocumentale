@@ -55,10 +55,10 @@
                     <div class="d-flex justify-content-between">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-institutions-tab" data-bs-toggle="tab" data-bs-target="#nav-institutions" type="button" role="tab" aria-controls="nav-institutions" aria-selected="true">
+                                <button class="nav-link active" id="nav-documents-tab" data-bs-toggle="tab" data-bs-target="#nav-documents" type="button" role="tab" aria-controls="nav-documents" aria-selected="true">
                                     <h5>Documents</h5>
                                 </button>
-                                <button class="nav-link" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">
+                                <button class="nav-link" id="nav-projects-tab" data-bs-toggle="tab" data-bs-target="#nav-projects" type="button" role="tab" aria-controls="nav-projects" aria-selected="false">
                                     <h5>Projects</h5>
                                 </button>
                             </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="card-body">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-institutions" role="tabpanel" aria-labelledby="nav-institutions-tab" tabindex="0">
+                        <div class="tab-pane fade show active" id="nav-documents" role="tabpanel" aria-labelledby="nav-documents-tab" tabindex="0">
                             <div style="width:100%; margin:0 auto;">
                                 <div class="container">
                                     <div class="row">
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab" tabindex="0">
+                        <div class="tab-pane fade" id="nav-projects" role="tabpanel" aria-labelledby="nav-projects-tab" tabindex="0">
                             <div style="width:100%; margin:0 auto;">
                                 <div class="container">
                                     <div class="row">
@@ -124,7 +124,7 @@
             let projectInitialized = false;
 
             // Add event listener to the Projects tab
-            $('#nav-users-tab').on('click', function () {
+            $('#nav-projects-tab').on('click', function () {
                 if (!projectInitialized) {
                     // Initialize projects-related elements only the first time the tab is clicked
                     initializeProjectDataTable();

@@ -218,7 +218,7 @@ function initializeProjectDataTable() {
 function DrawProjectDataTable(resource1, resource2) {
     var table = $('#ProjectDatatable').DataTable();
     // Непосредственно обновляем данные AJAX-запроса перед отправкой
-    var newUrl = '/Project/LoadProjectDatatable' + '?resource1=' + (resource1 || '') + '&resource2=' + (resource2 || '');
+    var newUrl = '/Project/LoadProjectDatatable' + '?InstitutionId=' + (resource1 || '') + '&YearGroup=' + (resource2 || '');
     table.ajax.url(newUrl).load();
 }
 
@@ -240,7 +240,7 @@ function buildProjectList(institutions) {
     institutions.forEach(function (institution) {
         var caretSpan = $('<span>').addClass('caret');
         var textSpan = $('<span>').text(institution.InstitutionName).css('cursor', 'pointer').on('click', function () {
-            DrawProjectDataTable(institution.InstitutionName, null);
+            DrawProjectDataTable(institution.InstitutionId, null);
         });
 
         var instituteLi = $('<li>').append(caretSpan, textSpan);
@@ -248,7 +248,7 @@ function buildProjectList(institutions) {
 
         institution.YearGroups.forEach(function (yearGroup) {
             var yearTextSpan = $('<span>').text(yearGroup).css('cursor', 'pointer').on('click', function () {
-                DrawProjectDataTable(institution.InstitutionName, yearGroup);
+                DrawProjectDataTable(institution.InstitutionId, yearGroup);
             });;
             var yearLi = $('<li>').append(yearTextSpan);
             yearGroupUl.append(yearLi);

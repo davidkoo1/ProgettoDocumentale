@@ -18,26 +18,25 @@ namespace BLL.Common.Repository
     public class ProjectRepository : IProjectRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly IMapper _mapper;
-        public ProjectRepository(ApplicationDbContext dbContext, IMapper mapper)
+        public ProjectRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string resource1, string resource2)
+        public async Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string InstitutionId, string YearGroup)
         {
             IQueryable<Project> query = _dbContext.Projects
                  .Include(x => x.Institution)
                  .Include(x => x.User)
                  .Search(parameters).OrderBy(parameters).Page(parameters);
 
-            if (!string.IsNullOrEmpty(resource1))
+            if (!string.IsNullOrEmpty(InstitutionId))
             {
-                query = query.Where(x => x.Institution.Name == resource1);
+                int IdForInstitution = Convert.ToInt32(InstitutionId);
+                query = query.Where(x => x.Institution.Id == IdForInstitution);
             }
 
-            if (!string.IsNullOrEmpty(resource2) && int.TryParse(resource2, out int year))
+            if (!string.IsNullOrEmpty(YearGroup) && int.TryParse(YearGroup, out int year))
             {
                 query = query.Where(x => x.DateTill.Year == year);
             }
@@ -78,6 +77,21 @@ namespace BLL.Common.Repository
               }).ToList();
 
             return grouped;
+        }
+
+        public async Task<ProjectDetailDto> GetProject(int ProjectId)
+        {
+           return await _dbContext.Projects.Select(x => new ProjectDetailDto
+           {
+               Id = x.Id,
+               Name = x.Name,
+               InstitutionName = x.Institution.Name,
+               DateFrom = x.DateFrom,
+               DateTill = x.DateTill,
+               AdditionalInfo = x.AdditionalInfo,
+               IsActive= x.IsActive,
+
+           }).FirstOrDefaultAsync(p => p.Id == ProjectId);
         }
     }
 }

@@ -28,11 +28,11 @@ namespace WebUI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> LoadProjectDatatable(DataTablesParameters parameters, string resource1, string resource2)
+        public async Task<ActionResult> LoadProjectDatatable(DataTablesParameters parameters, string InstitutionId, string YearGroup)
         {
             try
             {
-                var result = await _projectRepository.GetAllProjects(parameters, resource1, resource2);
+                var result = await _projectRepository.GetAllProjects(parameters, InstitutionId, YearGroup);
                 return Json(new
                 {
                     draw = parameters.Draw,
@@ -45,6 +45,23 @@ namespace WebUI.Controllers
             {
                 return View("~/Views/Shared/_NotFound.cshtml");
             }
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetDetails(int id)
+        {
+            try
+            {
+
+                var project = await _projectRepository.GetProject(id);
+                return PartialView("~/Views/Project/Details.cshtml", project);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
         }
 
     }
