@@ -23,10 +23,10 @@ function initializeInstitutionDataTable() {
                 "name": "AdditionalInfo",
                 "autoWidth": true,
                 "render": function (data, type, row) {
-                    if (data.length > 20) {
+                    if (data && data.length > 20) {
                         return data.substr(0, 20) + '...';
                     } else {
-                        return data;
+                        return data || '';
                     }
                 }
             }

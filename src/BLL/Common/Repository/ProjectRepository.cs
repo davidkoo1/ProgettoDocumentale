@@ -121,11 +121,42 @@ namespace BLL.Common.Repository
                                 DateFrom = t.DateFrom,
                                 DateTill = t.DateTill,
                                 AdditionalInfo = t.AdditionalInfo,
-                                IsActive = t.IsActive
+                                IsActive = t.IsActive,
                             })
                             .FirstOrDefaultAsync(x => x.Id == ProjectId);
             }
             return new UpsertProjectDto();
+        }
+
+        public async Task<bool> UpsertProject(UpsertProjectDto ProjectDtoToUpsert)
+        {
+            var existing = await _dbContext.Projects.AnyAsync(x => x.Id == ProjectDtoToUpsert.Id /*&& !x.IsActive*/);
+
+            if (ProjectDtoToUpsert == null || !existing)
+            {
+                return false;
+            }
+
+            if (ProjectDtoToUpsert.Id != 0)
+            {
+
+                var project = await _dbContext.Projects.AsNoTracking().FirstOrDefaultAsync(x => x.Id == ProjectDtoToUpsert.Id);
+                ProjectDtoToUpsert.UserId = project.UserId;
+            }
+
+            _dbContext.Projects.AddOrUpdate(new Project
+            {
+                Id = ProjectDtoToUpsert.Id,
+                Name = ProjectDtoToUpsert.Name,
+                DateFrom = ProjectDtoToUpsert.DateFrom,
+                DateTill = ProjectDtoToUpsert.DateTill,
+                AdditionalInfo = ProjectDtoToUpsert.AdditionalInfo,
+                IsActive = ProjectDtoToUpsert.IsActive,
+                InstitutionId = ProjectDtoToUpsert.InstitutionId,
+                UserId = ProjectDtoToUpsert.UserId
+            });
+
+            return await Save();
         }
     }
 }

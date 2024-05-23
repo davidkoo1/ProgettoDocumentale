@@ -1,9 +1,13 @@
-﻿using BLL.Common.Interfaces;
+﻿using BLL.Common.Extensions;
+using BLL.Common.Interfaces;
 using BLL.Common.Repository;
+using BLL.DTO.ProjectDTOs;
 using BLL.TableParameters;
+using BLL.UserDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -66,8 +70,7 @@ namespace WebUI.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<JsonResult> PrepareProjectInstitution(int projectid)
+        private async Task PrepareProjectInstitution(int projectid)
         {
 
             var projectVM = await _projectRepository.GetProjectForUpsert(projectid);
@@ -83,8 +86,6 @@ namespace WebUI.Controllers
                 x.Id == projectInstitutionId : false
             });
             ViewBag.Institutions = selectListInstitutionsVm;
-
-            return Json(selectListInstitutionsVm);
         }
 
         public async Task<ActionResult> GetUpsert(int id)
@@ -102,6 +103,42 @@ namespace WebUI.Controllers
 
 
         }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Upsert(UpsertProjectDto upsertProjectDto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (upsertProjectDto.Id == 0)
+                    {
+                        upsertProjectDto.UserId = User.GetUserId();
+                    }
+                    var result = await _projectRepository.UpsertProject(upsertProjectDto);
+                    if (result)
+                    {
+                        return Json(new { success = true });
+                    }
+                    else
+                    {
+                        TempData["ErrorProject"] = "ErrorUpsertProject";
+                        await PrepareProjectInstitution(upsertProjectDto.Id);
+                        return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
+                    }
+
+                }
+                TempData["ErrorProject"] = "ErrorUpsertProject";
+                await PrepareProjectInstitution(upsertProjectDto.Id);
+                return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {

@@ -64,7 +64,7 @@ namespace BLL.Common.Repository
 
         public async Task<bool> Update(UpdateInstitutionDto institutionToUpdateDto)
         {
-            var institution = _dbContext.Institutions.FirstOrDefault(x => x.Id == institutionToUpdateDto.Id);
+            var institution = _dbContext.Institutions.AsNoTracking().FirstOrDefault(x => x.Id == institutionToUpdateDto.Id);
             if (institution == null)
                 return false;
             var institutionToUpdate = _mapper.Map<Institution>(institutionToUpdateDto);

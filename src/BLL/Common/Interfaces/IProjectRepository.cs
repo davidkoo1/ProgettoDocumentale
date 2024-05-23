@@ -1,6 +1,7 @@
 ﻿using BLL.DTO.DocumentDTOs;
 using BLL.DTO.ProjectDTOs;
 using BLL.TableParameters;
+using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace BLL.Common.Interfaces
         Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string InstitutionId, string YearGroup);
         Task<ProjectDetailDto> GetProject(int ProjectId);
         Task<UpsertProjectDto> GetProjectForUpsert(int ProjectId);
+        Task<bool> UpsertProject(UpsertProjectDto ProjectDtoToUpsert);
         Task<bool> Delete(int projectId);
         Task<bool> Save();
     }

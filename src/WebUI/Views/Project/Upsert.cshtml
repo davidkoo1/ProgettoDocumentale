@@ -2,69 +2,73 @@
 <div class="modal-body">
     <div class="container">
         <h2 class="text-center mb-4">Project Details</h2>
+        @using (Html.BeginForm("Upsert", "Project", FormMethod.Post, new { id = "upsertProjectForm", @class = "needs-validation", novalidate = "novalidate" }))
+        {
+            @Html.HiddenFor(model => model.Id)
 
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-floating">
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name", @style = "max-width: 100% !important; width: 100%;" })
-                    @Html.LabelFor(model => model.Name)
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name", @style = "max-width: 100% !important; width: 100%;" })
+                        @Html.LabelFor(model => model.Name, "*Name")
+                        @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        @Html.DropDownListFor(model => model.InstitutionId, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "InstitutionId", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+
+                        @Html.LabelFor(model => model.InstitutionId, "*Institution")
+                        @Html.ValidationMessageFor(model => model.InstitutionId, null, new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    @if (Model.Id != 0)
-                    {
-                        @Html.DropDownListFor(model => model.InstitutionId, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "InstitutionId", @style = "max-width: 100% !important; width: 100%;" })
-                    }
-                    else
-                    {
-                        @Html.DropDownListFor(model => model.InstitutionId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control selectpicker", @id = "InstitutionId", @style = "max-width: 100% !important; width: 100%;" })
-                    }
-                    @Html.LabelFor(model => model.InstitutionId, "Institution")
-                </div>
-                <span asp-validation-for="InstitutionId" class="text-danger"></span>
-            </div>
-        </div>
 
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input id="dateFrom" type="date" class="form-control" placeholder="Date From" style="max-width: 100% !important; width: 100%;" asp-for="DateFrom" value="@Model.DateFrom.ToString("yyyy-MM-dd")" />
-                    <label for="dateFrom">Date From</label>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        @Html.TextBoxFor(model => model.DateFrom, Model.Id == 0 ? "{0}" : "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", @placeholder = "Date From", @style = "max-width: 100% !important; width: 100%;" })
+                        @Html.LabelFor(model => model.DateFrom, "*Date From")
+                        @Html.ValidationMessageFor(model => model.DateFrom, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        @Html.TextBoxFor(model => model.DateTill, Model.Id == 0 ? "{0}" : "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", @placeholder = "Date Till", @style = "max-width: 100% !important; width: 100%;" })
+                        @Html.LabelFor(model => model.DateTill, "*Date Till")
+                        @Html.ValidationMessageFor(model => model.DateTill, null, new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input id="dateTill" type="date" class="form-control" placeholder="Date Till" style="max-width: 100% !important; width: 100%;" asp-for="DateTill" value="@Model.DateTill.ToString("yyyy-MM-dd")" />
-                    <label for="dateTill">Date Till</label>
+
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <textarea id="additionalInfo" name="AdditionalInfo" class="form-control" placeholder="Additional Info" style="resize: none; height: 150px; max-width: 100% !important; width: 100%;">@Model.AdditionalInfo</textarea>
+                        <label for="additionalInfo">Additional Info</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <div class="form-floating">
-                    <textarea id="additionalInfo" class="form-control" placeholder="Additional Info" style="resize: none; height: 150px; max-width: 100% !important; width: 100%;">@Model.AdditionalInfo</textarea>
-                    <label for="additionalInfo">Additional Info</label>
+            <div class="mb-3 row">
+                <label class="col-sm-3 form-check-label" for="IsActive">Active</label>
+                <div class="col-sm-9">
+                    <div class="form-check form-switch">
+                        @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "IsActive" })
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-md-12 text-right">
-                <div class="form-check form-switch ml-auto">
-                    <input class="form-check-input" type="checkbox" id="isActive" @if (Model.IsActive) { <text> checked</text> }>
-                    <label class="form-check-label" for="isActive">Active</label>
-                </div>
-            </div>
-        </div>
 
 
+
+        }
 
     </div>
 </div>
 
 <div class="modal-footer">
+    <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#upsertProjectForm', 'ProjectDatatable')">Save</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 </div>
 

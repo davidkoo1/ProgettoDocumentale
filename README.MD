@@ -1,5 +1,5 @@
 ﻿# TODO List
-
+ChangeDesignProjectDetailPage
 Перенести js/Css code со страничек в файлы
 DeleteIsFlagInstitution -- спросить удаление документов и остального
 

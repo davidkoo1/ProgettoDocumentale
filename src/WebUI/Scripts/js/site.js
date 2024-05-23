@@ -15,7 +15,7 @@
     });
 }
 
-function handleSubmitButton(formId) {
+function handleSubmitButton(formId, reloadDataTableId) {
     var $form = $(formId);
     if ($form.length === 0) return; // Проверяем, существует ли форма
 
@@ -26,8 +26,7 @@ function handleSubmitButton(formId) {
         success: function (response) {
             if (response.success) {
                 $('#lgModal').modal('hide');
-                $('#UserDatatable').DataTable().ajax.reload(null, false);
-                $('#InstitutionDatatable').DataTable().ajax.reload(null, false);
+                $('#' + reloadDataTableId).DataTable().ajax.reload(null, false);
             } else {
                 $('.modal-body').html(response);
                 $('.selectpicker').selectpicker('refresh');

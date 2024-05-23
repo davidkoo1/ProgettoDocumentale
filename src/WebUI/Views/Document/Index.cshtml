@@ -132,7 +132,15 @@
                     projectInitialized = true;  // Set the flag so initialization only happens once
                 }
             });
-            
+
+
+            $('#nav-documents-tab').on('shown.bs.tab', function () {
+                $('#addButton').attr('onclick', "drawPatrialView('/Document/GetCreate/', 'lgModalBody')");
+            });
+
+            $('#nav-projects-tab').on('shown.bs.tab', function () {
+                $('#addButton').attr('onclick', "drawPatrialView('/Project/GetUpsert/0', 'lgModalBody')");
+            });
         });
 
     </script>

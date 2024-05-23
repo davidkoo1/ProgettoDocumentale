@@ -15,5 +15,7 @@ namespace BLL.DTO.ProjectDTOs
         public DateTime DateTill { get; set; }
         public string AdditionalInfo { get; set; }
         public bool IsActive { get; set; }
+
+        public int UserId { get; set; }
     }
 }

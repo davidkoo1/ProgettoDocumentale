@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Extensions\DataTableExtensions.cs" />
+    <Compile Include="Common\Extensions\PrincipalExtensions.cs" />
     <Compile Include="Common\Interfaces\IAccountRepository.cs" />
     <Compile Include="Common\Interfaces\IDocumentRepository.cs" />
     <Compile Include="Common\Interfaces\IInstitutionRepository.cs" />
