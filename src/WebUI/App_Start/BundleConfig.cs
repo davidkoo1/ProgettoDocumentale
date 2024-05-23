@@ -56,7 +56,11 @@ namespace WebUI
             "~/lib/jquery-contextmenu/dist/jquery.ui.position.min.js",
             "~/Scripts/moment.js/moment.min.js"));
 
+            //bundles.Add(new StyleBundle("~/Scripts/bootstrap-switch-button").Include(
+            //   "~/Scripts/bootstrap-switch-button/css/bootstrap-switch-button.min.css"));
 
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap-switch-button").Include(
+            //    "~/Scripts/bootstrap-switch-button/dist/bootstrap-switch-button.min.js"));
 
         }
     }

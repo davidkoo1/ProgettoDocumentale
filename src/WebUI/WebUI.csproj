@@ -1115,6 +1115,7 @@
     <Content Include="Scripts\moment.js\moment-with-locales.min.js.map" />
     <Content Include="Scripts\moment.js\moment.min.js.map" />
     <Content Include="Views\Project\Details.cshtml" />
+    <Content Include="Views\Project\Upsert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

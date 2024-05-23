@@ -191,15 +191,14 @@ function initializeProjectDataTable() {
             switch (key) {
                 case 'Edit':
                     $('#lgModal').modal('show');
-                    drawPatrialView('../Project/GetEdit/' + row.data()["Id"], 'lgModalBody');
+                    drawPatrialView('../Project/GetUpsert/' + row.data()["Id"], 'lgModalBody');
                     break;
                 case 'Details':
                     $('#lgModal').modal('show');
                     drawPatrialView('../Project/GetDetails/' + row.data()["Id"], 'lgModalBody');
                     break;
-                case 'Delete':
-                    $('#lgModal').modal('show');
-                    drawPatrialView('../Project/GetDelete/' + row.data()["Id"], 'lgModalBody');
+                case 'Activate/Disactivate':
+                    IsNotActivate(row.data()["Id"]);
                     break;
                 default:
                     break
@@ -208,13 +207,27 @@ function initializeProjectDataTable() {
         items: {
             "Edit": { name: "Edit" },
             "Details": { name: "Details" },
-            "Delete": { name: "Delete" }
+            "Activate/Disactivate": { name: "Activate/Disactivate" }
         }
     });
 
     return table;
 }
 
+
+function IsNotActivate(projectId) {
+    $.ajax({
+        url: '../Project/Delete/' + projectId,
+        cache: false,
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            if (response.success) {
+                $('#ProjectDatatable').DataTable().ajax.reload(null, false);
+            }
+        }
+    });
+}
 function DrawProjectDataTable(resource1, resource2) {
     var table = $('#ProjectDatatable').DataTable();
     // Непосредственно обновляем данные AJAX-запроса перед отправкой

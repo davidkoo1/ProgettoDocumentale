@@ -9,8 +9,10 @@ using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BLL.Common.Repository
@@ -21,6 +23,17 @@ namespace BLL.Common.Repository
         public ProjectRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+        public async Task<bool> Save() => await _dbContext.SaveChangesAsync() > 0;
+
+        public async Task<bool> Delete(int projectId)
+        {
+            var projectToDelete = await _dbContext.Projects.FirstOrDefaultAsync(x => x.Id == projectId);
+            projectToDelete.IsActive = !projectToDelete.IsActive;
+
+            _dbContext.Projects.AddOrUpdate(projectToDelete);
+
+            return await Save();  
         }
 
         public async Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string InstitutionId, string YearGroup)
@@ -92,6 +105,27 @@ namespace BLL.Common.Repository
                IsActive= x.IsActive,
 
            }).FirstOrDefaultAsync(p => p.Id == ProjectId);
+        }
+
+        public async Task<UpsertProjectDto> GetProjectForUpsert(int ProjectId)
+        {
+            if (await _dbContext.Projects.AnyAsync(x => x.Id == ProjectId))
+            {
+                return await _dbContext.Projects
+                            .Include(x => x.Institution)
+                            .Select(t => new UpsertProjectDto
+                            {
+                                Id= t.Id,
+                                Name= t.Name,
+                                InstitutionId = t.Institution.Id,
+                                DateFrom = t.DateFrom,
+                                DateTill = t.DateTill,
+                                AdditionalInfo = t.AdditionalInfo,
+                                IsActive = t.IsActive
+                            })
+                            .FirstOrDefaultAsync(x => x.Id == ProjectId);
+            }
+            return new UpsertProjectDto();
         }
     }
 }

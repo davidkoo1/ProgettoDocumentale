@@ -14,5 +14,8 @@ namespace BLL.Common.Interfaces
         Task<IEnumerable<BuilderProjectThree>> GetAllThree();
         Task<IEnumerable<ProjectDto>> GetAllProjects(DataTablesParameters parameters, string InstitutionId, string YearGroup);
         Task<ProjectDetailDto> GetProject(int ProjectId);
+        Task<UpsertProjectDto> GetProjectForUpsert(int ProjectId);
+        Task<bool> Delete(int projectId);
+        Task<bool> Save();
     }
 }
