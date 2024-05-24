@@ -1,5 +1,8 @@
 ﻿# TODO List
 
+
+Если учиреждение есть - то ищем по ид иначе пуской список(если меняется на пустое значение - также пустой список с проектами)
+
 ProjectDataTableParametrs(сделать типо 3 разные таблицы, чтоб не мучатся)
 
 
@@ -9,7 +12,4 @@ ProjectDataTableParametrs(сделать типо 3 разные таблицы,
 - ChangesEditRoleInstitutions(PrepareUserInstitutions)(по факту я могу этот метод и не инифиализировать в контроллере, достаточно только в ajax)
 
 -Toaster+returns
--Try-Catch
--ContextMenuDatatable
-
-- Bootstrap
+-Try-Catch/Logger

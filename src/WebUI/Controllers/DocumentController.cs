@@ -8,6 +8,7 @@ using System;
 using System.Web.Mvc;
 using BLL.DTO.DocumentDTOs;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebUI.Controllers
 {
@@ -15,10 +16,12 @@ namespace WebUI.Controllers
     public class DocumentController : BaseController
     {
         private readonly IDocumentRepository _documentRepository;
+        private readonly IInstitutionRepository _institutionRepository;
 
-        public DocumentController(IDocumentRepository documentRepository)
+        public DocumentController(IDocumentRepository documentRepository, IInstitutionRepository institutionRepository)
         {
             _documentRepository = documentRepository;
+            _institutionRepository = institutionRepository;
         }
 
         public ActionResult Index() => View();
@@ -66,6 +69,63 @@ namespace WebUI.Controllers
             }
 
         }
+
+
+
+        private async Task PrepareViewBags()
+        {
+
+            
+            var institutions = await _institutionRepository.GetInstitutions();
+            var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = false
+            });
+            ViewBag.Institutions = selectListInstitutionsVm;
+
+            var MacroTypes = await _documentRepository.GetMacroDocumentType();
+            var selectListMacroTypeVm = MacroTypes.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = false
+            });
+            ViewBag.MacroTypes = selectListMacroTypeVm;
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GetMicroTypes(int MacroId)
+        {
+            var result = await _documentRepository.GetMicroTypesByMacroId(MacroId);
+            var selectListMicroTypesVm = result.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = false
+            });
+            return Json(selectListMicroTypesVm);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCreate()
+        {
+            try
+            {
+                //var userVm = await _userRepository.GetUser(id);
+
+                await PrepareViewBags();
+                return PartialView("~/Views/Document/Create.cshtml");
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+
+        }
+
 
     }
 }

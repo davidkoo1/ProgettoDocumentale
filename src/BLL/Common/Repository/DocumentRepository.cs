@@ -150,5 +150,31 @@ namespace BLL.Common.Repository
 
 
         }
+
+        public async Task<IEnumerable<DocumentTypeDto>> GetMacroDocumentType()
+        {
+            return await _dbContext.DocumentTypes.Where(x => x.IsMacro).Select(x => new DocumentTypeDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).ToListAsync();
+        }
+
+        public async Task<IEnumerable<DocumentTypeDto>> GetMicroTypesByMacroId(int macroId)
+        {
+            var microTypesId = await _dbContext.DocumentTypeHierarchies
+                                               .Where(x => x.IdMacro == macroId)
+                                               .Select(x => x.IdMicro)
+                                               .ToListAsync();
+
+            
+            return  await _dbContext.DocumentTypes
+                                                .Where(x => microTypesId.Contains(x.Id))
+                                                .Select(t => new DocumentTypeDto
+                                                {
+                                                    Id = t.Id,
+                                                    Name = t.Name,
+                                                }).ToListAsync();
+        }
     }
 }

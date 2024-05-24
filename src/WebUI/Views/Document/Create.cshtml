@@ -1,0 +1,132 @@
+﻿@model BLL.DTO.DocumentDTOs.CreateDocumentDto
+
+<div class="modal-body">
+    <div class="container">
+        <h2 class="text-center mb-4">Add Document</h2>
+        @using (Html.BeginForm("Create", "Document", FormMethod.Post, new { id = "CreateDocumentForm", @class = "needs-validation", novalidate = "novalidate" }))
+        {
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.File, "*File", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    <input type="file" name="File" class="form-control" style="max-width: 100% !important; width: 100%;" />
+                </div>
+                <br>
+            </div>
+
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.InstitutionId, "*Institution", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.InstitutionId, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "InstitutionId", @title = "Choose...", data_live_search = "true", @style = "max-width: 100% !important; width: 100%;" })
+
+                    @Html.ValidationMessageFor(model => model.InstitutionId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.MacroId, "*MACRO TYPE", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.MacroId, new SelectList(ViewBag.MacroTypes, "Value", "Text"), new { @class = "form-control selectpicker", @id = "MacroId", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.MacroId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row" id="MicroTypeRow" style="display: none;">
+                @Html.LabelFor(model => model.MicroId, "*MICRO TYPE", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.MicroId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control selectpicker", data_live_search = "true", @id = "MicroType", @title = "Choose..." })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row" id="ProjectRow" style="display: none;">
+                @Html.LabelFor(model => model.ProjectId, "*Project", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.ProjectId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control selectpicker", data_live_search = "true", @id = "ProjectId", @title = "Choose..." })
+                </div>
+                <br>
+            </div>
+
+
+            <div class="mb-3 row">
+                <div class="col-md-12">
+                    <label for="AdditionalInfo" class="col-md-4 col-form-label">Additional Info</label>
+                    <textarea id="AdditionalInfo" rows="3" class="form-control" style="resize: none; max-width: 100% !important; width: 100%;"></textarea>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#CreateDocumentForm', 'DocumentDatatable')">Save</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker();
+
+        $('#MacroId').change(SetMicroType);
+    });
+
+    function SetMicroType() {
+        var macroId = $('#MacroId').val();
+
+
+        if (macroId === "2") {
+            $('#MicroTypeRow').hide();
+        }
+        if (macroId === "1") {
+            $('#ProjectRow').hide();
+        }
+
+        if (macroId === "3") {
+            $.ajax({
+                url: '/Document/GetProjectsByInstitutionId',
+                type: 'POST',
+                data: { InstitutionId: InstitutionId },
+                success: function (response) {
+                    $('#ProjectId').empty();
+
+                    $.each(response, function (index, item) {
+                        $('#ProjectId').append($('<option>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+
+                    $('.selectpicker').selectpicker('refresh');
+                    $('#ProjectRow').show();
+                }
+            });
+        }
+
+
+        if (macroId !== "2") {
+            $.ajax({
+                url: '/Document/GetMicroTypes',
+                type: 'POST',
+                data: { macroId: macroId },
+                success: function (response) {
+                    $('#MicroType').empty();
+
+                    $.each(response, function (index, item) {
+                        $('#MicroType').append($('<option>', {
+                            value: item.Value,
+                            text: item.Text
+                        }));
+                    });
+
+                    $('.selectpicker').selectpicker('refresh');
+                    $('#MicroTypeRow').show();
+                }
+            });
+        }
+
+    }
+</script>

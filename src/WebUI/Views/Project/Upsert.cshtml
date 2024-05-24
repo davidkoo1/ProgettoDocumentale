@@ -1,7 +1,14 @@
 ﻿@model BLL.DTO.ProjectDTOs.UpsertProjectDto
 <div class="modal-body">
     <div class="container">
-        <h2 class="text-center mb-4">Project Details</h2>
+        @if (Model.Id == 0)
+        {
+            <h2 class="text-center mb-4">Create Project</h2>
+        }
+        else
+        {
+            <h2 class="text-center mb-4">Edit Project</h2>
+        }
         @using (Html.BeginForm("Upsert", "Project", FormMethod.Post, new { id = "upsertProjectForm", @class = "needs-validation", novalidate = "novalidate" }))
         {
             @Html.HiddenFor(model => model.Id)
