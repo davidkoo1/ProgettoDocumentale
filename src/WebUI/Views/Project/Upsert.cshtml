@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        @Html.DropDownListFor(model => model.InstitutionId, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "InstitutionId", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+                        @Html.DropDownListFor(model => model.InstitutionId, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "InstitutionId", @title = "Choose...", data_live_search = "true", @style = "max-width: 100% !important; width: 100%;" })
 
                         @Html.LabelFor(model => model.InstitutionId, "*Institution")
                         @Html.ValidationMessageFor(model => model.InstitutionId, null, new { @class = "text-danger" })
@@ -45,8 +45,9 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <div class="form-floating">
-                        <textarea id="additionalInfo" name="AdditionalInfo" class="form-control" placeholder="Additional Info" style="resize: none; height: 150px; max-width: 100% !important; width: 100%;">@Model.AdditionalInfo</textarea>
+                        <textarea id="additionalInfo" name="AdditionalInfo" class="form-control" maxlength="998" placeholder="Additional Info" style="resize: none; height: 150px; max-width: 100% !important; width: 100%;">@Model.AdditionalInfo</textarea>
                         <label for="additionalInfo">Additional Info</label>
+                        @Html.ValidationMessageFor(model => model.AdditionalInfo, null, new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

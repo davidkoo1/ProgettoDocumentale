@@ -40,8 +40,8 @@ namespace BLL.Common.Repository
         {
             IQueryable<Project> query = _dbContext.Projects
                  .Include(x => x.Institution)
-                 .Include(x => x.User)
-                 .Search(parameters).OrderBy(parameters).Page(parameters);
+                 .Include(x => x.User);
+                 //.Search(parameters).OrderBy(parameters).Page(parameters);
 
             if (!string.IsNullOrEmpty(InstitutionId))
             {
@@ -132,7 +132,7 @@ namespace BLL.Common.Repository
         {
             var existing = await _dbContext.Projects.AnyAsync(x => x.Id == ProjectDtoToUpsert.Id /*&& !x.IsActive*/);
 
-            if (ProjectDtoToUpsert == null || !existing)
+            if (ProjectDtoToUpsert == null || !existing && ProjectDtoToUpsert.Id > 0)
             {
                 return false;
             }

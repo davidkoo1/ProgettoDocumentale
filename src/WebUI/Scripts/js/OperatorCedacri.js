@@ -72,59 +72,6 @@ function DrawDocumentDataTable(resource1, resource2, resource3) {
     table.ajax.url(newUrl).load();
 }
 
-function initializeDocumentThree() {
-    $.ajax({
-        url: '../Document/GetAllDocumentsThree',
-        type: 'POST',
-        dataType: 'json',
-        success: function (data) {
-            buildDocumentList(data);
-            attachCaretEventListeners();
-        }
-    });
-}
-
-
-function buildDocumentList(institutions) {
-    var ul = $('#ThreeDocument');
-    ul.empty();
-
-    institutions.forEach(function (institution) {
-        var caretSpan = $('<span>').addClass('caret');
-        var textSpan = $('<span>').text(institution.InstitutionName).css('cursor', 'pointer').on('click', function () {
-            DrawDocumentDataTable(institution.InstitutionName, null, null);
-        });
-
-        var instituteLi = $('<li>').append(caretSpan, textSpan);
-        var yearGroupUl = $('<ul>').addClass('nested');
-
-        institution.YearGroups.forEach(function (yearGroup) {
-            var yearCaretSpan = $('<span>').addClass('caret');
-            var yearTextSpan = $('<span>').text(yearGroup.Year).css('cursor', 'pointer').on('click', function () {
-                DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, null);
-            });
-
-            var yearLi = $('<li>').append(yearCaretSpan, yearTextSpan);
-            var typeUl = $('<ul>').addClass('nested');
-
-            yearGroup.SubTypeNames.forEach(function (typeName) {
-                var typeLi = $('<li>').text(typeName).css('cursor', 'pointer').on('click', function () {
-                    DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, typeName);
-                });
-                typeUl.append(typeLi);
-            });
-
-            yearLi.append(typeUl);
-            yearGroupUl.append(yearLi);
-        });
-
-        instituteLi.append(yearGroupUl);
-        ul.append(instituteLi);
-
-
-    });
-}
-
 
 
 function initializeProjectDataTable() {
@@ -230,9 +177,24 @@ function IsNotActivate(projectId) {
 }
 function DrawProjectDataTable(resource1, resource2) {
     var table = $('#ProjectDatatable').DataTable();
-    // Непосредственно обновляем данные AJAX-запроса перед отправкой
-    var newUrl = '/Project/LoadProjectDatatable' + '?InstitutionId=' + (resource1 || '') + '&YearGroup=' + (resource2 || '');
-    table.ajax.url(newUrl).load();
+
+    // Формирование нового URL с параметрами фильтрации
+    var newUrl = '/Project/LoadProjectDatatable?InstitutionId=' + (resource1 || '') + '&YearGroup=' + (resource2 || '');
+
+    // Обновление URL и перезагрузка данных таблицы
+    table.ajax.url(newUrl).load(null, false);
+}
+
+
+
+function attachCaretEventListeners() {
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("caret")) {
+            event.stopPropagation();
+            event.target.parentElement.querySelector(".nested").classList.toggle("active");
+            event.target.classList.toggle("caret-down");
+        }
+    });
 }
 
 function initializeProjectThree() {
@@ -241,7 +203,8 @@ function initializeProjectThree() {
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-            buildProjectList(data);    
+            buildProjectList(data);
+            // attachCaretEventListeners() уже вызван и работает через делегирование событий
         }
     });
 }
@@ -262,30 +225,66 @@ function buildProjectList(institutions) {
         institution.YearGroups.forEach(function (yearGroup) {
             var yearTextSpan = $('<span>').text(yearGroup).css('cursor', 'pointer').on('click', function () {
                 DrawProjectDataTable(institution.InstitutionId, yearGroup);
-            });;
+            });
             var yearLi = $('<li>').append(yearTextSpan);
             yearGroupUl.append(yearLi);
         });
 
         instituteLi.append(yearGroupUl);
         ul.append(instituteLi);
-
-
     });
-
 }
 
+function initializeDocumentThree() {
+    $.ajax({
+        url: '../Document/GetAllDocumentsThree',
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            buildDocumentList(data);
+            // attachCaretEventListeners() уже вызван и работает через делегирование событий
+        }
+    });
+}
 
+function buildDocumentList(institutions) {
+    var ul = $('#ThreeDocument');
+    ul.empty();
 
-
-function attachCaretEventListeners() {
-    var toggler = document.getElementsByClassName("caret");
-    for (var i = 0; i < toggler.length; i++) {
-        toggler[i].addEventListener("click", function (event) {
-            event.stopPropagation(); 
-            this.parentElement.querySelector(".nested").classList.toggle("active");
-            this.classList.toggle("caret-down");
+    institutions.forEach(function (institution) {
+        var caretSpan = $('<span>').addClass('caret');
+        var textSpan = $('<span>').text(institution.InstitutionName).css('cursor', 'pointer').on('click', function () {
+            DrawDocumentDataTable(institution.InstitutionName, null, null);
         });
-    }
+
+        var instituteLi = $('<li>').append(caretSpan, textSpan);
+        var yearGroupUl = $('<ul>').addClass('nested');
+
+        institution.YearGroups.forEach(function (yearGroup) {
+            var yearCaretSpan = $('<span>').addClass('caret');
+            var yearTextSpan = $('<span>').text(yearGroup.Year).css('cursor', 'pointer').on('click', function () {
+                DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, null);
+            });
+
+            var yearLi = $('<li>').append(yearCaretSpan, yearTextSpan);
+            var typeUl = $('<ul>').addClass('nested');
+
+            yearGroup.SubTypeNames.forEach(function (typeName) {
+                var typeLi = $('<li>').text(typeName).css('cursor', 'pointer').on('click', function () {
+                    DrawDocumentDataTable(institution.InstitutionName, yearGroup.Year, typeName);
+                });
+                typeUl.append(typeLi);
+            });
+
+            yearLi.append(typeUl);
+            yearGroupUl.append(yearLi);
+        });
+
+        instituteLi.append(yearGroupUl);
+        ul.append(instituteLi);
+    });
 }
+
+// Вызов функции attachCaretEventListeners один раз для всего документа
+attachCaretEventListeners();
 

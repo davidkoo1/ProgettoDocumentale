@@ -7,7 +7,7 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating">
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name", @readonly = "readonly", @disabled = true })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name", @readonly = "readonly", maxlength = "250",  @disabled = true })
                     @Html.LabelFor(model => model.Name)
                 </div>
             </div>

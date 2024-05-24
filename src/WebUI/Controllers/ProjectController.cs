@@ -4,6 +4,8 @@ using BLL.Common.Repository;
 using BLL.DTO.ProjectDTOs;
 using BLL.TableParameters;
 using BLL.UserDTOs;
+using BLL.Validator;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +20,13 @@ namespace WebUI.Controllers
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IInstitutionRepository _institutionRepository;
+        private readonly IValidator<UpsertProjectDto> _upsertProjectDtoValidator;
 
-        public ProjectController(IProjectRepository projectRepository, IInstitutionRepository institutionRepository)
+        public ProjectController(IProjectRepository projectRepository, IInstitutionRepository institutionRepository, IValidator<UpsertProjectDto> upsertProjectDtoValidator)
         {
             _projectRepository = projectRepository;
             _institutionRepository = institutionRepository;
+            _upsertProjectDtoValidator = upsertProjectDtoValidator;
         }
 
         [HttpPost]
@@ -80,9 +84,9 @@ namespace WebUI.Controllers
             {
                 Value = x.Id.ToString(),
                 Text = x.Name,
-                Selected = projectVM != null && 
-                projectVM.InstitutionId != 0 && 
-                projectVM.InstitutionId != null ? 
+                Selected = projectVM != null &&
+                projectVM.InstitutionId != 0 &&
+                projectVM.InstitutionId != null ?
                 x.Id == projectInstitutionId : false
             });
             ViewBag.Institutions = selectListInstitutionsVm;
@@ -110,28 +114,37 @@ namespace WebUI.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                var validationResult = _upsertProjectDtoValidator.Validate(upsertProjectDto);
+                if (!validationResult.IsValid)
                 {
-                    if (upsertProjectDto.Id == 0)
+                    foreach (var failure in validationResult.Errors)
                     {
-                        upsertProjectDto.UserId = User.GetUserId();
-                    }
-                    var result = await _projectRepository.UpsertProject(upsertProjectDto);
-                    if (result)
-                    {
-                        return Json(new { success = true });
-                    }
-                    else
-                    {
-                        TempData["ErrorProject"] = "ErrorUpsertProject";
-                        await PrepareProjectInstitution(upsertProjectDto.Id);
-                        return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
+                        ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
                     }
 
+                    TempData["ErrorProject"] = "ErrorUpsertProject";
+                    await PrepareProjectInstitution(upsertProjectDto.Id);
+                    return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
                 }
-                TempData["ErrorProject"] = "ErrorUpsertProject";
-                await PrepareProjectInstitution(upsertProjectDto.Id);
-                return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
+
+                if (upsertProjectDto.Id == 0)
+                {
+                    upsertProjectDto.UserId = User.GetUserId();
+                }
+                var result = await _projectRepository.UpsertProject(upsertProjectDto);
+                if (result)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    TempData["ErrorProject"] = "ErrorUpsertProject";
+                    await PrepareProjectInstitution(upsertProjectDto.Id);
+                    return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
+                }
+
+
+
             }
             catch (Exception ex)
             {

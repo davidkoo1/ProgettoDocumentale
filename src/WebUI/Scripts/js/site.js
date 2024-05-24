@@ -27,6 +27,9 @@ function handleSubmitButton(formId, reloadDataTableId) {
             if (response.success) {
                 $('#lgModal').modal('hide');
                 $('#' + reloadDataTableId).DataTable().ajax.reload(null, false);
+                if (reloadDataTableId === "ProjectDatatable") {
+                    initializeProjectThree();
+                }
             } else {
                 $('.modal-body').html(response);
                 $('.selectpicker').selectpicker('refresh');
@@ -37,3 +40,8 @@ function handleSubmitButton(formId, reloadDataTableId) {
         }
     });
 }
+
+
+
+
+

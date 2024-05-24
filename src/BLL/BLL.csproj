@@ -136,6 +136,7 @@
     <Compile Include="Validator\LoginDtoValidator.cs" />
     <Compile Include="Validator\UpdateInstitutionDtoValidator.cs" />
     <Compile Include="Validator\UpdateUserDtoValidator.cs" />
+    <Compile Include="Validator\UpsertProjectDtoValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
