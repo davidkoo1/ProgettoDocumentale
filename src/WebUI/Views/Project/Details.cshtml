@@ -1,5 +1,13 @@
 ﻿@model BLL.DTO.ProjectDTOs.ProjectDetailDto
 
+<style>
+    hr.dashed {
+        border-top: 2px dashed #000; /* Задаём черту как пунктирную, толщиной 2px и черного цвета */
+        margin-top: 10px; /* Отступ сверху */
+        margin-bottom: 10px; /* Отступ снизу */
+    }
+</style>
+
 <div class="modal-body">
     <div class="container">
         <h2 class="text-center mb-4">Project Details</h2>
@@ -7,11 +15,11 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-floating">
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name", @readonly = "readonly", maxlength = "250",  @disabled = true })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name", @readonly = "readonly", maxlength = "250", @disabled = true })
                     @Html.LabelFor(model => model.Name)
                 </div>
             </div>
-            <div class="col-md-6 d-flex align-items-center">
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="isActive" disabled @if (Model.IsActive) { <text> checked</text> }>
                     <label class="form-check-label" for="isActive">Active</label>
@@ -19,14 +27,24 @@
             </div>
         </div>
 
+        <hr class="dashed">
+
         <div class="row mb-3">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-floating">
                     @Html.TextBoxFor(model => model.InstitutionName, new { @class = "form-control", @placeholder = "Institution Name", @readonly = "readonly", @disabled = true })
                     @Html.LabelFor(model => model.InstitutionName)
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <textarea id="additionalInfo" rows="3" class="form-control" placeholder="Additional Info" disabled readonly style="height: 150px; resize: none;">@Model.AdditionalInfo</textarea>
+                    <label for="additionalInfo">Additional Info</label>
+                </div>
+            </div>
         </div>
+
+        <hr class="dashed">
 
         <div class="row mb-3">
             <div class="col-md-6">
@@ -43,14 +61,7 @@
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <div class="form-floating">
-                    <textarea id="additionalInfo" rows="3" class="form-control" placeholder="Additional Info" disabled readonly style="resize: none;">@Model.AdditionalInfo</textarea>
-                    <label for="additionalInfo">Additional Info</label>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 
