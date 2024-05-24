@@ -50,5 +50,22 @@ namespace WebUI.Controllers
             }
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult> GetDetails(int id)
+        {
+            try
+            {
+
+                var document = await _documentRepository.GetDocument(id);
+                return PartialView("~/Views/Document/Details.cshtml", document);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+        }
+
     }
 }

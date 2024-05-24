@@ -1,0 +1,73 @@
+﻿@model BLL.DTO.DocumentDTOs.DocumentDetailDto
+
+
+
+<div class="modal-body">
+
+
+
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.File, "File", new { @class = "col-sm-3 form-label" })
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.File, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
+        </div>
+        <br>
+    </div>
+
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.Institution, "Institution", new { @class = "col-sm-3 form-label" })
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.Institution, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
+        </div>
+        <br>
+    </div>
+
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.MacroType, "Macro Type", new { @class = "col-sm-3 form-label" })
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.MacroType, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
+        </div>
+        <br>
+    </div>
+    @if (Model.MacroType != Model.MicroType)
+    {
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.MicroType, "Micro Type", new { @class = "col-sm-3 form-label" })
+            <div class="col-sm-9">
+                @Html.TextBoxFor(model => model.MicroType, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
+            </div>
+            <br>
+        </div>
+    }
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.Project, "Project", new { @class = "col-sm-3 form-label" })
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.Project, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
+        </div>
+        <br>
+    </div>
+
+    <div class="mb-3 row">
+        @Html.LabelFor(model => model.DataGroup, "Data Group", new { @class = "col-sm-3 form-label" })
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.DataGroup, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
+        </div>
+        <br>
+    </div>
+
+    <div class="mb-3 row">
+        <div class="col-md-12">
+            <label for="AdditionalInfo" class="col-md-4 col-form-label">Additional Info</label>
+            <textarea id="AdditionalInfo" rows="3" class="form-control" style="resize: none; max-width: 100% !important; width: 100%;" disabled>@Model.AdditionalInfo</textarea>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Cancel</button>
+</div>

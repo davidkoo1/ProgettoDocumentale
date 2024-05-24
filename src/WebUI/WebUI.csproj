@@ -1116,6 +1116,7 @@
     <Content Include="Scripts\moment.js\moment.min.js.map" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Upsert.cshtml" />
+    <Content Include="Views\Document\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

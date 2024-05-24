@@ -131,6 +131,24 @@ namespace BLL.Common.Repository
             return grouped;
         }
 
+        public async Task<DocumentDetailDto> GetDocument(int Id)
+        {
+            var document = await _dbContext.Documents.Include(x => x.Institution).Include(x => x.Project).Include(x => x.DocumentType).FirstOrDefaultAsync(x => x.Id == Id);
+            var hierarhyId = await _dbContext.DocumentTypeHierarchies.AsNoTracking().FirstOrDefaultAsync(x => x.IdMicro == document.TypeId);
+            var documentMacroType = await _dbContext.DocumentTypes.AsNoTracking().FirstOrDefaultAsync(t => t.Id == hierarhyId.IdMacro);
 
+            return new DocumentDetailDto
+            {
+                File = document.SavedPath,
+                Institution = document.Institution?.Name,
+                MacroType = documentMacroType?.Name,
+                MicroType = document.DocumentType?.Name,
+                Project = document.Project?.Name,
+                DataGroup = document.GroupingDate.ToString("yyyy-MM-dd"),
+                AdditionalInfo = document.AdditionalInfo,
+            };
+
+
+        }
     }
 }

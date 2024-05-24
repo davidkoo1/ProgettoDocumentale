@@ -1,7 +1,6 @@
 ﻿# TODO List
-- ChangeDesignProjectDetailPage
-- ValidationProjectUpsertDto
-- RefreshThreeProject(2bugs - 1 ProjectDataTableParametrs(сделать типо 3 разные таблицы, чтоб не мучатся), 2 - click in threeProject)
+
+ProjectDataTableParametrs(сделать типо 3 разные таблицы, чтоб не мучатся)
 
 
 - Перенести js/Css code со страничек в файлы

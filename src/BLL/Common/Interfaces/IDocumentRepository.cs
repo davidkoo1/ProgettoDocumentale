@@ -10,6 +10,7 @@ namespace BLL.Common.Interfaces
     {
         Task<IEnumerable<DocumentDto>> GetAllDocuments(DataTablesParameters parameters, string resource1, string resource2, string resource3);
         Task<IEnumerable<BuilderDocumentThree>> GetAllThree();
+        Task<DocumentDetailDto> GetDocument(int Id);
         ////Task<IEnumerable<InstitutionDto>> GetInstitutions();
         ////Task<InstitutionDto> GetInstitution(int id);
         ////Task<UpdateInstitutionDto> GetInstitutionForUpdate(int id);
