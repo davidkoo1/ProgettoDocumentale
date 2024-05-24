@@ -52,6 +52,15 @@
 
 
             <div class="mb-3 row">
+                @Html.LabelFor(model => model.GroupingDate, "*Date of grouping", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.GroupingDate, "{0}", new { @type = "date", @class = "form-control", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.GroupingDate, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row">
                 <div class="col-md-12">
                     <label for="AdditionalInfo" class="col-md-4 col-form-label">Additional Info</label>
                     <textarea id="AdditionalInfo" rows="3" class="form-control" style="resize: none; max-width: 100% !important; width: 100%;"></textarea>
