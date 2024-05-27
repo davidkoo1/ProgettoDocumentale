@@ -1,7 +1,14 @@
 ﻿# TODO List
 
 
-Если учиреждение есть - то ищем по ид иначе пуской список(если меняется на пустое значение - также пустой список с проектами)
+//Передовать и выбранное учереждение и его поставить в selected
+        //UserControllerOptimiz
+
+        //!*andUser-emailAlreadyExist
+
+        fix threes(reload+getdata)
+
+SetInitialInCreateDocument
 
 ProjectDataTableParametrs(сделать типо 3 разные таблицы, чтоб не мучатся)
 

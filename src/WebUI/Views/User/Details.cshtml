@@ -14,11 +14,11 @@
 <div class="modal-body">
     <div class="mb-3 row">
         <div class="col-md-6">
-            @Html.LabelFor(model => model.UserName)
+            @Html.LabelFor(model => model.UserName, "User name")
             @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @disabled = true })
         </div>
         <div class="col-md-6">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.Name, "Name")
             @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = true })
         </div>
     </div>
@@ -38,7 +38,7 @@
             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @disabled = true })
         </div>
         <div class="col-md-6">
-            @Html.LabelFor(model => model.IsEnabled)
+            @Html.LabelFor(model => model.IsEnabled, "Enabled")
             <div role="group">
                 <input type="radio" class="btn-check" name="btnradio2" id="btnradio2-1" value="True" autocomplete="off" @(Model.IsEnabled ? "checked" : "") disabled>
                 <label class="btn btn-outline-primary" for="btnradio2-1">Active</label>
@@ -65,7 +65,7 @@
         <hr class="dashed">
         <div class="mb-3 row">
             <div class="col-12">
-                @Html.LabelFor(model => model.InstitutionName, new { @class = "form-label" })
+                @Html.LabelFor(model => model.InstitutionName, "Institution", new { @class = "form-label" })
                 @Html.TextBoxFor(model => model.InstitutionName, new { @class = "form-control", @disabled = true, @style = "max-width: 100% !important; width: 100%;" })
             </div>
         </div>

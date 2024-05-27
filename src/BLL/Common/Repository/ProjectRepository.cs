@@ -40,8 +40,8 @@ namespace BLL.Common.Repository
         {
             IQueryable<Project> query = _dbContext.Projects
                  .Include(x => x.Institution)
-                 .Include(x => x.User);
-                 //.Search(parameters).OrderBy(parameters).Page(parameters);
+                 .Include(x => x.User)
+                 .Search(parameters).OrderBy(parameters).Page(parameters);
 
             if (!string.IsNullOrEmpty(InstitutionId))
             {

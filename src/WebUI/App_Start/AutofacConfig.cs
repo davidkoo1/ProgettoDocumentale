@@ -15,6 +15,7 @@ using BLL.Validator;
 using BLL.UserDTOs;
 using BLL.DTO.InstitutionDTOs;
 using BLL.DTO.ProjectDTOs;
+using BLL.DTO.DocumentDTOs;
 
 namespace WebUI.App_Start
 {
@@ -39,6 +40,8 @@ namespace WebUI.App_Start
             builder.RegisterType<UpdateInstitutionDtoValidator>().As<IValidator<UpdateInstitutionDto>>();
 
             builder.RegisterType<UpsertProjectDtoValidator>().As<IValidator<UpsertProjectDto>>();
+
+            builder.RegisterType<CreateDocumentDtoValidator>().As<IValidator<CreateDocumentDto>>();
 
             var container = builder.Build();
 

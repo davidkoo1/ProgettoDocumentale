@@ -226,7 +226,7 @@ namespace BLL.Common.Repository
                 InstitutionId = model.InstitutionId,
                 UserId = model.UserId,
                 ProjectId = model.ProjectId,
-                TypeId = model.MicroId ?? 1,//Fix
+                TypeId = model.MicroId ?? model.MacroId,
                 AdditionalInfo = model.AdditionalInfo,
                 UploadDate = DateTime.Now,
                 GroupingDate = model.GroupingDate,

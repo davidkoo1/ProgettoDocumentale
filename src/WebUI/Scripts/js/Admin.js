@@ -15,11 +15,11 @@ function initializeInstitutionDataTable() {
         },
         "columns": [
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
-            { "data": "InstCode", "title": "InstCode", "name": "InstCode", "autoWidth": true },
+            { "data": "InstCode", "title": "Code", "name": "InstCode", "autoWidth": true },
             { "data": "Name", "title": "Name", "name": "Name", "autoWidth": true },
             {
                 "data": "AdditionalInfo",
-                "title": "AdditionalInfo",
+                "title": "Additional info",
                 "name": "AdditionalInfo",
                 "autoWidth": true,
                 "render": function (data, type, row) {
@@ -157,11 +157,11 @@ function initializeUserDataTable() {
         },
         "columns": [
             { "data": "Id", "title": "Id", "name": "Id", "visible": false },
-            { "data": "UserName", "title": "UserName", "name": "UserName", "autoWidth": true },
+            { "data": "UserName", "title": "User name", "name": "UserName", "autoWidth": true },
             { "data": "Email", "title": "Email", "name": "Email", "autoWidth": true },
             {
                 "data": "IsEnabled",
-                "title": "IsEnabled",
+                "title": "Enabled",
                 "name": "IsEnabled",
                 "autoWidth": true,
                 "render": function (data, type, row) {

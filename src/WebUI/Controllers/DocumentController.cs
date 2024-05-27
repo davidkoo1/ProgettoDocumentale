@@ -20,11 +20,13 @@ namespace WebUI.Controllers
     {
         private readonly IDocumentRepository _documentRepository;
         private readonly IInstitutionRepository _institutionRepository;
+        private readonly IValidator<CreateDocumentDto> _CreateDocumentDtoValidator;
 
-        public DocumentController(IDocumentRepository documentRepository, IInstitutionRepository institutionRepository)
+        public DocumentController(IDocumentRepository documentRepository, IInstitutionRepository institutionRepository, IValidator<CreateDocumentDto> createDocumentDtoValidator)
         {
             _documentRepository = documentRepository;
             _institutionRepository = institutionRepository;
+            _CreateDocumentDtoValidator = createDocumentDtoValidator;
         }
 
         public ActionResult Index() => View();
@@ -149,18 +151,17 @@ namespace WebUI.Controllers
         {
             try
             {
-                //var validationResult = _upsertProjectDtoValidator.Validate(upsertProjectDto);
-                //if (!validationResult.IsValid)
-                //{
-                //    foreach (var failure in validationResult.Errors)
-                //    {
-                //        ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
-                //    }
+                var validationResult = _CreateDocumentDtoValidator.Validate(createDocumentDto);
+                if (!validationResult.IsValid)
+                {
+                    foreach (var failure in validationResult.Errors)
+                    {
+                        ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+                    }
 
-                //    TempData["ErrorProject"] = "ErrorUpsertProject";
-                //    await PrepareProjectInstitution(upsertProjectDto.Id);
-                //    return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
-                //}
+                    await PrepareViewBags();
+                    return PartialView("~/Views/Document/Create.cshtml", createDocumentDto);
+                }
 
                 //if (upsertProjectDto.Id == 0)
                 //{

@@ -134,6 +134,7 @@
     <Compile Include="TableParameters\DataTablesOrder.cs" />
     <Compile Include="TableParameters\DataTablesParameters.cs" />
     <Compile Include="TableParameters\DataTablesSearch.cs" />
+    <Compile Include="Validator\CreateDocumentDtoValidator.cs" />
     <Compile Include="Validator\CreateInstitutionDtoValidator.cs" />
     <Compile Include="Validator\CreateUserDtoValidator.cs" />
     <Compile Include="Validator\LoginDtoValidator.cs" />

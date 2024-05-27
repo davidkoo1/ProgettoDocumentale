@@ -9,10 +9,10 @@
         @using (Html.BeginForm("Create", "Document", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateDocumentForm", @class = "needs-validation", novalidate = "novalidate" }))
         {
             <div class="mb-3 row">
-                @Html.LabelFor(model => model.File, "Choose File", new { @class = "col-sm-3 form-label" })
+                @Html.LabelFor(model => model.File, "*File", new { @class = "col-sm-3 form-label" })
                 <div class="col-sm-9">
                     @Html.TextBoxFor(model => model.File, new { type = "file", @class = "form-control", @style = "max-width: 100% !important; width: 100%;" })
-                    @Html.ValidationMessageFor(model => model.File)
+                    @Html.ValidationMessageFor(model => model.File, null, new { @class = "text-danger" })
                 </div>
                 <br>
             </div>
@@ -43,6 +43,7 @@
                 @Html.LabelFor(model => model.MicroId, "*MICRO TYPE", new { @class = "col-sm-3 form-label" })
                 <div class="col-sm-9">
                     @Html.DropDownListFor(model => model.MicroId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control selectpicker", data_live_search = "true", @id = "MicroType", @title = "Choose..." })
+                    @Html.ValidationMessageFor(model => model.MicroId, null, new { @class = "text-danger" })
                 </div>
                 <br>
             </div>
@@ -51,6 +52,7 @@
                 @Html.LabelFor(model => model.ProjectId, "*Project", new { @class = "col-sm-3 form-label" })
                 <div class="col-sm-9">
                     @Html.DropDownListFor(model => model.ProjectId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control selectpicker", data_live_search = "true", @id = "ProjectId", @title = "Choose..." })
+                    @Html.ValidationMessageFor(model => model.ProjectId, null, new { @class = "text-danger" })
                 </div>
                 <br>
             </div>
