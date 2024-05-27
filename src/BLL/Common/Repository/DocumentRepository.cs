@@ -2,13 +2,17 @@
 using BLL.Common.Extensions;
 using BLL.Common.Interfaces;
 using BLL.DTO.DocumentDTOs;
+using BLL.DTO.ProjectDTOs;
 using BLL.TableParameters;
 using DAL.Context.Persistance;
 using DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml.Linq;
 
 namespace BLL.Common.Repository
@@ -18,6 +22,7 @@ namespace BLL.Common.Repository
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+
         public DocumentRepository(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
@@ -176,5 +181,65 @@ namespace BLL.Common.Repository
                                                     Name = t.Name,
                                                 }).ToListAsync();
         }
+
+        public async Task<IEnumerable<ProjectDto>> GetProjectsByInstitutionId(int InstitutionId)
+        {
+            return await _dbContext.Projects.Where(x => x.InstitutionId == InstitutionId && x.IsActive).Select(t => new ProjectDto
+            {
+                Id = t.Id,
+                Name = t.Name
+            }).ToListAsync();
+        }
+
+        public async Task<bool> CreateDocument(CreateDocumentDto model)
+        {
+            var fileName = Path.GetFileName(model.File.FileName);
+
+            var filePath = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
+
+            var bankName = _dbContext.Institutions
+                               .Where(x => x.Id == model.InstitutionId)
+                               .Select(x => x.Name)
+                               .FirstOrDefault();
+
+            var year = model.GroupingDate.Year.ToString();
+            var month = model.GroupingDate.ToString("MMMM");
+
+            var pathList = new List<string> { filePath, bankName, year, month };
+            foreach (var path in pathList)
+            {
+                filePath = Path.Combine(filePath, path);
+                if (!Directory.Exists(filePath))
+                    Directory.CreateDirectory(filePath);
+            }
+
+            var documentName = model.File.FileName;
+            filePath = Path.Combine(filePath, documentName);
+
+            using (var destinationStream = new FileStream(filePath, FileMode.Create))
+            {
+                await model.File.InputStream.CopyToAsync(destinationStream);
+            }
+
+            var entity = new Document
+            {
+                InstitutionId = model.InstitutionId,
+                UserId = model.UserId,
+                ProjectId = model.ProjectId,
+                TypeId = model.MicroId ?? 1,//Fix
+                AdditionalInfo = model.AdditionalInfo,
+                UploadDate = DateTime.Now,
+                GroupingDate = model.GroupingDate,
+                Name = documentName,
+                SavedPath = filePath
+            };
+
+            // Сохраните сущность в базе данных
+            _dbContext.Documents.Add(entity);
+
+            return await Save();
+        }
+
+        public async Task<bool> Save() => await _dbContext.SaveChangesAsync() > 0;
     }
 }

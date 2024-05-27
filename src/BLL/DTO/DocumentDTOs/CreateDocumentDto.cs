@@ -16,6 +16,7 @@ namespace BLL.DTO.DocumentDTOs
         public int MacroId { get; set; }
         public int? MicroId { get; set; }
         public int? ProjectId { get; set; }
+        public int UserId { get; set; }
     }
 
 }

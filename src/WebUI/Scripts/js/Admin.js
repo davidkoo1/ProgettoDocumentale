@@ -94,9 +94,8 @@ function SetInstitution() {
     }
 }
 
-function RoleChangeForInstitution() {
+function RoleChangeForInstitution(UserId) {
     var selectedValues = $(this).val();
-
     if (!selectedValues.includes("3")) {
         $('#AdditionalSelect').empty();
         $('#additionalSelectRow').hide();
@@ -105,7 +104,7 @@ function RoleChangeForInstitution() {
         $.ajax({
             url: '../User/PrepareUserInstitution',
             type: 'POST',
-            data: { userid: '@Model.Id' }, // Assuming you have the user ID available in your model
+            data: { userid: UserId },
             success: function (response) {
                 $('#AdditionalSelect').empty();
 

@@ -3,16 +3,21 @@
 <div class="modal-body">
     <div class="container">
         <h2 class="text-center mb-4">Add Document</h2>
-        @using (Html.BeginForm("Create", "Document", FormMethod.Post, new { id = "CreateDocumentForm", @class = "needs-validation", novalidate = "novalidate" }))
-        {
 
+
+
+        @using (Html.BeginForm("Create", "Document", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateDocumentForm", @class = "needs-validation", novalidate = "novalidate" }))
+        {
             <div class="mb-3 row">
-                @Html.LabelFor(model => model.File, "*File", new { @class = "col-sm-3 form-label" })
+                @Html.LabelFor(model => model.File, "Choose File", new { @class = "col-sm-3 form-label" })
                 <div class="col-sm-9">
-                    <input type="file" name="File" class="form-control" style="max-width: 100% !important; width: 100%;" />
+                    @Html.TextBoxFor(model => model.File, new { type = "file", @class = "form-control", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.File)
                 </div>
                 <br>
             </div>
+
+
 
 
             <div class="mb-3 row">
@@ -67,54 +72,73 @@
                 </div>
             </div>
 
+
         }
 
+
     </div>
-</div>
+            </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#CreateDocumentForm', 'DocumentDatatable')">Save</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 </div>
 
 <script type="text/javascript">
+
     $(document).ready(function () {
+
         $('.selectpicker').selectpicker();
 
+
         $('#MacroId').change(SetMicroType);
+        $('#InstitutionId').change(SetMicroType);
     });
 
     function SetMicroType() {
         var macroId = $('#MacroId').val();
+        var institutionId = $('#InstitutionId').val();
+        var projectSelect = $('#ProjectId');
 
+
+        if (macroId === "") {
+            return;
+        }
 
         if (macroId === "2") {
             $('#MicroTypeRow').hide();
+        } else {
+            $('#MicroTypeRow').show();
         }
-        if (macroId === "1") {
+
+        if (macroId !== "3") {
             $('#ProjectRow').hide();
+        } else {
+            $('#ProjectRow').show();
+            if (institutionId === "") {
+                projectSelect.empty().append('<option value="">Choose...</option>').prop('disabled', true);
+            } else {
+                projectSelect.prop('disabled', false);
+            }
         }
 
         if (macroId === "3") {
             $.ajax({
-                url: '/Document/GetProjectsByInstitutionId',
+                url: '/Document/GetProjectsByInstitution',
                 type: 'POST',
-                data: { InstitutionId: InstitutionId },
+                data: { InstitutionId: institutionId },
                 success: function (response) {
-                    $('#ProjectId').empty();
-
+                    projectSelect.empty();
                     $.each(response, function (index, item) {
-                        $('#ProjectId').append($('<option>', {
+                        projectSelect.append($('<option>', {
                             value: item.Value,
                             text: item.Text
                         }));
                     });
-
                     $('.selectpicker').selectpicker('refresh');
                     $('#ProjectRow').show();
                 }
             });
         }
-
 
         if (macroId !== "2") {
             $.ajax({
@@ -122,20 +146,19 @@
                 type: 'POST',
                 data: { macroId: macroId },
                 success: function (response) {
-                    $('#MicroType').empty();
-
+                    var microTypeSelect = $('#MicroType');
+                    microTypeSelect.empty();
                     $.each(response, function (index, item) {
-                        $('#MicroType').append($('<option>', {
+                        microTypeSelect.append($('<option>', {
                             value: item.Value,
                             text: item.Text
                         }));
                     });
-
                     $('.selectpicker').selectpicker('refresh');
                     $('#MicroTypeRow').show();
                 }
             });
         }
-
     }
+
 </script>

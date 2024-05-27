@@ -17,12 +17,16 @@
 
 function handleSubmitButton(formId, reloadDataTableId) {
     var $form = $(formId);
-    if ($form.length === 0) return; // Проверяем, существует ли форма
+    if ($form.length === 0) return; // Check if the form exists
+
+    var formData = new FormData($form[0]); // Create FormData object from form
 
     $.ajax({
         type: $form.attr('method'),
         url: $form.attr('action'),
-        data: $form.serialize(),
+        data: formData, // Use FormData object as the data
+        processData: false, // Prevent jQuery from processing the data
+        contentType: false, // Prevent jQuery from setting the content type
         success: function (response) {
             if (response.success) {
                 $('#lgModal').modal('hide');
@@ -36,10 +40,11 @@ function handleSubmitButton(formId, reloadDataTableId) {
             }
         },
         error: function (xhr, status, error) {
-            alert("Произошла ошибка: " + error);
+            alert("An error occurred: " + error);
         }
     });
 }
+
 
 
 

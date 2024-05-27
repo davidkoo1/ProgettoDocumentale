@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using BLL.DTO.DocumentDTOs;
 using System.Collections.Generic;
 using System.Linq;
+using BLL.Common.Extensions;
+using BLL.DTO.ProjectDTOs;
+using BLL.Validator;
 
 namespace WebUI.Controllers
 {
@@ -108,6 +111,19 @@ namespace WebUI.Controllers
             return Json(selectListMicroTypesVm);
         }
 
+        [HttpPost]
+        public async Task<JsonResult> GetProjectsByInstitution(int InstitutionId)
+        {
+            var result = await _documentRepository.GetProjectsByInstitutionId(InstitutionId);
+            var selectListProjectsVm = result.Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = false
+            });
+            return Json(selectListProjectsVm);
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetCreate()
         {
@@ -126,6 +142,52 @@ namespace WebUI.Controllers
 
         }
 
+
+
+        [HttpPost]
+        public async Task<ActionResult> Create(CreateDocumentDto createDocumentDto)
+        {
+            try
+            {
+                //var validationResult = _upsertProjectDtoValidator.Validate(upsertProjectDto);
+                //if (!validationResult.IsValid)
+                //{
+                //    foreach (var failure in validationResult.Errors)
+                //    {
+                //        ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+                //    }
+
+                //    TempData["ErrorProject"] = "ErrorUpsertProject";
+                //    await PrepareProjectInstitution(upsertProjectDto.Id);
+                //    return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
+                //}
+
+                //if (upsertProjectDto.Id == 0)
+                //{
+                //    upsertProjectDto.UserId = User.GetUserId();
+                //}
+                createDocumentDto.UserId = User.GetUserId();
+                var result = await _documentRepository.CreateDocument(createDocumentDto);
+                return Json(new { success = true });
+                //if (result)
+                //{
+                //    return Json(new { success = true });
+                //}
+                //else
+                //{
+                //    TempData["ErrorProject"] = "ErrorUpsertProject";
+                //    await PrepareProjectInstitution(upsertProjectDto.Id);
+                //    return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
+                //}
+
+
+
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+        }
 
     }
 }

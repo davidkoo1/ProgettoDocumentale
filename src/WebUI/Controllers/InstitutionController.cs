@@ -55,14 +55,14 @@ namespace WebUI.Controllers
 
 
         [HttpPost]
-        public async Task<JsonResult> GetInstitutions()
+        public async Task<JsonResult> GetInstitutions(int? InstitutionId)
         {
             var institutions = await _institutionRepository.GetInstitutions();
             var selectListinstitutionsVm = institutions.Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Name,
-                Selected = false
+                Selected = x.Id == InstitutionId
             });
             ViewBag.Institutions = selectListinstitutionsVm;
             return Json(selectListinstitutionsVm);

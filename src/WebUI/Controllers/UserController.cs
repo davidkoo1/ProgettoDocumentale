@@ -99,19 +99,33 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<JsonResult> PrepareUserInstitution(int userid)
         {
-
-            var userVM = await _userRepository.GetUser(userid);
-            var userInstitutionId = userVM.InstitutionId;
-            var institutions = await _institutionRepository.GetInstitutions();
-            var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+            if (userid != 0)
             {
-                Value = x.Id.ToString(),
-                Text = x.Name,
-                Selected = userVM != null && userVM.InstitutionId != 0 && userVM.InstitutionId != null ? x.Id == userInstitutionId : false
-            });
-            ViewBag.Institutions = selectListInstitutionsVm;
+                var userVM = await _userRepository.GetUser(userid);
+                var userInstitutionId = userVM.InstitutionId;
+                var institutions = await _institutionRepository.GetInstitutions();
+                var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = userVM != null && userVM.InstitutionId != 0 && userVM.InstitutionId != null ? x.Id == userInstitutionId : false
+                });
+                ViewBag.Institutions = selectListInstitutionsVm;
 
-            return Json(selectListInstitutionsVm);
+                return Json(selectListInstitutionsVm);
+            }
+            else
+            {
+                var institutions = await _institutionRepository.GetInstitutions();
+                var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = false
+                });
+                ViewBag.Institutions = selectListInstitutionsVm;
+                return Json(selectListInstitutionsVm);
+            }
         }
         [HttpGet]
         public async Task<ActionResult> GetCreate()
@@ -121,6 +135,14 @@ namespace WebUI.Controllers
                 //var userVm = await _userRepository.GetUser(id);
 
                 await PrepareUserRoles(null);
+                var institutions = await _institutionRepository.GetInstitutions();
+                var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = false
+                });
+                ViewBag.Institutions = selectListInstitutionsVm;
                 return PartialView("~/Views/User/Create.cshtml");
             }
             catch (Exception ex)
@@ -146,6 +168,14 @@ namespace WebUI.Controllers
 
                     TempData["ErrorUser"] = "ErrorUser";
                     await PrepareUserRoles(null);
+                    var institutions = await _institutionRepository.GetInstitutions();
+                    var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+                    {
+                        Value = x.Id.ToString(),
+                        Text = x.Name,
+                        Selected = false
+                    });
+                    ViewBag.Institutions = selectListInstitutionsVm;
                     return PartialView("~/Views/User/Create.cshtml", createUser);
                 }
 
@@ -159,6 +189,14 @@ namespace WebUI.Controllers
                 {
                     TempData["ErrorUser"] = "ErrorUser";
                     await PrepareUserRoles(null);
+                    var institutions = await _institutionRepository.GetInstitutions();
+                    var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+                    {
+                        Value = x.Id.ToString(),
+                        Text = x.Name,
+                        Selected = false
+                    });
+                    ViewBag.Institutions = selectListInstitutionsVm;
                     return PartialView("~/Views/User/Create.cshtml", createUser);
                 }
 

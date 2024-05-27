@@ -12,7 +12,6 @@
     <div class="modal-body">
         @Html.AntiForgeryToken()
 
-
         <div class="mb-3 row">
             @Html.LabelFor(model => model.UserName, "*User Name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
@@ -76,14 +75,12 @@
                 @Html.ValidationMessageFor(model => model.RolesId, null, new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="mb-3 row" id="additionalSelectRow" style="display: none;">
+        <div class="mb-3 row" id="additionalSelectRow" @*style="display: none;"*@>
             @Html.LabelFor(model => model.IdInstitution, "Institutions", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.DropDownListFor(model => model.IdInstitution, Enumerable.Empty<SelectListItem>(), new { @class = "form-control selectpicker", data_live_search = "true", @id = "AdditionalSelect", @title = "Choose..." })
+                @Html.DropDownListFor(model => model.IdInstitution, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "AdditionalSelect", @title = "Choose..." })
             </div>
         </div>
-
 
     </div>
 
@@ -97,6 +94,15 @@
     $(document).ready(function () {
         $('.selectpicker').selectpicker();
 
-        $('#rolesSelect').change(SetInstitution);
+        RoleChangeForInstitution.bind($('#rolesSelect'), '0')();
+        //Передовать и выбранное учереждение и его поставить в selected
+        //Сделать в Edit
+        //LabelName change
+        //UserControllerOptimiz
+
+        //!*DocumentCreate+Validation(andUser-emailAlreadyExist)
+        $('#rolesSelect').change(RoleChangeForInstitution.bind($('#rolesSelect'), '0'));
+
     });
+
 </script>

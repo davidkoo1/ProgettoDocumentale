@@ -96,41 +96,9 @@
     $(document).ready(function () {
         $('.selectpicker').selectpicker();
 
-        RoleChangeForInstitution.call($('#rolesSelect'));
+        RoleChangeForInstitution.bind($('#rolesSelect'), '@Model.Id')();
 
-        $('#rolesSelect').change(RoleChangeForInstitution);
+        $('#rolesSelect').change(RoleChangeForInstitution.bind($('#rolesSelect'), '@Model.Id'));
 
-        function RoleChangeForInstitution() {
-            var selectedValues = $(this).val();
-
-            if (!selectedValues.includes("3")) {
-                $('#AdditionalSelect').empty();
-                $('#additionalSelectRow').hide();
-            }
-            else {
-                $.ajax({
-                        url: '../User/PrepareUserInstitution',
-                        type: 'POST',
-                        data: { userid: '@Model.Id' }, // Assuming you have the user ID available in your model
-                        success: function (response) {
-                            $('#AdditionalSelect').empty();
-
-                            $.each(response, function (index, item) {
-                                $('#AdditionalSelect').append($('<option>', {
-                                    value: item.Value,
-                                    text: item.Text,
-                                    selected: item.Selected
-                                }));
-                            });
-
-                            $('.selectpicker').selectpicker('refresh');
-                            $('#additionalSelectRow').show();
-                        },
-                        error: function (error) {
-                            console.error('AJAX error:', error);
-                        }
-                    });
-            }
-        }
     });
 </script>
