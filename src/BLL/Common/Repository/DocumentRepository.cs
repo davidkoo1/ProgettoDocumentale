@@ -34,6 +34,7 @@ namespace BLL.Common.Repository
             IQueryable<Document> query = _dbContext.Documents
                 .Include(x => x.Institution)
                 .Include(x => x.DocumentType)
+                .Include(x => x.Project)
                 .Search(parameters).OrderBy(parameters).Page(parameters);
 
             if (!string.IsNullOrEmpty(resource1))
@@ -64,10 +65,9 @@ namespace BLL.Common.Repository
                 }
             }
 
-            // Materialize query result
+
             var documents = await query.ToListAsync();
 
-            // Process each document to create DocumentDto
             var documentDtos = new List<DocumentDto>();
             foreach (var x in documents)
             {
@@ -80,12 +80,14 @@ namespace BLL.Common.Repository
                     UploadDate = x.UploadDate,
                     AdditionalInfo = x.AdditionalInfo,
                     GroupingDate = x.GroupingDate,
-                    InstitutionId = x.Institution.Name,
-                    TypeId = typeName
+                    InstitutionId = x.Institution?.Name, 
+                    TypeId = typeName,
+                    ProjectId = x.Project?.Name ?? " " 
                 });
             }
 
             return documentDtos;
+
         }
 
         private async Task<string> GetFullDocumentTypeName(DocumentType documentType)
@@ -144,7 +146,7 @@ namespace BLL.Common.Repository
 
             return new DocumentDetailDto
             {
-                File = document.SavedPath,
+                Name = document.Name,
                 Institution = document.Institution?.Name,
                 MacroType = documentMacroType?.Name,
                 MicroType = document.DocumentType?.Name,
@@ -194,18 +196,22 @@ namespace BLL.Common.Repository
         public async Task<bool> CreateDocument(CreateDocumentDto model)
         {
             var fileName = Path.GetFileName(model.File.FileName);
+            var fileExtension = Path.GetExtension(fileName);
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
 
-            var filePath = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
+            var baseFilePath = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
 
             var bankName = _dbContext.Institutions
-                               .Where(x => x.Id == model.InstitutionId)
-                               .Select(x => x.Name)
-                               .FirstOrDefault();
+                .Where(x => x.Id == model.InstitutionId)
+                .Select(x => x.Name)
+                .FirstOrDefault();
 
             var year = model.GroupingDate.Year.ToString();
             var month = model.GroupingDate.ToString("MMMM");
 
-            var pathList = new List<string> { filePath, bankName, year, month };
+            var pathList = new List<string> { baseFilePath, bankName, year, month };
+            var filePath = baseFilePath;
+
             foreach (var path in pathList)
             {
                 filePath = Path.Combine(filePath, path);
@@ -213,10 +219,18 @@ namespace BLL.Common.Repository
                     Directory.CreateDirectory(filePath);
             }
 
-            var documentName = model.File.FileName;
-            filePath = Path.Combine(filePath, documentName);
+            var documentName = fileName;
+            var finalPath = Path.Combine(filePath, documentName);
+            var count = 1;
 
-            using (var destinationStream = new FileStream(filePath, FileMode.Create))
+            while (File.Exists(finalPath))
+            {
+                documentName = $"{fileNameWithoutExtension}({count}){fileExtension}";
+                finalPath = Path.Combine(filePath, documentName);
+                count++;
+            }
+
+            using (var destinationStream = new FileStream(finalPath, FileMode.Create))
             {
                 await model.File.InputStream.CopyToAsync(destinationStream);
             }
@@ -231,14 +245,14 @@ namespace BLL.Common.Repository
                 UploadDate = DateTime.Now,
                 GroupingDate = model.GroupingDate,
                 Name = documentName,
-                SavedPath = filePath
+                SavedPath = finalPath
             };
 
-            // Сохраните сущность в базе данных
             _dbContext.Documents.Add(entity);
 
             return await Save();
         }
+
 
         public async Task<bool> Save() => await _dbContext.SaveChangesAsync() > 0;
     }

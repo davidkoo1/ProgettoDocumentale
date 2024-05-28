@@ -17,5 +17,6 @@ namespace BLL.DTO.DocumentDTOs
 
         public string InstitutionId { get; set; }
         public string TypeId { get; set; }
+        public string ProjectId { get; set; }
     }
 }

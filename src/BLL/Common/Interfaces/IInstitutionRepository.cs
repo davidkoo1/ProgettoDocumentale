@@ -17,6 +17,9 @@ namespace BLL.Common.Interfaces
         Task<IEnumerable<InstitutionDto>> GetInstitutions();
         Task<InstitutionDto> GetInstitution(int id);
         Task<UpdateInstitutionDto> GetInstitutionForUpdate(int id);
+
+        Task<bool> IsCodeInUseAsync(string code); //OnlyForFluentValidation
+
         Task<bool> Add(CreateInstitutionDto institutionToCreateDto);
         Task<bool> Update(UpdateInstitutionDto institutionToUpdateDto);
         Task<bool> Delete(int institutionId);

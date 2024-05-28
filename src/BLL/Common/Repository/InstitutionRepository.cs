@@ -13,6 +13,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace BLL.Common.Repository
 {
@@ -76,5 +77,7 @@ namespace BLL.Common.Repository
         }
 
         public async Task<UpdateInstitutionDto> GetInstitutionForUpdate(int id) => _mapper.Map<UpdateInstitutionDto>(await _dbContext.Institutions.FirstOrDefaultAsync(x => x.Id == id));
+
+        public async Task<bool> IsCodeInUseAsync(string code) => await _dbContext.Institutions.AnyAsync(u => u.InstCode.Equals(code));
     }
 }

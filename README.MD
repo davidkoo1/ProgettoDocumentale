@@ -4,8 +4,6 @@
 //Передовать и выбранное учереждение и его поставить в selected
         //UserControllerOptimiz
 
-        //!*andUser-emailAlreadyExist
-
         thenIgetDataFromThree-useId
 
 ProjectDataTableParametrs(сделать типо 3 разные таблицы, чтоб не мучатся)

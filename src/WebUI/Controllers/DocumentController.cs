@@ -131,7 +131,6 @@ namespace WebUI.Controllers
         {
             try
             {
-                //var userVm = await _userRepository.GetUser(id);
 
                 await PrepareViewBags();
                 return PartialView("~/Views/Document/Create.cshtml");
@@ -169,17 +168,16 @@ namespace WebUI.Controllers
                 //}
                 createDocumentDto.UserId = User.GetUserId();
                 var result = await _documentRepository.CreateDocument(createDocumentDto);
-                return Json(new { success = true });
-                //if (result)
-                //{
-                //    return Json(new { success = true });
-                //}
-                //else
-                //{
-                //    TempData["ErrorProject"] = "ErrorUpsertProject";
-                //    await PrepareProjectInstitution(upsertProjectDto.Id);
-                //    return PartialView("~/Views/Project/Upsert.cshtml", upsertProjectDto);
-                //}
+                if (result)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    TempData["ErrorDocument"] = "ErrorCreateDocument";
+                    await PrepareViewBags();
+                    return PartialView("~/Views/Document/Create.cshtml");
+                }
 
 
 

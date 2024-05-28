@@ -36,7 +36,7 @@ namespace BLL.Validator
                 RuleFor(x => x.ProjectId)
                     .NotNull()
                     .NotEmpty()
-                    .WithMessage("ProjectId is required when MacroId is 3");
+                    .WithMessage("Project is required when select this Macro");
             });
 
 

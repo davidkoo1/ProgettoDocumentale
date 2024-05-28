@@ -25,7 +25,8 @@ function initializeDocumentDataTable() {
                     return moment(data).format('DD/MM/YYYY'); // Формат даты
                 }
             },
-            { "data": "InstitutionId", "title": "Institution", "name": "InstitutionId", "autoWidth": true }
+            { "data": "InstitutionId", "title": "Institution", "name": "InstitutionId", "autoWidth": true },
+            { "data": "ProjectId", "title": "Project", "name": "ProjectId", "autoWidth": true }
         ],
         columnDefs: [
             { className: 'text-center', targets: [3] },
