@@ -33,7 +33,7 @@ namespace WebUI.Controllers
             if (!User.Identity.IsAuthenticated)
                 return View();
             else
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(DocumentController.Index), "Document");
         }
 
         [HttpPost]

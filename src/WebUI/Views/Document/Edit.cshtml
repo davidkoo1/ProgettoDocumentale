@@ -40,24 +40,7 @@
                 <br>
             </div>
 
-            @*<div class="mb-3 row" id="MicroTypeRow" style="display: @(Model.MicroId != Model.MacroId ? "block" : "none");">
-                @Html.LabelFor(model => model.MicroId, "*MICRO TYPE", new { @class = "col-sm-3 form-label" })
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(model => model.MicroId, new SelectList(ViewBag.MicroTypes, "Value", "Text"), new { @class = "form-control selectpicker", @id = "MicroType", @title = "Choose..." })
-                    @Html.ValidationMessageFor(model => model.MicroId, null, new { @class = "text-danger" })
-                </div>
-                <br>
-            </div>
 
-
-            <div class="mb-3 row" id="ProjectRow" style="display: @(Model.ProjectId != null ? "block" : "none");">
-                @Html.LabelFor(model => model.ProjectId, "*Project", new { @class = "col-sm-3 form-label" })
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(model => model.ProjectId, new SelectList(ViewBag.Projects, "Value", "Text"), new { @class = "form-control selectpicker", @id = "ProjectId", @title = "Choose..." })
-                    @Html.ValidationMessageFor(model => model.ProjectId, null, new { @class = "text-danger" })
-                </div>
-                <br>
-            </div>*@
 
             <div class="mb-3 row @(Model.MicroId != Model.MacroId ? "" : "d-none")" id="MicroTypeRow">
                 @Html.LabelFor(model => model.MicroId, "*MICRO TYPE", new { @class = "col-sm-3 form-label" })

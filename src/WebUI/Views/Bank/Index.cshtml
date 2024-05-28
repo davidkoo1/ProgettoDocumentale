@@ -1,0 +1,44 @@
+﻿
+<div class="" id="cedacriContent">
+    <h3>Bank Operator</h3>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+            <button class="nav-link active" id="nav-service-tab" data-bs-toggle="tab" data-bs-target="#nav-service" type="button" role="tab" aria-controls="nav-service" aria-selected="true">
+                <h5>Service Reports</h5>
+            </button>
+
+            <button class="nav-link" id="nav-sla-tab" data-bs-toggle="tab" data-bs-target="#nav-sla" type="button" role="tab" aria-controls="nav-sla" aria-selected="false">
+                <h5>SLA Report</h5>
+            </button>
+
+            <button class="nav-link" id="nav-design-tab" data-bs-toggle="tab" data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design" aria-selected="false">
+                <h5>Projects</h5>
+            </button>
+
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab" tabindex="0">
+            <div style="width:100%; margin:0 auto;">
+                @Html.Partial("_ServiceReports")
+            </div>
+        </div>
+
+
+
+        <div class="tab-pane fade" id="nav-sla" role="tabpanel" aria-labelledby="nav-sla-tab" tabindex="0">
+            <div style="width:100%; margin:0 auto;">
+                @Html.Partial("_SLAReports")
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="nav-design" role="tabpanel" aria-labelledby="nav-design-tab" tabindex="0">
+            <div style="width:100%; margin:0 auto;">
+                @Html.Partial("_Projects")
+            </div>
+        </div>
+
+    </div>
+</div>
