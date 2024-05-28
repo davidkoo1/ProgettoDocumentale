@@ -268,7 +268,6 @@ namespace BLL.Common.Repository
             document.GroupingDate = updateDocumentDto.GroupingDate;
             document.AdditionalInfo = updateDocumentDto.AdditionalInfo;
             document.ProjectId = updateDocumentDto.ProjectId;
-            document.UserId = 1;
 
             _dbContext.Documents.AddOrUpdate(document);
 

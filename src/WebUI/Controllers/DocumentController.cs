@@ -254,5 +254,49 @@ namespace WebUI.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<ActionResult> Edit(int documentId, UpdateDocumentDto updateDocumentDto)
+        {
+            try
+            {
+                //var validationResult = _CreateDocumentDtoValidator.Validate(createDocumentDto);
+                //if (!validationResult.IsValid)
+                //{
+                //    foreach (var failure in validationResult.Errors)
+                //    {
+                //        ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+                //    }
+
+                //    await PrepareViewBags();
+                //    return PartialView("~/Views/Document/Create.cshtml", createDocumentDto);
+                //}
+
+                //if (upsertProjectDto.Id == 0)
+                //{
+                //    upsertProjectDto.UserId = User.GetUserId();
+                //}
+                //createDocumentDto.UserId = User.GetUserId();
+                updateDocumentDto.Id = documentId;
+                var result = await _documentRepository.Update(updateDocumentDto);
+                if (result)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    TempData["ErrorDocument"] = "ErrorCreateDocument";
+                    await PrepareViewBags();
+                    return PartialView("~/Views/Document/Create.cshtml");
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+        }
+
     }
 }

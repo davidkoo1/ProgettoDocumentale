@@ -1,12 +1,14 @@
 ﻿@model BLL.DTO.DocumentDTOs.UpdateDocumentDto
+@{
 
+}
 <div class="modal-body">
     <div class="container">
         <h2 class="text-center mb-4">Update Document</h2>
 
 
 
-        @using (Html.BeginForm("Edit", "Document", FormMethod.Post, new { enctype = "multipart/form-data", id = "UpdateDocumentForm", @class = "needs-validation", novalidate = "novalidate" }))
+        @using (Html.BeginForm("Edit", "Document", new { documentId = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data", id = "UpdateDocumentForm", @class = "needs-validation", novalidate = "novalidate" }))
         {
             <div class="mb-3 row">
                 @Html.LabelFor(model => model.Name, "*File", new { @class = "col-sm-3 form-label" })
@@ -38,23 +40,43 @@
                 <br>
             </div>
 
-            <div class="mb-3 row" id="MicroTypeRow" hidden="@(!(Model.MacroId != Model.MicroId))">
+            @*<div class="mb-3 row" id="MicroTypeRow" style="display: @(Model.MicroId != Model.MacroId ? "block" : "none");">
                 @Html.LabelFor(model => model.MicroId, "*MICRO TYPE", new { @class = "col-sm-3 form-label" })
                 <div class="col-sm-9">
-                    @Html.DropDownListFor(model => model.MicroId, new SelectList(ViewBag.MicroTypes, "Value", "Text"), new { @class = "form-control selectpicker", @id = "MicroType", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.DropDownListFor(model => model.MicroId, new SelectList(ViewBag.MicroTypes, "Value", "Text"), new { @class = "form-control selectpicker", @id = "MicroType", @title = "Choose..." })
                     @Html.ValidationMessageFor(model => model.MicroId, null, new { @class = "text-danger" })
                 </div>
                 <br>
             </div>
 
-            <div class="mb-3 row" id="ProjectRow" hidden="@(!(Model.ProjectId != null))">
+
+            <div class="mb-3 row" id="ProjectRow" style="display: @(Model.ProjectId != null ? "block" : "none");">
                 @Html.LabelFor(model => model.ProjectId, "*Project", new { @class = "col-sm-3 form-label" })
                 <div class="col-sm-9">
-                    @Html.DropDownListFor(model => model.ProjectId, new SelectList(ViewBag.Projects, "Value", "Text"), new { @class = "form-control selectpicker", @id = "ProjectId", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.DropDownListFor(model => model.ProjectId, new SelectList(ViewBag.Projects, "Value", "Text"), new { @class = "form-control selectpicker", @id = "ProjectId", @title = "Choose..." })
+                    @Html.ValidationMessageFor(model => model.ProjectId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>*@
+
+            <div class="mb-3 row @(Model.MicroId != Model.MacroId ? "" : "d-none")" id="MicroTypeRow">
+                @Html.LabelFor(model => model.MicroId, "*MICRO TYPE", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.MicroId, new SelectList(ViewBag.MicroTypes, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true", @id = "MicroType", @title = "Choose..." })
+                    @Html.ValidationMessageFor(model => model.MicroId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row @(Model.ProjectId != null ? "" : "d-none")" id="ProjectRow">
+                @Html.LabelFor(model => model.ProjectId, "*Project", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.ProjectId, new SelectList(ViewBag.Projects, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true", @id = "ProjectId", @title = "Choose..." })
                     @Html.ValidationMessageFor(model => model.ProjectId, null, new { @class = "text-danger" })
                 </div>
                 <br>
             </div>
+
 
 
             <div class="mb-3 row">
