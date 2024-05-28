@@ -139,6 +139,7 @@
     <Compile Include="Validator\CreateInstitutionDtoValidator.cs" />
     <Compile Include="Validator\CreateUserDtoValidator.cs" />
     <Compile Include="Validator\LoginDtoValidator.cs" />
+    <Compile Include="Validator\UpdateDocumentDtoValidator.cs" />
     <Compile Include="Validator\UpdateInstitutionDtoValidator.cs" />
     <Compile Include="Validator\UpdateUserDtoValidator.cs" />
     <Compile Include="Validator\UpsertProjectDtoValidator.cs" />

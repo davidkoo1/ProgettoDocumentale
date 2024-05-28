@@ -43,6 +43,7 @@ namespace BLL
             builder.RegisterType<UpsertProjectDtoValidator>().As<IValidator<UpsertProjectDto>>();
 
             builder.RegisterType<CreateDocumentDtoValidator>().As<IValidator<CreateDocumentDto>>();
+            builder.RegisterType<UpdateDocumentDtoValidator>().As<IValidator<UpdateDocumentDto>>();
 
             // AutoMapper Configuration and Registration
             var mapperConfiguration = new MapperConfiguration(cfg =>
