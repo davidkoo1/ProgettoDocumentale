@@ -188,5 +188,71 @@ namespace WebUI.Controllers
             }
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult> GetEdit(int id)
+        {
+            try
+            {
+                var updateDocumentVm = await _documentRepository.GetUpdateDocument(id);
+
+                var DocumentInstitutionId = updateDocumentVm.InstitutionId;
+                var DocumentMacroId = updateDocumentVm.MacroId;
+                var DocumentMicroId = updateDocumentVm.MicroId;
+                var DocumentProjectId = updateDocumentVm.ProjectId;
+
+
+                var institutions = await _institutionRepository.GetInstitutions();
+                var selectListInstitutionsVm = institutions.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = updateDocumentVm.InstitutionId != 0 ? x.Id == DocumentInstitutionId : false
+                });
+                ViewBag.Institutions = selectListInstitutionsVm;
+
+
+                var MacroTypes = await _documentRepository.GetMacroDocumentType();
+                var selectListMacroTypeVm = MacroTypes.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = updateDocumentVm.MacroId != 0 ? x.Id == DocumentMacroId : false
+                });
+                ViewBag.MacroTypes = selectListMacroTypeVm;
+
+
+                var MicroTypes = await _documentRepository.GetMicroTypesByMacroId(DocumentMacroId);
+                var selectListMicroTypeVm = MicroTypes.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = updateDocumentVm.MicroId != 0 ? x.Id == DocumentMicroId : false
+                });
+                ViewBag.MicroTypes = selectListMicroTypeVm;
+
+
+                var projects = await _documentRepository.GetProjectsByInstitutionId(DocumentInstitutionId);
+                var selectListProjectsVm = projects.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = updateDocumentVm.MacroId != 3 ? x.Id == DocumentProjectId : false
+                });
+                ViewBag.Projects = selectListProjectsVm;
+
+
+
+                return PartialView("~/Views/Document/Edit.cshtml", updateDocumentVm);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+
+        }
+
+
     }
 }

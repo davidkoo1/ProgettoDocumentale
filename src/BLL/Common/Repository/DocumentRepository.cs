@@ -9,8 +9,10 @@ using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
@@ -184,7 +186,7 @@ namespace BLL.Common.Repository
                                                 }).ToListAsync();
         }
 
-        public async Task<IEnumerable<ProjectDto>> GetProjectsByInstitutionId(int InstitutionId)
+        public async Task<IEnumerable<ProjectDto>> GetProjectsByInstitutionId(int? InstitutionId)
         {
             return await _dbContext.Projects.Where(x => x.InstitutionId == InstitutionId && x.IsActive).Select(t => new ProjectDto
             {
@@ -255,5 +257,61 @@ namespace BLL.Common.Repository
 
 
         public async Task<bool> Save() => await _dbContext.SaveChangesAsync() > 0;
+
+        public async Task<bool> Update(UpdateDocumentDto updateDocumentDto)
+        {
+            var document = await _dbContext.Documents
+                    .FirstAsync(x => x.Id == updateDocumentDto.Id);
+
+            document.InstitutionId = updateDocumentDto.InstitutionId;
+            document.TypeId = updateDocumentDto.MicroId ?? updateDocumentDto.MacroId;
+            document.GroupingDate = updateDocumentDto.GroupingDate;
+            document.AdditionalInfo = updateDocumentDto.AdditionalInfo;
+            document.ProjectId = updateDocumentDto.ProjectId;
+            document.UserId = 1;
+
+            _dbContext.Documents.AddOrUpdate(document);
+
+            return await Save();
+           // await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<UpdateDocumentDto> GetUpdateDocument(int id)
+        {
+            // Получаем документ с включенными связанными данными
+            var document = await _dbContext.Documents
+                .Include(x => x.Project)
+                .Include(x => x.Institution)
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (document == null)
+            {
+                return null;
+            }
+
+            // Получаем все типы иерархий документов в память
+            var documentMacroType = await _dbContext.DocumentTypeHierarchies.ToListAsync();
+
+            // Находим соответствующий MacroId
+            var macroId = documentMacroType
+                .Where(x => x.IdMicro == document.TypeId)
+                .Select(n => n.IdMacro)
+                .FirstOrDefault();
+
+            return new UpdateDocumentDto
+            {
+                Id = document.Id,
+                Name = document.Name,
+                AdditionalInfo = document.AdditionalInfo,
+                GroupingDate = document.GroupingDate,
+                InstitutionId = document.InstitutionId,
+                MicroId = document.TypeId,
+                MacroId = macroId,
+                ProjectId = document.ProjectId,
+            };
+        }
+
+
     }
 }

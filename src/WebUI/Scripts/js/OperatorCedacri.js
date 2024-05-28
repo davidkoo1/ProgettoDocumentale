@@ -6,7 +6,7 @@ function initializeDocumentDataTable() {
         "scrollX": true,
         //"autoWidth": true,
         //"stateSave": true,
-        //"dom": "p", //f, r, t, l, p
+        //"dom": "p", //f, r, t, l, p +Combination(fr...)
         ajax: {
             "url": "/Document/LoadDocumentDatatable",
             "type": "POST",
@@ -47,18 +47,13 @@ function initializeDocumentDataTable() {
                     $('#lgModal').modal('show');
                     drawPatrialView('../Document/GetDetails/' + row.data()["Id"], 'lgModalBody');
                     break;
-                case 'Delete':
-                    $('#lgModal').modal('show');
-                    drawPatrialView('../Document/GetDelete/' + row.data()["Id"], 'lgModalBody');
-                    break;
                 default:
                     break
             }
         },
         items: {
             "Edit": { name: "Edit" },
-            "Details": { name: "Details" },
-            "Delete": { name: "Delete" }
+            "Details": { name: "Details" }
         }
     });
 
@@ -93,7 +88,7 @@ function initializeProjectDataTable() {
             { "data": "Name", "title": "Name", "name": "Name", "autoWidth": true },
             {
                 "data": "DateFrom",
-                "title": "DateFrom",
+                "title": "Date from",
                 "name": "DateFrom",
                 "autoWidth": true,
                 "render": function (data, type, row) {
@@ -102,7 +97,7 @@ function initializeProjectDataTable() {
             },
             {
                 "data": "DateTill",
-                "title": "DateTill",
+                "title": "Date till",
                 "name": "DateTill",
                 "autoWidth": true,
                 "render": function (data, type, row) {
@@ -113,7 +108,7 @@ function initializeProjectDataTable() {
             { "data": "UserId", "title": "User", "name": "UserId", "autoWidth": true },
             {
                 "data": "IsActive",
-                "title": "IsActive",
+                "title": "Active",
                 "name": "IsActive",
                 "autoWidth": true,
                 "render": function (data, type, row) {

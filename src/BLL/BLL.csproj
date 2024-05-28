@@ -117,6 +117,7 @@
     <Compile Include="DTO\DocumentDTOs\DocumentDetailDto.cs" />
     <Compile Include="DTO\DocumentDTOs\DocumentDto.cs" />
     <Compile Include="DTO\DocumentDTOs\DocumentTypeDto.cs" />
+    <Compile Include="DTO\DocumentDTOs\UpdateDocumentDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\CreateInstitutionDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\InstitutionDto.cs" />
     <Compile Include="DTO\InstitutionDTOs\UpdateInstitutionDto.cs" />

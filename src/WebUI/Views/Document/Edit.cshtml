@@ -1,0 +1,101 @@
+﻿@model BLL.DTO.DocumentDTOs.UpdateDocumentDto
+
+<div class="modal-body">
+    <div class="container">
+        <h2 class="text-center mb-4">Update Document</h2>
+
+
+
+        @using (Html.BeginForm("Edit", "Document", FormMethod.Post, new { enctype = "multipart/form-data", id = "UpdateDocumentForm", @class = "needs-validation", novalidate = "novalidate" }))
+        {
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.Name, "*File", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @disabled = "disabled", @style = "max-width: 100% !important; width: 100%;" })
+                </div>
+                <br>
+            </div>
+
+
+
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.InstitutionId, "*Institution", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.InstitutionId, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "InstitutionId", @title = "Choose...", data_live_search = "true", @style = "max-width: 100% !important; width: 100%;" })
+
+                    @Html.ValidationMessageFor(model => model.InstitutionId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.MacroId, "*MACRO TYPE", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.MacroId, new SelectList(ViewBag.MacroTypes, "Value", "Text"), new { @class = "form-control selectpicker", @id = "MacroId", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.MacroId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row" id="MicroTypeRow" hidden="@(!(Model.MacroId != Model.MicroId))">
+                @Html.LabelFor(model => model.MicroId, "*MICRO TYPE", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.MicroId, new SelectList(ViewBag.MicroTypes, "Value", "Text"), new { @class = "form-control selectpicker", @id = "MicroType", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.MicroId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="mb-3 row" id="ProjectRow" hidden="@(!(Model.ProjectId != null))">
+                @Html.LabelFor(model => model.ProjectId, "*Project", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(model => model.ProjectId, new SelectList(ViewBag.Projects, "Value", "Text"), new { @class = "form-control selectpicker", @id = "ProjectId", @title = "Choose...", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.ProjectId, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+
+            <div class="mb-3 row">
+                @Html.LabelFor(model => model.GroupingDate, "*Date of grouping", new { @class = "col-sm-3 form-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.GroupingDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", @style = "max-width: 100% !important; width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.GroupingDate, null, new { @class = "text-danger" })
+                </div>
+                <br>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <textarea id="additionalInfo" name="AdditionalInfo" class="form-control" maxlength="998" placeholder="Additional Info" style="resize: none; height: 150px; max-width: 100% !important; width: 100%;">@Model.AdditionalInfo</textarea>
+                        <label for="additionalInfo">Additional Info</label>
+                        @Html.ValidationMessageFor(model => model.AdditionalInfo, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+        }
+
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#UpdateDocumentForm', 'DocumentDatatable')">Save</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker();
+
+        $('#MacroId').change(SetMicroType);
+        $('#InstitutionId').change(SetMicroType);
+    });
+
+
+
+</script>

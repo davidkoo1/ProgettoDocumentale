@@ -44,7 +44,7 @@ namespace BLL.Common.Repository
 
         public async Task<bool> Delete(int institutionId)
         {
-            var institutionToDelete = _dbContext.Institutions.FirstOrDefault(x => x.Id == institutionId);
+            var institutionToDelete = _dbContext.Institutions.Include(x => x.Projects).Include(u => u.Users).FirstOrDefault(x => x.Id == institutionId);
             //userToDelete.IsEnabled = false;
             _dbContext.Institutions.Remove(institutionToDelete);
             return await Save();

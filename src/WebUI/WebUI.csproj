@@ -1118,6 +1118,7 @@
     <Content Include="Views\Project\Upsert.cshtml" />
     <Content Include="Views\Document\Details.cshtml" />
     <Content Include="Views\Document\Create.cshtml" />
+    <Content Include="Views\Document\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
