@@ -34,8 +34,14 @@ function handleSubmitButton(formId, reloadDataTableId) {
                 if (reloadDataTableId === "ProjectDatatable") {
                     initializeProjectThree();
                 }
+                if (reloadDataTableId === "DocumentDatatable") {
+                    initializeDocumentThree();
+                }
             } else {
                 $('.modal-body').html(response);
+                if ($('.modal-body').find('#CreateDocumentForm').length) {
+                    initializeForm();
+                }
                 $('.selectpicker').selectpicker('refresh');
             }
         },

@@ -31,17 +31,7 @@ namespace WebUI.App_Start
             // Регистрация всех контроллеров в текущей сборке
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
-            builder.RegisterType<LoginDtoValidator>().As<IValidator<LoginDto>>();
-
-            builder.RegisterType<CreateUserDtoValidator>().As<IValidator<CreateUserDto>>();
-            builder.RegisterType<UpdateUserDtoValidator>().As<IValidator<UpdateUserDto>>();
-
-            builder.RegisterType<CreateInstitutionDtoValidator>().As<IValidator<CreateInstitutionDto>>();
-            builder.RegisterType<UpdateInstitutionDtoValidator>().As<IValidator<UpdateInstitutionDto>>();
-
-            builder.RegisterType<UpsertProjectDtoValidator>().As<IValidator<UpsertProjectDto>>();
-
-            builder.RegisterType<CreateDocumentDtoValidator>().As<IValidator<CreateDocumentDto>>();
+            
 
             var container = builder.Build();
 

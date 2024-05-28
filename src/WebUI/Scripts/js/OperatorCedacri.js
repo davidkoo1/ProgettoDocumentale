@@ -288,3 +288,78 @@ function buildDocumentList(institutions) {
 // Вызов функции attachCaretEventListeners один раз для всего документа
 attachCaretEventListeners();
 
+
+function initializeForm() {
+    $('.selectpicker').selectpicker();
+
+    SetMicroType();
+    $('#MacroId').change(SetMicroType);
+    $('#InstitutionId').change(SetMicroType);
+}
+
+function SetMicroType() {
+    var macroId = $('#MacroId').val();
+    var institutionId = $('#InstitutionId').val();
+    var projectSelect = $('#ProjectId');
+
+
+    if (macroId === "") {
+        return;
+    }
+
+    if (macroId === "2") {
+        $('#MicroTypeRow').hide();
+    } else {
+        $('#MicroTypeRow').show();
+    }
+
+    if (macroId !== "3") {
+        $('#ProjectRow').hide();
+    } else {
+        $('#ProjectRow').show();
+        if (institutionId === "") {
+            projectSelect.empty().append('<option value="">Choose...</option>').prop('disabled', true);
+        } else {
+            projectSelect.prop('disabled', false);
+        }
+    }
+
+    if (macroId === "3") {
+        $.ajax({
+            url: '/Document/GetProjectsByInstitution',
+            type: 'POST',
+            data: { InstitutionId: institutionId },
+            success: function (response) {
+                projectSelect.empty();
+                $.each(response, function (index, item) {
+                    projectSelect.append($('<option>', {
+                        value: item.Value,
+                        text: item.Text
+                    }));
+                });
+                $('.selectpicker').selectpicker('refresh');
+                $('#ProjectRow').show();
+            }
+        });
+    }
+
+    if (macroId !== "2") {
+        $.ajax({
+            url: '/Document/GetMicroTypes',
+            type: 'POST',
+            data: { macroId: macroId },
+            success: function (response) {
+                var microTypeSelect = $('#MicroType');
+                microTypeSelect.empty();
+                $.each(response, function (index, item) {
+                    microTypeSelect.append($('<option>', {
+                        value: item.Value,
+                        text: item.Text
+                    }));
+                });
+                $('.selectpicker').selectpicker('refresh');
+                $('#MicroTypeRow').show();
+            }
+        });
+    }
+}

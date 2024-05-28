@@ -6,9 +6,7 @@
 
         //!*andUser-emailAlreadyExist
 
-        fix threes(reload+getdata)
-
-SetInitialInCreateDocument
+        thenIgetDataFromThree-useId
 
 ProjectDataTableParametrs(сделать типо 3 разные таблицы, чтоб не мучатся)
 

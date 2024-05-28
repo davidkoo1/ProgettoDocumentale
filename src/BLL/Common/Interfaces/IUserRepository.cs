@@ -18,6 +18,10 @@ namespace BLL.Common.Interfaces
         Task<UpdateUserDto> GetUpdateUser(int id);
         Task<bool> UserExists(int userId);
         Task<IEnumerable<RoleDto>> GetRolesAsync();
+
+        Task<bool> IsEmailInUseAsync(string email); //OnlyForFluentValidation
+        Task<bool> IsUserNameInUseAsync(string username); //OnlyForFluentValidation
+
         Task<bool> Add(CreateUserDto userToCreateDto);
         Task<bool> Update(UpdateUserDto userToUpdateDto);
         Task<bool> Delete(int userId);

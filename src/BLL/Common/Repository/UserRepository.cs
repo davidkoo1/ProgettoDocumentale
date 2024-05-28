@@ -71,6 +71,9 @@ namespace BLL.Common.Repository
             return _mapper.Map<UserDto>(user);
         }
 
+        public async Task<bool> IsEmailInUseAsync(string email) => await _dbContext.Users.AnyAsync(u => u.Email == email);
+        public async Task<bool> IsUserNameInUseAsync(string username) => await _dbContext.Users.AnyAsync(u => u.UserName == username /*&& u.IsEnabled*/);
+
         public async Task<bool> Save() => await _dbContext.SaveChangesAsync() > 0 ? true : false;
 
         public async Task<bool> Update(UpdateUserDto userToUpdateDto)

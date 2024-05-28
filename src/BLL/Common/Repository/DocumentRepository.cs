@@ -96,7 +96,7 @@ namespace BLL.Common.Repository
             var hierarchyName = hierarchy != null ?
                 await _dbContext.DocumentTypes.FirstOrDefaultAsync(x => x.Id == hierarchy.IdMacro) : null;
 
-            return hierarchyName != null ? $"{documentType.Name}/{hierarchyName.Name}" : documentType.Name;
+            return hierarchyName != null ? $"{hierarchyName.Name}/{documentType.Name}" : documentType.Name;
         }
 
         public async Task<IEnumerable<BuilderDocumentThree>> GetAllThree()

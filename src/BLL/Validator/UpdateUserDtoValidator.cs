@@ -34,8 +34,17 @@ namespace BLL.Validator
                 .MaximumLength(100);
 
             RuleFor(x => x.RolesId)
-                .NotNull()
-                .NotEmpty();
+                .NotNull().WithName("Role")
+                .NotEmpty().WithName("Role");
+
+
+            When(x => x.RolesId != null && x.RolesId.Contains(3), () =>
+            {
+                RuleFor(x => x.IdInstitution)
+                    .NotNull().WithName("Institution")
+                    .NotEmpty().WithName("Institution")
+                    .WithMessage("For this role institution is requared");
+            });
         }
     }
 }
