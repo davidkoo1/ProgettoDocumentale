@@ -30,6 +30,7 @@ namespace BLL
             builder.RegisterType<InstitutionRepository>().As<IInstitutionRepository>();
             builder.RegisterType<DocumentRepository>().As<IDocumentRepository>();
             builder.RegisterType<ProjectRepository>().As<IProjectRepository>();
+            builder.RegisterType<BankRepository>().As<IBankRepository>();
 
 
             builder.RegisterType<LoginDtoValidator>().As<IValidator<LoginDto>>();

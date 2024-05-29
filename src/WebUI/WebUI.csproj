@@ -774,6 +774,7 @@
     <Content Include="lib\jquery-contextmenu\package.json" />
     <Content Include="lib\jquery-contextmenu\CHANGELOG.md" />
     <Content Include="lib\jquery-contextmenu\README.md" />
+    <Content Include="Access\fds.pdf" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="lib\bootstrap\dist\css\bootstrap-grid.css" />
     <Content Include="lib\bootstrap\dist\css\bootstrap-grid.min.css" />

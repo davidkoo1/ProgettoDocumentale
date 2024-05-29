@@ -201,7 +201,7 @@ namespace BLL.Common.Repository
             var fileExtension = Path.GetExtension(fileName);
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
 
-            var baseFilePath = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
+            var baseFilePath = HttpContext.Current.Server.MapPath("~/Access/uploads");
 
             var bankName = _dbContext.Institutions
                 .Where(x => x.Id == model.InstitutionId)

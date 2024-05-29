@@ -1,6 +1,10 @@
-﻿using System;
+﻿using BLL.Common.Interfaces;
+using BLL.Common.Repository;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,10 +13,64 @@ namespace WebUI.Controllers
     [Authorize(Roles = "Operator Bancar")]
     public class BankController : Controller
     {
-        // GET: Bank
-        public ActionResult Index()
+        private readonly IBankRepository _bankRepository;
+        private readonly IDocumentRepository _documentRepository;
+        public BankController(IBankRepository bankRepository, IDocumentRepository documentRepository)
         {
-            return View();
+            _bankRepository = bankRepository;
+            _documentRepository = documentRepository;
         }
+
+        // GET: Bank
+        public async Task<ActionResult> Index()
+        {
+
+            var tmp = await _bankRepository.GetAllThree();
+
+
+            return View(tmp);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetDetails(int id)
+        {
+            try
+            {
+
+                var document = await _documentRepository.GetDocument(id);
+                return PartialView("~/Views/Bank/_Info.cshtml", document);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> DownloadDocumentById(int id)
+        {
+            try
+            {
+                var result = await _bankRepository.GetFileById(id);
+
+                if (result != null && System.IO.File.Exists(result.Path))
+                {
+                    var streamResponse = new FileStream(result.Path, FileMode.Open, FileAccess.Read);
+
+                    return File(streamResponse, "application/octet-stream", result.Name);
+                }
+                else
+                {
+                    return HttpNotFound(); 
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

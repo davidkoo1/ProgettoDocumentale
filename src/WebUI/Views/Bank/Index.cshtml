@@ -1,4 +1,4 @@
-﻿
+﻿@model  List<BLL.DTO.BankDTOs.YearGroup>
 <div class="" id="cedacriContent">
     <h3>Bank Operator</h3>
     <nav>
@@ -22,7 +22,7 @@
 
         <div class="tab-pane fade show active" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab" tabindex="0">
             <div style="width:100%; margin:0 auto;">
-                @Html.Partial("_ServiceReports")
+                @Html.Partial("_ServiceReports", Model)
             </div>
         </div>
 
@@ -42,3 +42,34 @@
 
     </div>
 </div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".report-list").hide();
+            $("#CardDetails").hide();
+            attachCaretEventListeners();
+        });
+
+
+
+        function HideAndShow(element) {
+            $(element).next(".report-list").toggle();
+        }
+
+        function loadReportDetails(reportId) {
+            /*$("#CardDetails").hide();*/
+            $.ajax({
+                url: '@Url.Action("GetDetails", "Bank")',
+                data: { id: reportId },
+                success: function (data) {
+                    $("#downloadDocument").attr("href", `../Bank/DownloadDocumentById/${reportId}`);
+                    $("#CardDetails").show();
+                    $("#Details").html(data);
+                }
+            });
+        }
+    </script>
+}

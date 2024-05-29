@@ -1,3 +1,125 @@
-﻿
-<h2>_Projects</h2>
+﻿<style>
+    .report-container {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-right: 1px solid #ccc;
+    }
 
+    .year {
+        background: #ccc;
+        text-align: center;
+        padding: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .report-list {
+        list-style: none;
+        padding-left: 10px;
+    }
+
+    .report-item {
+        cursor: pointer;
+        padding: 2px 5px;
+    }
+
+        .report-item:hover {
+            background-color: #ddd;
+        }
+
+    .context-menu {
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background: #ffffff;
+        border: 1px solid #cccccc;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+        .context-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .context-menu ul li {
+                padding: 8px 12px;
+                cursor: pointer;
+            }
+
+                .context-menu ul li:hover {
+                    background: #eeeeee;
+                }
+</style>
+
+<br/>
+
+<div class="row">
+    <div class="col-xl-4">
+        <div class="card checkout-order-summary">
+            <div class="card-body">
+                <div class="report-container">
+                    <div class="year" onclick="HideAndShow(this)">2015</div>
+                    <ul class="report-list">
+                        <li>
+                            Gennaio
+                            <ul>
+                                <li>
+                                    Network (2)
+                                    <ul>
+                                        <li class="report-item" data-id="1" onclick="loadReportDetails(this)">Report1</li>
+                                        <li class="report-item" data-id="2" onclick="loadReportDetails(this)">Report2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Другие месяцы и года -->
+                    </ul>
+                    <div class="year" onclick="HideAndShow(this)">2016</div>
+                    <ul class="report-list">
+                        <li>
+                            Gennaio
+                            <ul>
+                                <li>
+                                    Network (2)
+                                    <ul>
+                                        <li class="report-item" data-id="1" onclick="loadReportDetails(this)">Report1</li>
+                                        <li class="report-item" data-id="2" onclick="loadReportDetails(this)">Report2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Другие месяцы и года -->
+                    </ul>
+                    <!-- Другие данные -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8">
+        <div class="custom-accordion">
+            <div class="card">
+                <div id="Details"></div>
+            </div>
+
+  
+
+        </div>
+
+        <div class="row my-4">
+            <div class="col">
+                <a href=@Url.Action("Index", "EcommerceProducts") class="btn btn-link text-muted">
+                    <i class="uil uil-arrow-left me-1"></i> Continue Shopping
+                </a>
+            </div> <!-- end col -->
+            <div class="col">
+                <div class="text-sm-end mt-2 mt-sm-0">
+                    <a href="#" class="btn btn-success">
+                        <i class="uil uil-shopping-cart-alt me-1"></i> Procced
+                    </a>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row-->
+    </div>
+
+</div>

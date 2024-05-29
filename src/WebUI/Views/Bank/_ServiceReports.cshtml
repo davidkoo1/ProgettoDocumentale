@@ -1,3 +1,188 @@
-﻿
-<h2>_ServiceReports</h2>
+﻿@model  List<BLL.DTO.BankDTOs.YearGroup>
+<style>
+    .report-container {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-right: 1px solid #ccc;
+    }
 
+    .year {
+        background: #ccc;
+        text-align: center;
+        padding: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .report-list {
+        list-style: none;
+        padding-left: 10px;
+    }
+
+    .report-item {
+        cursor: pointer;
+        padding: 2px 5px;
+    }
+
+        .report-item:hover {
+            background-color: #ddd;
+        }
+
+    .context-menu {
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background: #ffffff;
+        border: 1px solid #cccccc;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+        .context-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .context-menu ul li {
+                padding: 8px 12px;
+                cursor: pointer;
+            }
+
+                .context-menu ul li:hover {
+                    background: #eeeeee;
+                }
+
+    ul, #myUL {
+        list-style-type: none;
+    }
+
+    #myUL {
+        margin: 0;
+        padding: 0;
+    }
+
+    .caret {
+        cursor: pointer;
+        -webkit-user-select: none; /* Safari 3.1+ */
+        -moz-user-select: none; /* Firefox 2+ */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
+    }
+
+        .caret::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+    .caret-down::before {
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -webkit-transform: rotate(90deg); /* Safari */
+        ' transform: rotate(90deg);
+    }
+
+    .nested {
+        display: none;
+    }
+
+    .active {
+        display: block;
+    }
+</style>
+
+<br />
+
+<div class="row">
+    <div class="col-xl-4">
+        <div class="card checkout-order-summary">
+            <div class="card-body">
+                <div class="report-container">
+                    @foreach (var mainYear in Model)
+                    {
+                        <div class="year" onclick="HideAndShow(this)">@mainYear.Year</div>
+                        <ul class="report-list">
+                            <li>
+                                @foreach (var month in mainYear.Months)
+                                {
+                                    @month.MonthName
+                                    <ul>
+                                        <li>
+                                            @foreach (var documentType in month.DocumentTypes)
+                                            {
+                                                <p>@documentType.Name<span>@($"({documentType.Count})")</span></p>
+
+                                                <ul>
+                                                    @foreach (var report in documentType.Reports)
+                                                    {
+                                                        <li class="report-item" data-id="1" onclick="loadReportDetails(@report.Id)">@report.Text</li>
+                                                    }
+
+                                                </ul>
+                                            }
+                                        </li>
+                                    </ul>
+                                }
+
+                            </li>
+                            <!-- Другие месяцы и года -->
+                        </ul>
+                    }
+
+
+                    <div class="year" onclick="HideAndShow(this)">2016</div>
+                    <ul id="myUL" class="report-list">
+                        <li>
+                            <span class="caret">Gennaio</span>
+                            <ul class="nested">
+                                <li>
+                                    <span class="caret">Network (2)</span>
+                                    <ul class="nested">
+                                        <li class="report-item" data-id="1" onclick="loadReportDetails(this)">Report1</li>
+                                        <li class="report-item" data-id="2" onclick="loadReportDetails(this)">Report2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+
+
+
+                    <!-- Другие данные -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="CardDetails" class="col-xl-8">
+        <div class="custom-accordion">
+            <div class="card">
+                <div id="Details"></div>
+            </div>
+        </div>
+
+        <div class="row my-4">
+
+            <div class="col">
+                <div class="text-sm-end mt-2 mt-sm-0">
+                    <a id="downloadDocument" class="btn btn-primary"> Download</a>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row-->
+    </div>
+
+</div>
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+</script>
