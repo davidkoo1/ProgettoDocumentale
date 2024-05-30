@@ -52,11 +52,11 @@
                     background: #eeeeee;
                 }
 
-    ul, #myUL {
+    ul, #ThreeDocument, #ThreeProject {
         list-style-type: none;
     }
 
-    #myUL {
+    #ThreeDocument, #ThreeProject {
         margin: 0;
         padding: 0;
     }
@@ -77,9 +77,7 @@
         }
 
     .caret-down::before {
-        -ms-transform: rotate(90deg); /* IE 9 */
-        -webkit-transform: rotate(90deg); /* Safari */
-        ' transform: rotate(90deg);
+        transform: rotate(90deg);
     }
 
     .nested {
@@ -88,6 +86,10 @@
 
     .active {
         display: block;
+    }
+
+    .table-container {
+        margin-top: 20px;
     }
 </style>
 
@@ -101,56 +103,29 @@
                     @foreach (var mainYear in Model)
                     {
                         <div class="year" onclick="HideAndShow(this)">@mainYear.Year</div>
-                        <ul class="report-list">
-                            <li>
-                                @foreach (var month in mainYear.Months)
-                                {
-                                    @month.MonthName
-                                    <ul>
-                                        <li>
-                                            @foreach (var documentType in month.DocumentTypes)
-                                            {
-                                                <p>@documentType.Name<span>@($"({documentType.Count})")</span></p>
-
-                                                <ul>
+                        <ul class="report-list" style="display: none;">
+                            @foreach (var month in mainYear.Months)
+                            {
+                                <li>
+                                    <span class="caret">@month.MonthName</span>
+                                    <ul class="nested" style="display: none;">
+                                        @foreach (var documentType in month.DocumentTypes)
+                                        {
+                                            <li>
+                                                <span class="caret">@documentType.Name @($"({documentType.Count})")</span>
+                                                <ul class="nested" style="display: none;">
                                                     @foreach (var report in documentType.Reports)
                                                     {
-                                                        <li class="report-item" data-id="1" onclick="loadReportDetails(@report.Id)">@report.Text</li>
+                                                        <li class="report-item" onclick="loadReportDetails(@report.Id)">@report.Text</li>
                                                     }
-
                                                 </ul>
-                                            }
-                                        </li>
-                                    </ul>
-                                }
-
-                            </li>
-                            <!-- Другие месяцы и года -->
-                        </ul>
-                    }
-
-
-                    <div class="year" onclick="HideAndShow(this)">2016</div>
-                    <ul id="myUL" class="report-list">
-                        <li>
-                            <span class="caret">Gennaio</span>
-                            <ul class="nested">
-                                <li>
-                                    <span class="caret">Network (2)</span>
-                                    <ul class="nested">
-                                        <li class="report-item" data-id="1" onclick="loadReportDetails(this)">Report1</li>
-                                        <li class="report-item" data-id="2" onclick="loadReportDetails(this)">Report2</li>
+                                            </li>
+                                        }
                                     </ul>
                                 </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-
-
-
-
-                    <!-- Другие данные -->
+                            }
+                        </ul>
+                    }
                 </div>
             </div>
         </div>
@@ -164,25 +139,15 @@
         </div>
 
         <div class="row my-4">
-
             <div class="col">
                 <div class="text-sm-end mt-2 mt-sm-0">
                     <a id="downloadDocument" class="btn btn-primary"> Download</a>
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row-->
+
     </div>
 
 </div>
 
-<script>
-    var toggler = document.getElementsByClassName("caret");
-    var i;
 
-    for (i = 0; i < toggler.length; i++) {
-        toggler[i].addEventListener("click", function () {
-            this.parentElement.querySelector(".nested").classList.toggle("active");
-            this.classList.toggle("caret-down");
-        });
-    }
-</script>

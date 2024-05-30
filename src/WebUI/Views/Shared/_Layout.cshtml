@@ -35,11 +35,12 @@
             </div>
             @if (User.Identity.IsAuthenticated)
             {
+                var userName = Context.User.Identity.Name;
                 <div class="d-flex">
                     <ul class="navbar-nav">
                         <li>
                             <a class="btn btn-outline-danger" href="@Url.Action("Logout", "Account")">
-                                Logout
+                                Logout<br /> @userName
                             </a>
                         </li>
                     </ul>

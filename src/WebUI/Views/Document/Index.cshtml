@@ -45,7 +45,7 @@
     }
 </style>
 
-@*<h3>Administration</h3>*@
+<h3>Operator Cedacri</h3>
 
 <div class="container-fluid">
     <div class="row">
@@ -116,7 +116,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            
+
             initializeDocumentThree();
             initializeDocumentDataTable();
             initializeProjectThree();
@@ -128,7 +128,7 @@
                 if (!projectInitialized) {
                     // Initialize projects-related elements only the first time the tab is clicked
                     initializeProjectDataTable();
-                   
+
                     projectInitialized = true;  // Set the flag so initialization only happens once
                 }
             });

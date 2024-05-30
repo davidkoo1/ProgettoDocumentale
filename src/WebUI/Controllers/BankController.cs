@@ -1,4 +1,5 @@
-﻿using BLL.Common.Interfaces;
+﻿using BLL.Common.Extensions;
+using BLL.Common.Interfaces;
 using BLL.Common.Repository;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,42 @@ namespace WebUI.Controllers
             _documentRepository = documentRepository;
         }
 
-        // GET: Bank
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
+            return View();
+        }
 
-            var tmp = await _bankRepository.GetAllThree();
 
+        [HttpGet]
+        public async Task<ActionResult> GetServiceDocuments()
+        {
+            try
+            {
 
-            return View(tmp);
+                var resultService = await _bankRepository.GetAllSerciceThree(User.GetUserId());
+                return PartialView("~/Views/Bank/_Reports.cshtml", resultService);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetSLADocuments()
+        {
+            try
+            {
+
+                var resultSLA = await _bankRepository.GetAllSerciceThree(User.GetUserId());
+                return PartialView("~/Views/Bank/_Reports.cshtml", resultSLA);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
         }
 
         [HttpGet]
@@ -62,7 +91,7 @@ namespace WebUI.Controllers
                 }
                 else
                 {
-                    return HttpNotFound(); 
+                    return HttpNotFound();
                 }
             }
             catch (Exception ex)

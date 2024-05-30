@@ -10,6 +10,7 @@
             },
         },
         success: function (result, e) {
+            $('#' + divId).empty();
             $('#' + divId).html(result);
         },
     });

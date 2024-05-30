@@ -29,7 +29,8 @@ namespace WebUI
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                         "~/Scripts/js/site.js",
                         "~/Scripts/js/Admin.js",
-                        "~/Scripts/js/OperatorCedacri.js"));
+                        "~/Scripts/js/OperatorCedacri.js",
+                        "~/Scripts/js/OperatorBancar.js"));
 
 
             //bundles.Add(new ScriptBundle("~/bundles/datatables").Include(

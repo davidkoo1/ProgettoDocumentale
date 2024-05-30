@@ -23,9 +23,8 @@ namespace BLL.Common.Repository
         }
         
 
-        public async Task<List<YearGroup>> GetAllThree()
+        public async Task<List<YearGroup>> GetAllSerciceThree(int userId)
         {
-            int userId = 2;
             var user = await _dbContext.Users.FindAsync(userId);
             var institutionId = user.IdInstitution;
 

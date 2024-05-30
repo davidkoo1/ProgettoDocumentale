@@ -11,7 +11,7 @@ namespace BLL.Common.Interfaces
 {
     public interface IBankRepository
     {
-        Task<List<YearGroup>> GetAllThree();
+        Task<List<YearGroup>> GetAllSerciceThree(int userId);
         Task<DownloadFile> GetFileById(int id);
     }
 }

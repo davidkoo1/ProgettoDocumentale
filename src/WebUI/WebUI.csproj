@@ -1120,7 +1120,7 @@
     <Content Include="Views\Document\Edit.cshtml" />
     <Content Include="Views\Bank\Index.cshtml" />
     <Content Include="Views\Bank\_ServiceReports.cshtml" />
-    <Content Include="Views\Bank\_SLAReports.cshtml" />
+    <Content Include="Views\Bank\_Reports.cshtml" />
     <Content Include="Views\Bank\_Projects.cshtml" />
     <Content Include="Views\Bank\_Info.cshtml" />
   </ItemGroup>

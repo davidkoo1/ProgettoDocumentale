@@ -63,7 +63,7 @@ namespace BLL.Common.Repository
                 DateFrom = x.DateFrom,
                 DateTill = x.DateTill,
                 InstitutionId = x.Institution.Name,
-                UserId = x.User.Name,
+                UserId = x.User.UserName,
                 IsActive = x.IsActive,
             }).ToListAsync();
         }

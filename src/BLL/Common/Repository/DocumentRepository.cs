@@ -142,7 +142,7 @@ namespace BLL.Common.Repository
 
         public async Task<DocumentDetailDto> GetDocument(int Id)
         {
-            var document = await _dbContext.Documents.Include(x => x.Institution).Include(x => x.Project).Include(x => x.DocumentType).FirstOrDefaultAsync(x => x.Id == Id);
+            var document = await _dbContext.Documents.Include(x => x.Institution).Include(x => x.Project).Include(x => x.DocumentType).Include(x => x.User).FirstOrDefaultAsync(x => x.Id == Id);
             var hierarhyId = await _dbContext.DocumentTypeHierarchies.AsNoTracking().FirstOrDefaultAsync(x => x.IdMicro == document.TypeId);
             var documentMacroType = await _dbContext.DocumentTypes.AsNoTracking().FirstOrDefaultAsync(t => t.Id == hierarhyId.IdMacro);
 
@@ -155,6 +155,7 @@ namespace BLL.Common.Repository
                 Project = document.Project?.Name,
                 DataGroup = document.GroupingDate.ToString("yyyy-MM-dd"),
                 AdditionalInfo = document.AdditionalInfo,
+                User = document.User.UserName,
             };
 
 
@@ -227,7 +228,7 @@ namespace BLL.Common.Repository
 
             while (File.Exists(finalPath))
             {
-                documentName = $"{fileNameWithoutExtension}({count}){fileExtension}";
+                documentName = $"{fileNameWithoutExtension} ({count}){fileExtension}";
                 finalPath = Path.Combine(filePath, documentName);
                 count++;
             }
