@@ -59,6 +59,21 @@ namespace WebUI.Controllers
             }
 
         }
+        [HttpGet]
+        public async Task<ActionResult> GetProjects()
+        {
+            try
+            {
+
+                var resultProjects = await _bankRepository.GetAllProjectThree(User.GetUserId());
+                return PartialView("~/Views/Bank/_Projects.cshtml", resultProjects);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/_NotFound.cshtml");
+            }
+
+        }
 
         [HttpGet]
         public async Task<ActionResult> GetDetails(int id)

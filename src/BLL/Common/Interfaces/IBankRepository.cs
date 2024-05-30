@@ -8,7 +8,7 @@ namespace BLL.Common.Interfaces
     {
         Task<List<ServiceGroupTreeVm>> GetAllSerciceThree(int userId);
         Task<List<SLAGroupTreeVm>> GetAllSLAThree(int userId);
-        Task<List<ServiceGroupTreeVm>> GetAllProjectThree(int userId);
+        Task<List<ProjectGroupTreeVm>> GetAllProjectThree(int userId);
         Task<DownloadFile> GetFileById(int id);
     }
 }

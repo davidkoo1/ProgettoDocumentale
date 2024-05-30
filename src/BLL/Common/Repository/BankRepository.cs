@@ -120,10 +120,57 @@ namespace BLL.Common.Repository
             return result;
         }
 
-        public Task<List<ServiceGroupTreeVm>> GetAllProjectThree(int userId)
+        public async Task<List<ProjectGroupTreeVm>> GetAllProjectThree(int userId)
         {
-            throw new NotImplementedException();
+            var user = await _dbContext.Users.FindAsync(userId);
+            var institutionId = user.IdInstitution;
+
+            var typeHierarchy = await _dbContext.DocumentTypeHierarchies
+                .Where(x => x.IdMacro == 3)
+                .Select(t => t.IdMicro)
+                .ToListAsync();
+
+            var documents = await _dbContext.Documents
+                .Include(x => x.Project)
+                .Include(doc => doc.DocumentType)
+                .Where(x => typeHierarchy.Contains(x.TypeId) && x.InstitutionId == institutionId)
+                .ToListAsync();
+
+            var grouped = documents
+                .GroupBy(doc => new { doc.GroupingDate.Year, ProjectName = doc.Project.Name, DocumentTypeName = doc.DocumentType.Name })
+                .Select(group => new
+                {
+                    Year = group.Key.Year,
+                    ProjectName = group.Key.ProjectName,
+                    DocumentTypeName = group.Key.DocumentTypeName,
+                    Count = group.Count(),
+                    Reports = group.Select(d => new ReportVm { Id = d.Id, Text = d.Name }).ToList()
+                }).ToList();
+
+            var result = grouped.GroupBy(group => group.Year)
+                .Select(yearGroup => new ProjectGroupTreeVm
+                {
+                    Year = yearGroup.Key,
+                    ProjectGroups = yearGroup.GroupBy(group => group.ProjectName)
+                        .Select(projectGroup => new ProjectGroup
+                        {
+                            ProjectName = projectGroup.Key,
+                            ProjectTypes = projectGroup.Select(ptGroup => new ProjectTypeGroup
+                            {
+                                Name = ptGroup.DocumentTypeName,
+                                Count = ptGroup.Count,
+                                Reports = ptGroup.Reports.Select(report => new ReportVm
+                                {
+                                    Text = report.Text,
+                                    Id = report.Id
+                                }).ToList()
+                            }).ToList()
+                        }).ToList()
+                }).ToList();
+
+            return result;
         }
+
 
         public async Task<DownloadFile> GetFileById(int id)
         {

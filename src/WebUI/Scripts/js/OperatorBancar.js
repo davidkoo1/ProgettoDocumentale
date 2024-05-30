@@ -25,6 +25,7 @@ function drawReports(method) {
     $("#nav-service").hide();
     $("#nav-sla").hide();
     $("#nav-design").hide();
+    $("#CardDetails").hide();
     if (method === "GetSLADocuments") {
         $("#nav-sla").show();
         drawPatrialView('/Bank/GetSLADocuments', '_SLAReports')
