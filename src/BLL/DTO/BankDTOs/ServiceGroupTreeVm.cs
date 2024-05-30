@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BLL.DTO.BankDTOs
 {
-    public class YearGroup
+    public class ServiceGroupTreeVm
     {
         public int Year { get; set; }
-        public List<MonthGroup> Months { get; set; }
+        public List<MonthServiceGroup> Months { get; set; }
     }
 
-    public class MonthGroup
+    public class MonthServiceGroup
     {
         public string MonthName { get; set; }
         public List<DocumentTypeGroup> DocumentTypes { get; set; }
@@ -22,11 +22,6 @@ namespace BLL.DTO.BankDTOs
     {
         public string Name { get; set; }
         public int Count { get; set; }
-        public List<Report> Reports { get; set; }
-    }
-    public class Report
-    {
-        public string Text { get; set; }
-        public int Id { get; set; }
+        public List<ReportVm> Reports { get; set; }
     }
 }

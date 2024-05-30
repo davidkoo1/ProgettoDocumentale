@@ -115,7 +115,9 @@
     <Compile Include="Common\Repository\UserRepository.cs" />
     <Compile Include="DependencyInjection.cs" />
     <Compile Include="DTO\BankDTOs\DownloadFile.cs" />
-    <Compile Include="DTO\BankDTOs\YearGroup.cs" />
+    <Compile Include="DTO\BankDTOs\ReportVm.cs" />
+    <Compile Include="DTO\BankDTOs\SLAGroupTreeVm.cs" />
+    <Compile Include="DTO\BankDTOs\ServiceGroupTreeVm.cs" />
     <Compile Include="DTO\DocumentDTOs\BuilderDocumentThree.cs" />
     <Compile Include="DTO\DocumentDTOs\CreateDocumentDto.cs" />
     <Compile Include="DTO\DocumentDTOs\DocumentDetailDto.cs" />

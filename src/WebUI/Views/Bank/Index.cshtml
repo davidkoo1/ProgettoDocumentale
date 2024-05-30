@@ -1,33 +1,69 @@
-﻿@model  List<BLL.DTO.BankDTOs.YearGroup>
+﻿@model  List<BLL.DTO.BankDTOs.ServiceGroupTreeVm>
 
 <h3>Operator Bancar</h3>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" onclick="drawReports('GetServiceDocuments')">
+
+        <button class="nav-link active" id="nav-service-tab" onclick="drawReports('GetServiceDocuments')" data-bs-toggle="tab" data-bs-target="#nav-service" type="button" role="tab" aria-controls="nav-service" aria-selected="true">
             <h5>Service Reports</h5>
         </button>
 
-        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" onclick="drawReports('GetSLADocuments')">
+        <button class="nav-link" id="nav-sla-tab" onclick="drawReports('GetSLADocuments')" data-bs-toggle="tab" data-bs-target="#nav-sla" type="button" role="tab" aria-controls="nav-sla" aria-selected="false">
             <h5>SLA Report</h5>
         </button>
 
-        <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" onclick="drawReports('GetProjects')">
+        <button class="nav-link" id="nav-design-tab" onclick="drawReports('GetProjects')" data-bs-toggle="tab" data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design" aria-selected="false">
             <h5>Projects</h5>
         </button>
 
+
     </div>
 </nav>
+
 <div class="tab-content" id="nav-tabContent">
+    <div class="row">
+        <div class="col-xl-4">
 
-    <div class="tab-pane fade show active" role="tabpanel" tabindex="0">
-        <div style="width:100%; margin:0 auto;">
-            <div id="_Report">
-                <!--PartialView _Reports-->
+            <div class="tab-pane fade show active" id="nav-service" role="tabpanel" aria-labelledby="nav-service-tab" tabindex="0">
+                <div style="width:100%; margin:0 auto;">
+                    <div id="_ServiceReports"></div>
+                </div>
             </div>
-        </div>
-    </div>
 
+            <div class="tab-pane fade" id="nav-sla" role="tabpanel" aria-labelledby="nav-sla-tab" tabindex="0">
+                <div style="width:100%; margin:0 auto;">
+                    <div id="_SLAReports"></div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-design" role="tabpanel" aria-labelledby="nav-design-tab" tabindex="0">
+                <div style="width:100%; margin:0 auto;">
+                    <div id="_Projects"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="CardDetails" class="col-xl-8" style="margin-top: 23px; display: none;">
+            <div class="custom-accordion">
+                <div class="card">
+                    <div id="Details"></div>
+                </div>
+            </div>
+
+            <div class="row my-4">
+                <div class="col">
+                    <div class="text-sm-end mt-2 mt-sm-0">
+                        <a id="downloadDocument" class="btn btn-primary"> Download</a>
+                    </div>
+                </div>
+            </div> 
+
+        </div>
+
+
+    </div>
 </div>
 
 @section scripts {
@@ -35,7 +71,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            drawPatrialView("/Bank/GetServiceDocuments", "_Report");
+            drawPatrialView("/Bank/GetServiceDocuments", "_ServiceReports");
 
             $(".report-list").hide();
             $("#CardDetails").hide();

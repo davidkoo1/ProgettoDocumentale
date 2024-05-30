@@ -1,4 +1,4 @@
-﻿@model  List<BLL.DTO.BankDTOs.ServiceGroupTreeVm>
+﻿@model  List<BLL.DTO.BankDTOs.SLAGroupTreeVm>
 <style>
     .report-container {
         background-color: #f8f9fa;
@@ -95,42 +95,31 @@
 
 <br />
 
-<div class="row">
-    <div class="col-xl-4">
-        <div class="card checkout-order-summary">
-            <div class="card-body">
-                <div class="report-container">
-                    @foreach (var mainYear in Model)
+
+<div class="card checkout-order-summary">
+    <div class="card-body">
+        <div class="report-container">
+            @foreach (var mainYear in Model)
+            {
+                <div class="year" onclick="HideAndShow(this)">@mainYear.Year</div>
+                <ul class="report-list" style="display: none;">
+                    @foreach (var month in mainYear.Months)
                     {
-                        <div class="year" onclick="HideAndShow(this)">@mainYear.Year</div>
-                        <ul class="report-list" style="display: none;">
-                            @foreach (var month in mainYear.Months)
-                            {
-                                <li>
-                                    <span class="caret">@month.MonthName</span>
-                                    <ul class="nested" style="display: none;">
-                                        @foreach (var documentType in month.DocumentTypes)
-                                        {
-                                            <li>
-                                                <span class="caret">@documentType.Name @($"({documentType.Count})")</span>
-                                                <ul class="nested" style="display: none;">
-                                                    @foreach (var report in documentType.Reports)
-                                                    {
-                                                        <li class="report-item" onclick="loadReportDetails(@report.Id)">@report.Text</li>
-                                                    }
-                                                </ul>
-                                            </li>
-                                        }
-                                    </ul>
-                                </li>
-                            }
-                        </ul>
+                        <li>
+                            <span class="caret">@month.MonthName (@month.Count)</span>
+
+                            <ul class="nested" style="display: none;">
+                                @foreach (var report in month.Reports)
+                                {
+                                    <li class="report-item" onclick="loadReportDetails(@report.Id)">@report.Text</li>
+                                }
+                            </ul>
+
+                        </li>
                     }
-                </div>
-            </div>
+                </ul>
+            }
         </div>
     </div>
-
 </div>
-
 

@@ -22,14 +22,20 @@ function loadReportDetails(reportId) {
 
 
 function drawReports(method) {
+    $("#nav-service").hide();
+    $("#nav-sla").hide();
+    $("#nav-design").hide();
     if (method === "GetSLADocuments") {
-        drawPatrialView('/Bank/GetSLADocuments', '_Report')
+        $("#nav-sla").show();
+        drawPatrialView('/Bank/GetSLADocuments', '_SLAReports')
     }
     if (method === "GetProjects") {
-        drawPatrialView('/Bank/GetProjects', '_Report')
+        $("#nav-design").show();
+        drawPatrialView('/Bank/GetProjects', '_Projects')
     }
     if (method === "GetServiceDocuments") {
-        drawPatrialView('/Bank/GetServiceDocuments', '_Report')
+        $("#nav-service").show();
+        drawPatrialView('/Bank/GetServiceDocuments', '_ServiceReports')
     }
     else {
         return;

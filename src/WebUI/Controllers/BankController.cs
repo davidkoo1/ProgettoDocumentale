@@ -35,7 +35,7 @@ namespace WebUI.Controllers
             {
 
                 var resultService = await _bankRepository.GetAllSerciceThree(User.GetUserId());
-                return PartialView("~/Views/Bank/_Reports.cshtml", resultService);
+                return PartialView("~/Views/Bank/_ServiceReports.cshtml", resultService);
             }
             catch (Exception ex)
             {
@@ -50,8 +50,8 @@ namespace WebUI.Controllers
             try
             {
 
-                var resultSLA = await _bankRepository.GetAllSerciceThree(User.GetUserId());
-                return PartialView("~/Views/Bank/_Reports.cshtml", resultSLA);
+                var resultSLA = await _bankRepository.GetAllSLAThree(User.GetUserId());
+                return PartialView("~/Views/Bank/_SLAReports.cshtml", resultSLA);
             }
             catch (Exception ex)
             {
