@@ -24,7 +24,9 @@ namespace WebUI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/lib/bootstrap/dist/css/bootstrap.min.css",
-                        "~/Content/site.css"));
+                        "~/Content/site.css",
+                        "~/Content/ReportMenu.css",
+                        "~/Content/Tree.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                         "~/Scripts/js/site.js",

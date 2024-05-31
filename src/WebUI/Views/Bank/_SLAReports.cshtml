@@ -1,97 +1,4 @@
 ﻿@model  List<BLL.DTO.BankDTOs.SLAGroupTreeVm>
-<style>
-    .report-container {
-        background-color: #f8f9fa;
-        padding: 10px;
-        border-right: 1px solid #ccc;
-    }
-
-    .year {
-        background: #ccc;
-        text-align: center;
-        padding: 5px;
-        margin-top: 10px;
-        cursor: pointer;
-    }
-
-    .report-list {
-        list-style: none;
-        padding-left: 10px;
-    }
-
-    .report-item {
-        cursor: pointer;
-        padding: 2px 5px;
-    }
-
-        .report-item:hover {
-            background-color: #ddd;
-        }
-
-    .context-menu {
-        display: none;
-        position: absolute;
-        z-index: 1000;
-        background: #ffffff;
-        border: 1px solid #cccccc;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-        .context-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-            .context-menu ul li {
-                padding: 8px 12px;
-                cursor: pointer;
-            }
-
-                .context-menu ul li:hover {
-                    background: #eeeeee;
-                }
-
-    ul, #ThreeDocument, #ThreeProject {
-        list-style-type: none;
-    }
-
-    #ThreeDocument, #ThreeProject {
-        margin: 0;
-        padding: 0;
-    }
-
-    .caret {
-        cursor: pointer;
-        -webkit-user-select: none; /* Safari 3.1+ */
-        -moz-user-select: none; /* Firefox 2+ */
-        -ms-user-select: none; /* IE 10+ */
-        user-select: none;
-    }
-
-        .caret::before {
-            content: "\25B6";
-            color: black;
-            display: inline-block;
-            margin-right: 6px;
-        }
-
-    .caret-down::before {
-        transform: rotate(90deg);
-    }
-
-    .nested {
-        display: none;
-    }
-
-    .active {
-        display: block;
-    }
-
-    .table-container {
-        margin-top: 20px;
-    }
-</style>
 
 <br />
 
@@ -99,6 +6,10 @@
 <div class="card checkout-order-summary">
     <div class="card-body">
         <div class="report-container">
+            @if (Model.Count == 0)
+            {
+                <div class="year">No has data</div>
+            }
             @foreach (var mainYear in Model)
             {
                 <div class="year" onclick="HideAndShow(this)">@mainYear.Year</div>
@@ -119,6 +30,7 @@
                     }
                 </ul>
             }
+            
         </div>
     </div>
 </div>

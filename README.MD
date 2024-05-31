@@ -4,11 +4,10 @@ AddValidationForFileInController(ifNotnull)
 //Передовать и выбранное учереждение и его поставить в selected
 //UserControllerOptimiz
 
-        thenIgetDataFromThree-useId
+		thenIgetDataFromThree-useId
 
 
-- Перенести js/Css code со страничек в файлы
-- DeleteIsFlagInstitution -- спросить удаление документов и остального
+- DeleteIsFlagInstitution -- спросить удаление документов и остального(сделать в Configuration каскадное удаление)
 
 - ChangesEditRoleInstitutions(PrepareUserInstitutions)(по факту я могу этот метод и не инифиализировать в контроллере, достаточно только в ajax)
 
