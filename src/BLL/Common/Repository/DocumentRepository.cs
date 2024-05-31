@@ -36,8 +36,7 @@ namespace BLL.Common.Repository
             IQueryable<Document> query = _dbContext.Documents
                 .Include(x => x.Institution)
                 .Include(x => x.DocumentType)
-                .Include(x => x.Project)
-                .Search(parameters).OrderBy(parameters).Page(parameters);
+                .Include(x => x.Project);
 
             if (!string.IsNullOrEmpty(resource1))
             {
@@ -68,7 +67,7 @@ namespace BLL.Common.Repository
             }
 
 
-            var documents = await query.ToListAsync();
+            var documents = await query.Search(parameters).OrderBy(parameters).Page(parameters).ToListAsync();
 
             var documentDtos = new List<DocumentDto>();
             foreach (var x in documents)

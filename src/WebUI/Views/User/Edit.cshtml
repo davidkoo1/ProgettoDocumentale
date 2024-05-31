@@ -14,9 +14,9 @@
 
 
         <div class="mb-3 row">
-            @Html.LabelFor(model => model.UserName, new { @class = "col-sm-3 form-label" })
+            @Html.LabelFor(model => model.UserName, "User name", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
-                @Html.TextBoxFor(model => model.UserName, "User name", new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username", @disabled = "disabled", @style = "max-width: 100% !important; width: 100%;" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "username", placeholder = "Enter username", @disabled = "disabled", @style = "max-width: 100% !important; width: 100%;" })
                 @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
             </div>
             <br>

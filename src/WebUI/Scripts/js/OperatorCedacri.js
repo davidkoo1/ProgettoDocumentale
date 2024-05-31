@@ -62,10 +62,13 @@ function initializeDocumentDataTable() {
 
 
 function DrawDocumentDataTable(resource1, resource2, resource3) {
+
     var table = $('#DocumentDatatable').DataTable();
-    // Непосредственно обновляем данные AJAX-запроса перед отправкой
+
     var newUrl = '/Document/LoadDocumentDatatable' + '?resource1=' + (resource1 || '') + '&resource2=' + (resource2 || '') + '&resource3=' + (resource3 || '');
+
     table.ajax.url(newUrl).load();
+/*    table.destroy();*/
 }
 
 

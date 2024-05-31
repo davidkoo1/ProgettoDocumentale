@@ -1,12 +1,10 @@
 ﻿# TODO List
-
-AddValidationForFileInController(ifNotnull)
+Selecters(UserRoleInstitution|documenttypes)
+AddValidationForFileInController(ifNotnull) 
 //Передовать и выбранное учереждение и его поставить в selected
-        //UserControllerOptimiz
+//UserControllerOptimiz
 
         thenIgetDataFromThree-useId
-
-ProjectDataTableParametrs(сделать типо 3 разные таблицы, чтоб не мучатся)
 
 
 - Перенести js/Css code со страничек в файлы

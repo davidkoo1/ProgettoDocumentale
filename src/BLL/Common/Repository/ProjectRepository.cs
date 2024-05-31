@@ -40,8 +40,7 @@ namespace BLL.Common.Repository
         {
             IQueryable<Project> query = _dbContext.Projects
                  .Include(x => x.Institution)
-                 .Include(x => x.User)
-                 .Search(parameters).OrderBy(parameters).Page(parameters);
+                 .Include(x => x.User);
 
             if (!string.IsNullOrEmpty(InstitutionId))
             {
@@ -56,7 +55,7 @@ namespace BLL.Common.Repository
 
 
             // Materialize query result
-            return await query.Select(x => new ProjectDto
+            return await query.Search(parameters).OrderBy(parameters).Page(parameters).Select(x => new ProjectDto
             {
                 Id = x.Id,
                 Name = x.Name,
