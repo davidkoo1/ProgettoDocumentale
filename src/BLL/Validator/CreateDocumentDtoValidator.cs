@@ -3,6 +3,7 @@ using BLL.DTO.InstitutionDTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,16 @@ namespace BLL.Validator
         public CreateDocumentDtoValidator()
         {
             RuleFor(x => x.File)
-                .NotNull()
-                .NotEmpty();
+                .NotEmpty()
+                .NotNull().WithMessage("File is required.")
+                .Must(file => file.ContentLength > 0).WithMessage("File cannot be empty.")
+                .Must(file => file.ContentLength < 10 * 1024 * 1024).WithMessage("File size must be less than 10MB.");
+                //.Must(file =>
+                //{
+                //    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                //    var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+                //    return allowedExtensions.Contains(extension);
+                //}).WithMessage("Invalid file type. Only .jpg, .jpeg, .png, .gif are allowed.")
 
             RuleFor(x => x.GroupingDate)
                 .NotNull()
