@@ -1,4 +1,4 @@
-
+﻿
 //InstitutionData
 function initializeInstitutionDataTable() {
     var table = $('#InstitutionDatatable').DataTable({
@@ -69,7 +69,7 @@ function initializeInstitutionDataTable() {
 }
 
 function SetInstitution() {
-    var selectedValues = $(this).val();
+    var selectedValues = $('#rolesSelect').val();
 
     if (selectedValues.includes("3")) {
         $.ajax({
@@ -93,38 +93,64 @@ function SetInstitution() {
         $('#additionalSelectRow').hide();
     }
 }
-
-function RoleChangeForInstitution(UserId) {
-    var selectedValues = $(this).val();
-    if (!selectedValues.includes("3")) {
-        $('#AdditionalSelect').empty();
-        $('#additionalSelectRow').hide();
-    }
-    else {
+function RoleChangeForInstitution(modelId) {
+    // Делаем что-то с modelId
+    console.log("Model Id:", modelId);
+    var selectedValues = $('#rolesSelect').val();
+    if (selectedValues.includes("3")) {
         $.ajax({
             url: '../User/PrepareUserInstitution',
             type: 'POST',
-            data: { userid: UserId },
+            data: { userid: modelId },
             success: function (response) {
+                debugger;
                 $('#AdditionalSelect').empty();
 
                 $.each(response, function (index, item) {
                     $('#AdditionalSelect').append($('<option>', {
                         value: item.Value,
-                        text: item.Text,
-                        selected: item.Selected
+                        text: item.Text
                     }));
                 });
-
                 $('.selectpicker').selectpicker('refresh');
                 $('#additionalSelectRow').show();
-            },
-            error: function (error) {
-                console.error('AJAX error:', error);
             }
         });
+    } else {
+        $('#AdditionalSelect').empty();
+        $('#additionalSelectRow').hide();
     }
+
 }
+//function RoleChangeForInstitution(UserId) {
+//    debugger;
+//    var selectedValues = $('#rolesSelect').val();
+//    if (!selectedValues.includes("3")) {
+//        $('#AdditionalSelect').empty();
+//        $('#additionalSelectRow').hide();
+//    }
+//    else {
+//        $.ajax({
+//            url: '../User/PrepareUserInstitution',
+//            type: 'POST',
+//            data: { userid: UserId },
+//            success: function (response) {
+//                $('#AdditionalSelect').empty();
+
+//                $.each(response, function (index, item) {
+//                    $('#AdditionalSelect').append($('<option>', {
+//                        value: item.Value,
+//                        text: item.Text,
+//                        selected: item.Selected
+//                    }));
+//                });
+
+//                $('.selectpicker').selectpicker('refresh');
+//                $('#additionalSelectRow').show();
+//            }
+//        });
+//    }
+//}
 
 function deleteCurrentInstitution(institutionId) {
     $.ajax({

@@ -68,7 +68,7 @@
         </div>
 
 
-        <div class="mb-3 row">
+        <div class="mb-3 row" id="RoleSelecter">
             @Html.LabelFor(model => model.RolesId, "*Roles", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
                 @Html.ListBoxFor(model => model.RolesId, new MultiSelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control selectpicker", data_live_search = "true", @title = "Choose...", @id = "rolesSelect" })
@@ -91,14 +91,40 @@
     </div>
 }
 
-<script type="text/javascript">
+<script>
     $(document).ready(function () {
         $('.selectpicker').selectpicker();
+       
+        SetInstitution();
+        $('#rolesSelect').change(SetInstitution);
+        //$("#RoleSelecter").on("change", "select[id*='rolesSelect']", function () {
+        //    debugger;
+        //    var selectedValues = $('#rolesSelect').val();
+        //    if (selectedValues.includes("3")) {
+        //        $.ajax({
+        //            url: '../Institution/GetInstitutions',
+        //            type: 'POST',
+        //            success: function (response) {
+        //                $('#AdditionalSelect').empty();
 
-        RoleChangeForInstitution.bind($('#rolesSelect'), '0')();
-        
-        $('#rolesSelect').change(RoleChangeForInstitution.bind($('#rolesSelect'), '0'));
+        //                $.each(response, function (index, item) {
+        //                    $('#AdditionalSelect').append($('<option>', {
+        //                        value: item.Value,
+        //                        text: item.Text
+        //                    }));
+        //                });
+        //                $('.selectpicker').selectpicker('refresh');
+        //                $('#additionalSelectRow').show();
+        //            }
+        //        });
 
+        //    }
+        //    else {
+        //        $('#AdditionalSelect').empty();
+        //        $('#additionalSelectRow').hide();
+
+        //    }
+        //});
     });
 
 </script>

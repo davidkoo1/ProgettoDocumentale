@@ -108,7 +108,7 @@ namespace WebUI.Controllers
                 {
                     Value = x.Id.ToString(),
                     Text = x.Name,
-                    Selected = userVM != null && userVM.InstitutionId != 0 && userVM.InstitutionId != null ? x.Id == userInstitutionId : false
+                    Selected = userVM.InstitutionId != 0 ? x.Id == userInstitutionId : false
                 });
                 ViewBag.Institutions = selectListInstitutionsVm;
 

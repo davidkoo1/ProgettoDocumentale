@@ -40,6 +40,9 @@ function handleSubmitButton(formId, reloadDataTableId) {
                 }
             } else {
                 $('.modal-body').html(response);
+                if ($('.modal-body').find('#createUserForm').length || $('.modal-body').find('#updateUserForm').length) {
+                    $('#rolesSelect').change(SetInstitution);
+                }
                 if ($('.modal-body').find('#CreateDocumentForm').length) {
                     initializeForm();
                 }

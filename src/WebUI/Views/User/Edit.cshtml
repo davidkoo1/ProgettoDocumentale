@@ -6,10 +6,9 @@
         <strong>Sorry!</strong> - @TempData["ErrorUser"]
     </div>
 }
-
-@using (Html.BeginForm("Edit", "User", new { userId = Model.Id }, FormMethod.Post, new { id = "updateUserForm", @class = "bg-white needs-validation", novalidate = "novalidate" }))
-{
-    <div class="modal-body">
+<div class="modal-body">
+    @using (Html.BeginForm("Edit", "User", new { userId = Model.Id }, FormMethod.Post, new { id = "updateUserForm", @class = "bg-white needs-validation", novalidate = "novalidate", data_userId = "123" }))
+    {
         @Html.AntiForgeryToken()
 
 
@@ -81,24 +80,21 @@
             @Html.LabelFor(model => model.IdInstitution, "Institutions", new { @class = "col-sm-3 form-label" })
             <div class="col-sm-9">
                 @Html.DropDownListFor(model => model.IdInstitution, new SelectList(ViewBag.Institutions, "Value", "Text"), new { @class = "form-control selectpicker", @id = "AdditionalSelect", @title = "Choose..." })
+                @Html.ValidationMessageFor(model => model.IdInstitution, null, new { @class = "text-danger" })
             </div>
         </div>
+    }
+</div>
 
-    </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#updateUserForm', 'UserDatatable')">Save</button>
+    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Cancel</button>
+</div>
 
-    <div class="modal-footer">
-        <button type="button" class="btn btn-success" style="width: 100px;" onclick="handleSubmitButton('#updateUserForm', 'UserDatatable')">Save</button>
-        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Cancel</button>
-    </div>
-}
 
-<script type="text/javascript">
+<script>
     $(document).ready(function () {
-        $('.selectpicker').selectpicker();
-
-        RoleChangeForInstitution.bind($('#rolesSelect'), '@Model.Id')();
-
-        $('#rolesSelect').change(RoleChangeForInstitution.bind($('#rolesSelect'), '@Model.Id'));
+        $('.selectpicker').selectpicker();       
 
     });
 </script>

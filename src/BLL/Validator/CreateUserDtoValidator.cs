@@ -23,7 +23,7 @@ namespace BLL.Validator
                 .NotEmpty()
                 .MaximumLength(7)
                 .MinimumLength(5)
-                .Must(a => a != null && a.StartsWith("Cr") == true).WithMessage("Username start with CrXXX")
+                .Must(a => a != null && a.ToLower().StartsWith("сr") == true).WithMessage("Username start with CrXXX")
                 .MustAsync(BeUniqueUsername).WithMessage("Username is already in use");
 
             RuleFor(x => x.Name)
